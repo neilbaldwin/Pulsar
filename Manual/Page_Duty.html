@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Duty Table Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/dutyScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Tracks A &amp; B are the NES's two square-wave voices. They both have a <em>Duty</em> setting which sets the pulse width to one of four possible values. The four values (as they relate to the pulse width) are 12.5%, 25%, 50% and 25% (phase inverted). In Pulsar (like LSDJ) these four values are represented by little waveform icons.</p>
+<p>In the Instrument definition you have the option of either setting a single, static Duty value (which is depicted by one of four waveform icons) or alternatively you can tell Pulsar you wish the Duty of the Instrument to be controlled by a <em>Duty Table</em>. There is also a Command to set/override the Duty setting of an Instrument, <code>Wxx</code>.</p>
+<p>From left-to-right the parameters are:</p>
+<table>
+	<colgroup width="7%"/>
+	<colgroup />
+<tr>
+	<td><code><bold>DT</bold></code></td>
+	<td>specifies the Duty setting for the Duty Table step. You can't actually assign a number, just change the little waveform icon.</td>
+</tr>
+	<tr>
+		<td><code><bold>DL</bold></code></td>
+		<td>specifies the number of ticks/frames to hold the current Duty for (as specified in <code>DT</code> column). <code>00</code> means no delay, <code>FF</code> is the maximum possible delay</td>
+	</tr>
+	<tr>
+		<td><code><bold>JM</bold></code></td>
+		<td>tells the Duty Table which step to go to next after the current step has ended (after the specified Delay). A setting of <code>'--'</code> means to just drop through to the next step</td>
+	</tr>
+
+</table>
+<h5>Duty Table Operation</h5>
+<p>When a Duty Table is assigned to an Instrument, each time a new note is played the Duty Table starts at the first step and normally progresses to the end of the table (step <code>0F</code>) at which point it loops back to the start and continues.</p>
+<p>As you can probably tell from the <code>JM</code> and the <code>DL</code> settings, you can manipulate this flow to pretty much create any pattern of Duty settings you like.</p>
+<p>As an example, the Duty Table in the screen-shot above will start on step <code>00</code>, hold there for <code>06</code> ticks, then drop through to step <code>01</code>. On step <code>01</code> a different Duty value is specified and the step is held for <code>04</code> ticks. Then the <code>JM 02</code> command causes a jump to step <code>02</code> (though this is not really necessary as the next step after 01 would be 02 anyway). Then on step <code>02</code> a different Duty setting is specified and this is held for <code>05</code> ticks before jumping back to step <code>01</code>, thus looping around steps <code>01/02</code> until the end of the note.
+</p>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

@@ -1,0 +1,1288 @@
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+|                          PULSAR MANUAL                                      |
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+(c) Neil Baldwin, 2010
+
+
+INTRODUCTION
+------------
+
+Pulsar is a music tracker that runs on a NES/Famicom (or in your favourite 
+NES emulator).
+
+Pulsar borrows heavily from the design of LSDJ. If you've used LSDJ you'll 
+probably be pretty familiar with Pulsar's UI. There are a few little 
+differences though so watch out for those.
+
+The most radical feature of Pulsar is that the synthesis engine runs 
+independently from the sequencer and runs at 180hz - that's 3 times faster 
+than a "normal" NES audio engine. The advantage of this is that all 
+modulation-based effects have 3 times the resolution so you can get 
+ultra-fast and super-smooth sounds. At the same time it has allowed me to
+exploit a few quirks of the NES's audio to provide some unique ways to craft
+your NES music and sounds.
+
+It was this approach which, to a large extent, dictated the design of the 
+sequencing/UI of Pulsar and why it shares so much in common with 
+LSDJ: LSDJ really makes great use of a simple, fast interface and because
+I'm updating the audio engine 4 times per frame, speed and simplicity 
+were paramount.
+
+I openly tip my hat to Johan Kotlinksi for his work on LSDJ. It's safe
+to say that Pulsar probably wouldn't exist without LSDJ. Or at the very
+least it would've taken me a lot longer to create.
+
+CONVENTIONS
+-----------
+
+All numbers are expressed in hexadecimal (base 16) both in the manual and
+in Pulsar itself.
+
+EDITING WINDOWS/OBJECTS RELATIONSHIP
+------------------------------------
+
+At the top level is the Song. A Song contains 5 Tracks (or voices), each one 
+corresponding to a hardware voice on the NES. Tracks contains Chains. Chains 
+contain Patterns. Patterns contain notes, Instruments and Commands.
+
+Song
+   +-> Chain(s) 
+              +-> Pattern(s)      
+                           +->Instruments*
+                           |             +-> ADSR Envelope Table
+                           |             +-> Duty Cycle Table
+                           |             +-> Pitch/Command Table                     
+                           |             +-> Vibrato Table
+                           |             +-> Echo Table
+                           |             +-> etc
+                           |
+                           +->Commands  
+                                        +-> ADSR Envelope Table
+                                        +-> Duty Cycle Table
+                                        +-> Pitch/Command Table
+                                        +-> Vibrato Table
+                                        +-> Echo Table
+                                        +-> etc
+
+*This works the same for all Tracks apart from Track E (DPCM). Instruments for 
+Track E are called Drumkits.
+
+
+-------------------------------------------------------------------------------
+|    CONTROLS
+-------------------------------------------------------------------------------
+
+
+BASIC CONTROLS
+--------------
+
+MOVE AROUND EDITOR PAGES (*1)         : U/D/L/R
+
+TO JUMP TO SPECIFIC EDITOR PAGE  (*2) : put cursor on parameter, hold SELECT 
+                                        then tap R
+
+TO JUMP BACK TO LAST EDITOR PAGE (*3) : hold SELECT and tap L
+
+TO CHANGE A VALUE                     : hold A, tap/hold L/R for +/-1, 
+                                        tap/hold U/D for +/- 10 (*4)
+
+TO "ERASE" A VALUE                    : hold B then tap A
+
+TO QUICKLY ENTER LAST VALUE AGAIN     : tap A (*5)
+
+TO PLAY/STOP SONG                     : tap START
+
+
+*1 If the contents of an editor page exceed what can be displayed, little 
+   green arrows will appear at the bottom-right of the editng window showing 
+   you the directions that the page can scroll.
+
+*2 All of these shortcut jumps are listed below : "Context Navigation"
+
+*3 This won't always take you backwards through the UI hierarchy. A 
+   sixteen-step history is kept of your movements so SELECT+L will always go 
+   to the previous page you were on.
+
+*4 Generally, numbers will be increased/decreased by 10. Notes and transpose 
+   values will be increased/decreased by 0C (one octave).
+
+*5 The last-value-entered is saved for every column of every editor but 
+   because the Instrument page only has one column of values, this feature 
+   doesn't work there.
+
+-------------------------------------------------------------------------------
+
+INTERMEDIATE CONTROLS
+---------------------
+
+[1] CHANGE FOCUSED TRACK FROM ANY EDITOR PAGE
+    The Chain and Pattern commands will display data relevant to the last 
+    Track your cursor was on in the Song page. However, it is possible to 
+    change the current Track focus from within the Chain and Pattern pages.
+
+    To change the focused Track           : hold SELECT+B, then tap L/R to 
+                                            move between Tracks
+
+[2] TRAVERSE SONG/CHAIN FROM CHAIN/PATTERN EDITOR
+    In the Chain and Pattern editors, you can navigate up/down the parent 
+    object. The parent object of a Chain is a Track. The parent object of a 
+    Pattern is a Chain.
+
+    To change the focused object          : hold SELECT+B then tap U/D
+
+    In the case of the Chain editor, using this control will navigate up/down 
+    the currently focused track. For the Pattern editor, using this control 
+    will navigate up/down the current Chain.
+
+[3] SCROLL THROUGH CHAINS/PATTERNS IN CHAIN/PATTERN EDITOR
+    In addition to the control in [2], you can numerically navigate through 
+    all available objects within each editor page.
+
+    To scroll through objects in editor   : hold B and tap U/D
+
+[4] NAVIGATION WARP GATE!
+    At anytime you can get a list of all editor pages for rapid navigation.
+
+    To access the Quick Jump menu         : hold SELECT and tap D, while 
+                                            still holding SELECT, move U/D
+                                            to highlight an editor page and 
+                                            then release SELECT
+
+-------------------------------------------------------------------------------
+    ADVANCED CONTROLS -1-
+-------------------------------------------------------------------------------
+
+[1] INSERT NEXT UNUSED CHAIN/PATTERN
+    As you "use" Chains and Patterns, Pulsar internally marks them as being 
+    "used". The benefit of this is that instead of having to go through all 
+    the Chains/Patterns trying to find an empty one, Pulsar can do it for you.
+
+    To insert the next unused Chain/Pattern : put cursor where you want the 
+                                              Chain/Pattern then double-tap A
+
+[2] CLONE CHAIN/PATTERN
+    It is possible to "clone" a Chain or Pattern. This comes in handy if you 
+    want to use one Chain/Pattern as the basis to make variations quickly 
+    and simply.
+
+    To clone a Chain or Pattern            : put cursor on Chain/Pattern 
+                                             number you'd like to clone then
+                                             hold SELECT and tap A
+
+    The Chain/Pattern number under the cursor will be duplicated to a new 
+    Chain/Pattern and the number of that new Chain/Pattern will replace the 
+    old one.
+
+With both of these commands, if there are no free/unused Chains/Patterns, 
+nothing will happen. In this situation, it is possible that there may be empty 
+Chains/Patterns that are not being used in your Song but Pulsar has marked 
+them as being used (perhaps you used them at some point but have since 
+changed your mind). There is a function in the Setup Page, "Purge Song" which
+will scan your Song and "reset" any unused Chains/Patterns, if any exist. 
+Afterwards you might try cloning a Chain/Pattern again and hopefully you'll
+find that it works. If not, you've used all the Chains/Patterns. Sorry!
+
+[3] TOGGLE NOTE BETWEEN "NORMAL" and "TIE NOTE"
+    There are two types of note in Pulsar, "normal" and "tie". When a "normal" 
+    note is played there are many parameters that are reset/initialised such 
+    as the ADSR envelope being restarted at the Attack phase. A "tie note" 
+    bypasses much of this initialisation. It's handy for simulating effects
+    like "hammer on and pull off" (guitar technique) or for smoothing out a 
+    pitch slide.
+
+    To toggle note between normal/tie : put cursor on note then
+                                        hold SELECT and tap A
+
+    If the note was "normal" it will turn dark grey to indicate that it is 
+    now a "tie note" and vice versa. You can edit tie note pitches in the same 
+    way as a normal note. It will momentarily turn a bright colour while you 
+    do this, just for better visibility.
+
+[4] DELETE AN ENTIRE ROW
+    This works in Song/Chain/Pattern/Table/Duty Table and Speed Table editors.
+
+    To delete an entire row           : put cursor on row, hold 
+                                        B+A then tap UP
+
+    The contents of the row your cursor is on is deleted and all rows below 
+    are shifted up one step. A "blank" row is added at the end of the table. 
+    You cannot delete the last row of any table.
+
+[5] INSERT A ROW
+    This works in Song/Chain/Pattern/Table/Duty Table and Speed Table editors.
+
+    To insert a row                          : put cursor on row, hold 
+                                               B+A then tap DOWN
+
+    The rows below your cursor are shifted down one step. The contents of the 
+    row the cursor is on remains intact. You cannot insert a row on the last 
+    row of any table.
+
+-------------------------------------------------------------------------------
+    ADVANCED CONTROLS -2-
+-------------------------------------------------------------------------------
+
+COPY AND PASTE
+
+It is possible to copy whole or part of certain Pulsar objects; Chains,
+Patterns, Instruments*, Drumkit, Tables, Duty Table, FX Table, Speed Table.
+
+[1] TO COPY WHOLE OR PART OF AN OBJECT
+    Put the cursor on the first row of the object that you'd like to copy,
+    HOLD B then TAP LEFT.
+
+[2] TO PASTE DATA FROM THE COPY BUFFER
+    Put the cursor on the row you'd like to paste in to, then HOLD B and 
+    TAP RIGHT.
+
+When you copy data to the copy buffer, data FROM the row the cursor is on to
+the END of the current object is copied. e.g. putting the cursor on the 8th
+row of a Pattern (step 07) will copy rows 07,08,09,0A,0B,0C,0D,0E and 0F to
+the copy buffer. The copy buffer status (bottom right of Pulsar's screen)
+is updated to show you what you've just copied.
+
+e.g. PAT:00:07
+
+means you copied data from Pattern 00, row 07 (to the end of the Pattern).
+
+Thus when you come to paste the data, the data in the destination object will
+be overwritten by the data in the copy buffer but only as much as either the
+length of the copy buffer data or until the paste operation would exceeed the
+limits of the detaination object.
+
+e.g. (using the example above as the copy buffer) putting the cursor on row
+12 of a Pattern (step 0B) and pasting the data from the copy buffer will
+overwrite step 0B, 0C, 0D, 0E and 0F of the destination pattern with the
+first 5 rows of the copy buffer contents.
+
+It's not an ideal system, I know, but it is pretty useful.
+
+
+-------------------------------------------------------------------------------
+    ADVANCED CONTROLS -3-
+-------------------------------------------------------------------------------
+
+MUTE AND SOLO
+
+At any time you can either mute the current Track or Solo it. The current
+Track refers to the one you are currently editing and is always shown in the
+bottom-left information display: TRK: x:xx where 'x' is the Track and 'xx' is
+the row of the Track your cursor was last on.
+
+[1] To Mute/Unmute The Current Track : hold B and tap SELECT
+    You'll see that the VU meter will stop responding and the status light
+    underneath will be grey.
+
+[2] To Solo The Current Track: hold B then tap START
+    You'll see that all the other VU meters are no longer responding, their
+    corresponding status lights will be grey and the current track's status
+    light will be blinking red.
+
+You can mute/solo tracks from ANY editor page.
+
+-------------------------------------------------------------------------------
+    ADVANCED CONTROLS -4-
+-------------------------------------------------------------------------------
+
+"SMART" TRANSPOSE
+
+In the Pattern, Table and MultiFX (MFX) editor pages there is an additional
+control to modify multiple values in a column simultaneously.
+
+There are two modes (accessed via two different key combinations);
+
+Free Mode  : Values in every row on the current column are modifed
+Smart Mode : Only values that match the value under the cursor are modified
+
+Every column in a Pattern, Table or MultiFX can be modified this way.
+
+NOTE (1) : This function has very little in the way of range checking and 
+           limits so use it wisely. There is no undo.
+
+NOTE (2) : It is possible and easy to "flatten" your data even when using the
+           "Smart" mode. What I mean by this is that, for example, you have a
+           Pattern that contains;
+
+           C 4
+           ---
+           C 4
+           ---
+           G 4
+           ---
+           G 4
+           ---
+           etc
+
+           and you put the cursor on a "C 4" then use the Smart Transpose to
+           modifiy the pitch upwards. The pitch of these notes will change
+           leaving the "G 4"s unmodified. However, eventually, the "C 4"s 
+           will become "G 4" (if you transpose them high enough). At this
+           point if you continue to use Smart Transpose, all four "G 4"
+           notes will start to be transposed.
+
+[1] To Transpose all values in a column        : hold A+SELECT and tap L or R
+
+[2] To "Smart" Transpose all values in a column: hold A+SELECT and tap U or D    
+
+-------------------------------------------------------------------------------
+|    COMMANDS
+-------------------------------------------------------------------------------
+
+PATTERN/TABLE COMMANDS
+----------------------
+
+Many of these will be familiar to LSDJ users as generally, where appropriate, 
+I've tried to match the command letter to the same/similar function that 
+appears in LSDJ. However, there are some that I've left out (where not 
+appropriate) and others that I've added.
+
+Axx : run Command table, xx = Table number
+Bxx :
+Cxy : play arpeggio "chord", x=1st note, y=2nd note. Current note is root.
+Dxx : delay note by xx ticks
+Exx : select ADSR envelope xx
+Fxx : play a multi-channel effect
+Gxx : select Speed Table for this Track, xx = Speed Table number
+Hxx : Pre-jump for Pattern or Table (see below for details)
+Ixx : set Pulsar "intensity" i.e. number of times synthesis updated per frame
+Jxx : Post-jump for Pattern or Table (see below for details)
+Kxx : kill note after xx ticks
+Lxx : smoothly slide note to note, xx=speed
+Mxx : get Gate time to xx
+Nxx : turn "Hard Frequency" (Track A & B) on or off
+Oxx : scale output amplitude for note, xx=00 to 0F
+Pxx : Pitch sweep, xx=speed. 01 to 7F is up, FF to 80 is down
+Qxx : set step resolution for Pitch Sweep/Vibrato/Chord commands
+Rxx : re trigger note, xx = speed
+Sxx : Sweep (pitch, but not same as Pxx, see Instruments for details)
+Txx : set fine tune ('detune') for note
+Uxx : set probability of note to play on this step
+Vxx : select Vibrato for current note, xx = Vibrato number (in table)
+Wxx : select Duty value or Duty Table, either set waveform or table number
+Xxx : 
+Yxx : select Echo for this Track (Track A, B and D)
+Zxx : set speed for Command Table or 00/01 = sync table with Pattern
+
+Something to bear in mind is that there is no range checking on the parameter 
+value for any of the Commands. Please refer to the section 
+"Command Details" for details on limits for each command.
+
+Having said that, it's not likely that you could cause anything to go (too) 
+drastically wrong as although the editor will allow you to pretty much enter 
+any value, there are some internal checks in place to  sensibly limit the 
+parameters. This will manifest itself generally as values "wrapping around"
+e.g if a parameter's range is 00 to 1F and you enter 2F, the value that gets 
+sent to Pulsar's engine will likely be 0F. If you understand about binary 
+operations on numbers this will make sense. If not, don't worry about it.
+
+Also, it might be apparent that some of the Commands don't apply to certain 
+voices. For example, there is no Pitch Bend for Track D (noise). Pulsar 
+ignores Commands where they are not appropriate.
+
+Oh, one more thing! Some of the Commands double-up to access specific functions
+for the DPCM channel (Track E). See the section "QUIRKS AND BUGS" for details.
+
+
+
+-------------------------------------------------------------------------------
+|    ADVANCED NAVIGATION
+-------------------------------------------------------------------------------
+
+CONTEXT NAVIGATION
+------------------
+
+Generally (ignoring 'Quick Jump' navigation), you can only "freely" navigate 
+between the Song, Chain and Pattern pages. To access the other editor pages 
+you must put your cursor on an "object" then hold SELECT and tap RIGHT. 
+"Objects" are parameters and commands within a Pattern, Instrument or Table.
+
+To go to Instrument page      : put cursor in the 'IN' column in a Pattern in 
+                                Track A/B/C/D
+
+To go to Drumkit page         : put cursor in the 'IN' column in a Pattern in 
+                                Track E (*5)
+
+To go to Envelope page        : put cursor on the Envelope parameter of 
+                                an Instrument OR put cursor on Envelope 
+                                Command ('E') in Pattern or a Table
+
+To go to Table page           : put cursor on Table parameter of Instrument or
+                                put cursor on Table command ('A') in 
+                                a Pattern or a Table
+
+To go to Vibrato Table page   : put cursor on Vibrato parameter of Instrument
+                                or put cursor on Vibrato command ('V') in 
+                                a Pattern or a Table
+
+To go to Duty Table page      : put cursor on Duty parameter of 
+                                Instrument (*6), or  put cursor on Duty 
+                                command ('W') in Pattern or Table
+				
+To go to Echo Table page      : put cursor on Echo parameter of Instrument or
+                                put cursor on Echo command ('Y') in a 
+                                Pattern or a Table
+
+To go to Speed Table page     : put cursor on Speed command ('G') in a 
+                                Pattern or a Table
+
+To go to FX Table page        : put cursor on Fxx command in Pattern or
+                                put cursor on Fxx command in Table
+
+*5 Instruments are for Tracks A.B.C and D whereas Track E (DPCM) uses 
+   Drumkits. The Context navigation will jump to either editor page, depending
+   on which Track is currently in focus.
+
+*6 The first four Duty settings directly set the Duty (little waveform is 
+   displayed). After that the numbers specify the Duty Table to use. Thia 
+   Context navigation will only work if the parameter is a number.
+
+Where appropriate, when you make the Context Navigation jump, either the 
+object number of the destination page will reflect the parameter value or 
+in the case of a table, the cursor will be placed on the row of the table 
+that corresponds to the parameter you jumped from.
+
+For example, if you put the cursor on an Envelope Command ('E') in a Pattern 
+that has the value 05, the Context jump will display the Envelope Table page 
+and the cursor will be on Envelope 05.
+
+
+-------------------------------------------------------------------------------
+    EDITOR PAGES EXPLAINED
+-------------------------------------------------------------------------------
+Just a quick note about different ways data is represented/handled.
+
+Some pages show one of several objects (Chain, Pattern, Instrument, Drumkit
+Table, Duty Table, FX Table, Speed Table). The vertical rows are individual
+steps in those objects.
+
+The other type of view is for objects that are listed in a Table (Envelopes,
+Vibratos, Echo). In these views, the columns are parameters of one object and
+the vertical rows represent a single object of that type.
+
+
+SONG PAGE
+---------
+
+The Song is the main structure for your tune. The 5 columns represent the 
+hardware voices of the NES.
+
+The Song contains only Chain numbers and each Track plays downwards, 
+independently of each other.
+
+Wherever you have a blank cell in the Song "--" playback will loop back to 
+the start. When you play the Song, if there are any Tracks with empty cells 
+on the row that your cursor is on, that Track won't play.
+
+At all times during playback, little green arrows beside each Track column 
+will  show the current playback position of that Track.
+
+
+CHAIN PAGE
+----------
+
+A Chain has two columns. The first one labelled "PT" contains Pattern numbers 
+which will play in sequence from top to bottom. The second column, "TR", is 
+the transpose value applied to the Pattern on each step of the Chain.
+
+A Chain has a maximum of sixteen steps (00 to 0F) but the Chain will end when 
+a blank cell "--" is encountered.
+
+If you have a bank cell on step 00, Pulsar will think that this Chain is 
+empty and will skip this Chain in the Song.
+
+
+PATTERN PAGE
+------------
+
+A Pattern has 3 columns: NTE = notes, IN = instrument and CM1 = command.
+
+Notes : The Notes column is pretty self explanatory. The only special feature 
+of this is the ability to make a note into a "tie-note" (and back again). 
+A tie-note is one where the pitch is changed but certain aspects of the 
+synthesis are not reset/initialised as they are with a normal note. Things 
+such as the ADSR Envelope. When Pulsar encounters a tie-note, if another note
+is already playing, the ADSR Envelope of that note will continue rather than 
+being initialised to the Attack stage.
+
+Track D Notes : the noise voice doesn't have notes as such, instead the noise 
+frequency is just a number, 00 to 0F. In Pulsar this is represented by the 
+first sixteen notes, "A 1" to "C 3". Notes "C#3" to "E 4" are used to access 
+the "tone mode" (metallic sounding noise).
+
+Instruments : Again, pretty obvious what you put in here. One difference 
+between Pulsar and LSDJ is that Pulsar doesn't require an Instrument number 
+on each note. Instead, once an Instrument is specified it will remain in use 
+on that Track until a new one is set.
+
+CM1 : this is actually two columns. The first one, a single letter, is the 
+Command type. The second one is the parameter/date associated with the 
+Command. You edit them both separately and the Context Navigation works on
+either column.
+
+Something you should be aware of with Commands is that they almost always 
+only last for the Pattern step that they are placed on, or more specifically 
+until a new note is encountered.
+
+TIP : if you put the cursor on a command (the letter, not the value) and 
+      hold A for a short while, a hint box will appear giving you a (very) 
+      brief explanation of the command. You can change commands while the box 
+      is still visible. Once you let got of A (or tap B to delete the 
+      command) the hint box disappears again.
+
+
+INSTRUMENT PAGE
+---------------
+
+Tracks A, B, C and D use "Instruments" as the basis for their sound 
+generation. The parameters are reasonably self-explanatory.
+
+ENVELOPE : specifies the ADSR Envelope for the Instrument. Envelopes are 
+           contained in the Envelope Table.
+
+LEVEL    : scales the output volume for the Instrument. 00 is off, 0F is 
+           maximum (unscaled)
+
+GATE     : Sets the length of time notes are held before triggering the 
+           Release stage of the ADSR Envelope.
+
+DUTY     : For Track A & B (square-wave voices). This either directly sets 
+           the Duty for the Track or specifies the Duty Table number to use.
+
+TABLE    : selects a Pitch/Command Table to use for this Instrument. "--" 
+           means it is turned off.
+
+PSWEEP   : sets Pitch Sweep for the Instrument. 00 to 7F is up, FF to 80 
+           is down. See below for explanation.
+
+PSWEEP Q : sets the granularity of the Pitch Sweep, Vibrato and also the 
+           Chord ("C") effect.
+
+SWEEP    : sets Sweep for the Instrument. 00 to 7F is up, FF to 80 
+           is down. See below for explanation.
+
+VIBRATO  : selects the Vibrato for the Instrument from the Vibrato Table, 
+           "--" is off.
+
+DETUNE   : sets a fine-tune value for the Instrument
+
+HARD FRQ : sets Hard Frequency mode off (00) or on (01). Only affects Tracks
+           A and B.
+
+ECHO     : selects Echo for the Instrument from the Echo Table, "--" is off.
+
+The difference between PSWEEP and SWEEP is that PSWEEP attempts to provide a
+linear sweeping so that the sweep is even throughout all octaves. SWEEP is
+the more traditional way of adding a constant to the output frequency which
+, because the NES has non-linear pitch, means that the higher the pitch, 
+the faster the sweep (and vice versa). The other quite clever thing about 
+PSWEEP is that it works better in conjunction with other pitch modulation 
+such as arpeggio etc. to give a more musical result. SWEEP is not affected by
+PSWEEP Q.
+
+DRUMKIT PAGE
+------------
+
+Whereas Tracks A, B, C and D use Instruments for their sound generation, 
+Track E uses Drumkits.
+
+A Drumkit is one octave of notes, each note mapped to a DPCM sample.
+
+The Drumkit page has five columns: SM, PT, ST, EN and L. The rows are 
+numbered 00 to 0B and this is the offset from the "ROOT" note (at the bottom
+ of the page).
+
+SM : Sample Numbe, range 00-3F but obviously depends on how many samples 
+     you have in the ROM.
+
+PT : Pitch for the sample, range 00-0F
+
+ST : Start Offset, a numerical value added to the starting point of the 
+     sample
+
+EN : End Offset, a numerical value subtracted from the normal length of 
+     the sample
+
+L  : Looping on (Y) or off (N)
+
+ROOT : this sets which note will play the first sample (row 00) of your 
+Drumkit. e.g. if you set the Root to "C 4", you'll need to put a "C 4" in the
+pattern to play the first sample in the Drumkit. A "D 4" would play the 
+third sample (C4, C#4, D4 and so on). The Root can be set independently for 
+each Drumkit.
+
+
+ENVELOPE PAGE
+-------------
+
+The Envelope page contains all the available ADSR Envelopes for your Song.
+
+Each row of the table represents one ADSR Envelope with the parameters in 
+the four columns.
+
+AT : Attack. Time taken to go from 00 to max (0F) amplitude.
+DC : Decay. Time taken to go from max (0F) to the Sustain Level
+SU : Sustain Level. The amplitude to hold the envelope at until Release
+RL : Release. Time taken to go from Sustain Level to 00 amplitude.
+
+For AT, DC and RL, the value represents time. 01 is the slowest and FF is 
+the fastest. A zero '00' in any  of these parameters will skip that stage 
+and pass to the next. For example, AT=00 will set the amplitude to max (0F) 
+immediately and progress from the Decay stage.
+
+
+PITCH/COMMAND TABLE
+-------------------
+
+The Table page shows one entire Pitch/Command table. The Table number is at 
+the bottom-right.
+
+I use "Pitch/Command" because you can do both (actually, it should be called 
+Pitch/Volume/Command Table!) within the one table.
+
+From left to right the columns are:
+
+VL : volume scaling for this step. 00 is silent, 08 is about half and 0F is 
+     full volume. This scales the output of the Instrument on the Track. If 
+     your Instrument is set to LEVEL 08, for example, a value of 0F in the 
+     VL column will only ever output an amplitude of 08. VL=08 in this case 
+     would cause the amplitude to be reduced to 04 (half of the LEVEL 
+     setting in the Instrument).
+
+PT : semitone offset to add to the current note. It's also possible to set 
+     absolute pitch:
+     00 is no offset
+     01 up to 50 is positive offset
+     FF down to (about B1) is negative offset
+     60 to B0 sets absolute pitch, 60 is lowest possible note, B0 is highest
+
+CM1 : command 1
+
+CM2 : command 2
+
+As there are two CM columns, you can combine FX on one step. If two commands
+on the same step clash, CM2 will always take priority as it's executed last 
+in the audio engine. Any command can be placed in either column.
+
+The Table will run at a constant default speed unless you override it with 
+the 'Z' command.
+
+The Table will run through steps 00 to 0F constantly while a note plays, 
+unless you interrupt the flow with a 'Jxx' or 'Hxx' command.
+
+See "PATTERN/TABLE COMMANDS" details below.
+
+
+VIBRATO PAGE
+------------
+
+The Vibrato page shows you all the available Vibrato settings for your Song.
+
+Each row of the table represents one set of Vibrato parameters, each column 
+is the individual parameters.
+
+SP : vibrato speed. 00 = off, 0F is maximum.
+DP : vibrato depth. 00 = off, 1F is maximum.
+AC : vibrato acceleration. 00 = off. Any other value will cause the vibrato 
+     depth to start at 00 and gradually ramp up to the value in the DP column
+DL : vibrato delay. 00 = no delay
+
+I'm using a sine table and fractional pitch frequencies to give the same 
+perceived depth of pitch modulation over every octave. Because the number of
+entries in the sine table is an even number, when using some of the higher 
+depth settings, an odd number in the SP column (01, 03 etc.) might make the 
+pitch sound a bit off. There's not much I can do about this but it is only 
+with extreme depth (DP) settings, which aren't particularly musical anyway!
+
+Note : the "SWEEP Q" value of your Instrument affects the granularity of 
+Vibrato. A setting of 80 is about right. Lower values will produce a 
+"stepped" sound, higher values are good but as you only have a range of 
+00 to 0F for the Vibrato speed (SP), you won't be able to do slow vibrato if 
+you have the SWEEP Q setting too high.
+
+Note : I use blargg's super-cool smooth pitch modulation trick for 
+click-free vibrato (and pitch sweep).
+
+
+DUTY TABLE PAGE
+---------------
+
+The Duty Table page shows one entire Duty Table. Duty Tables are a bit like 
+Pitch/Command Tables except they only modulate the duty setting for the two 
+square-wave voices, Track A and B.
+
+DT : is the duty setting for the current step
+DL : is the delay before moving to the next step
+JM : is the step to jump to after the current step
+
+
+ECHO TABLE PAGE
+---------------
+
+The Echo Table page shows you all the available Echo settings for your Song.
+
+Each row of the table represents one set of Echo parameters, each column is 
+the individual parameters of each Echo set.
+
+SP : is the Echo speed, 00 to 0F
+LV : is the initial level of the echo signal
+AT : is how quickly the echo signal is reduced to 0
+
+The Echo feature works on Tracks A, B & D and is the same Auto Echo from 
+NTRQ (and Nijuu!)
+
+
+SPEED TABLE
+-----------
+
+The Speed Table page shows you one entire Speed Table. These are the 
+equivalent to Grooves in LSDJ except that Pulsar can't run Pulsar at 
+arbitrary tempos like LSDJ can, therefore the Speed Table not only serves to 
+provide a groove, it's also how you control the playback speed of the Song.
+
+There's only one column and the number is the number of engine ticks for each
+Pattern step. 00 is the fastest speed possible.
+
+The Speed Table has a maximum of sixteen steps (00 to 0F) but where an empty 
+cell is encountered ("--") the table will loop back to the beginning.
+
+For a straight speed with no groove you just need to set the first value in 
+the table to the required speed.
+
+Messing about with the table while the Song is playing can throw it out of 
+whack. If that happens, stop and restart your Song.
+
+
+FX PAGE
+-------
+
+The FX Table page shows you one entire Multi-Channel FX.
+
+From left-to-right the columns are;
+
+Note A, Volume A, Duty A
+Note B, Volume B, Duty B
+Note C
+Note D, Volume D
+
+Vertically are the 16 steps of the table. The table will play once from
+start to end at the speed set by the Fxx command (see Commands).
+
+Multi-channel FX are a way to create a very simple but special Table.
+The difference between FX Table and an ordinary Table is that a FX Table 
+can use Voices A, B, C and D simultaneously (or any combination of Voices).
+
+The FX Table is the last thing the the audio engine chain to be processed
+so it takes priority over anything else that is playing on the channels
+that you modify in the table. A few really cool things;
+
+1) Whatever is normally playing on the channels you modify in the FX Table
+   will continue to play as if nothing happened.
+2) You can play the FX Tables at different speeds by specifying the speed
+   in the Fxx command (speed is the first digit)
+3) It doesn't matter on which Track you place the command though the tracks
+   are always processed left-to-right so if there's a case where you use
+   the command in more than one track, the right-most one will take priority.
+
+All the values are absolute so the note you set is an absolute note and
+not relative to any notes playing in the Pattern where the command is
+used. Because of the different capabilities of each channel, A/B, C and
+D have a different number of columns. If you don't want to modify a
+particular channel, clear the Note column ("--").
+
+
+
+SETUP/UTILITY PAGE
+------------------
+
+This page contains various settings and utility functions. The gaps in the
+menu are intentional to make room for possible future settings.
+
+SONG
+Select the song number, 00-07.
+
+SONG SPEED
+Set the initial Speed Table used for the current Song.
+
+PRELISTEN
+Tapping A will toggle this on/off (Y/N).
+
+When Prelisten is ON (Y), when you are entering/modifying notes
+in Patterns or when you are modifying parameters in a Drumkit
+you can hear the note/sample.
+
+CLEAR SONG
+Clear the current Song. No other data is affected.
+
+CLEAN SONGS
+Will scan through the Song, Chains and Patterns to find unused Chains and
+Patterns. Any Chains or Patterns that are not used will be erased.
+
+The number of freed Chains and Patterns will be displayed, tap A
+to return to the menu.
+
+INIT ALL
+Will clear all of the data in your Pulsar .sav file, effectively giving
+you a blank song. There's no undo so use with caution!
+
+The number of free Chains and Patterns will be displayed, tap A
+to return to the menu,
+
+COLOR
+Here you can modify the colours of the main screen. There are only four
+colours you can modify.
+
+- the background colour
+- text colour 1, normally the brightest colour
+- text colour 2, normally medium brightness colour
+- text colour 3, normally the darkest colour
+
+Hold A and use U/D/L/R to change the values.
+
+L/R changes hue
+U/D changes brightness/saturation
+
+If you mess up and you can no loner read the on-screen text (or just want
+to scrap your changes), reset the NES/emulator while holding A and the 
+original colours will be restored.
+
+
+COMMANDS IN DETAIL
+------------------
+
+Format:
++==============================================================================+
+| Command | Command Type*                  | Tracks? | Table, Pattern or Both? |
+|..............................................................................|
+| Description                                                                  |
+|                                                                              |
++==============================================================================+
+
+[1] 'Tracks?'
+Tells you the Tracks that the Command is valid for.
+
+[2] 'Table, Pattern or Both?'
+Tells you whether the Command is valid in a Pattern or a Table or both.
+
+[3] Commands marked with '*' (see Exx for first example), means that the 
+effect overrides an Instrument parameter and lasts until the next 'normal' 
+note or until a new Instrument is specified. At that point the original 
+setting from the Instrument is restored.
+
+
+
++==============================================================================+
+| Axx | RUN TABLE                                            | ABCDE |  BOTH   |
+|------------------------------------------------------------------------------|
+| Table number specified by command value xx.                                  |
+|                                                                              |
+| It's possible to run a Table from within another table however:              | 
+|                                                                              |
+| [1] execution of Table will transfer to the new table.                       |
+| [2] if an Axx command is specified in the CM1 column, CM2 won't be processed |
+|     as the execution of the new Table will begin immediately.                |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Bxx |                                                      | ----- |         |
+|..............................................................................|
+|                                                                              |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Cxx | PLAY CHORD                                           | ABCD- |  BOTH   |
+|..............................................................................|
+| Play triad arpeggio for duration of note. Original note is root while 1st    |
+| and 2nd digits of the command value are the 2nd and 3rd notes of 'chord'.    |
+|                                                                              |
+| Note : arpeggio speed controlled by 'SWEEP Q' value of current Instrument.   |
+|        The higher the 'SWEEP Q' value, the faster the arpeggio runs.         |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Dxx | DELAY NOTE                                           | ABCDE |  BOTH   |
+|..............................................................................|
+| When placed on same step as a note, the note will be delayed for the number  |
+| of ticks specified by xx. If a new note is encountered before the number of  |
+| ticks has passed the delayed note is cancelled.                              |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Exx | ENVELOPE*                                            | AB-D- |  BOTH   |
+|..............................................................................|
+| Specifies an ADSR Envelope to use, xx is index into Envelope Table. This     |
+| overrides the Envelope number for the current Instrument.                    |
+|                                                                              |
++==============================================================================+
+             
++==============================================================================+
+| Fxx | RUN FX                                               | ABCDE |  BOTH   |
+|..............................................................................|
+| Run an FX Table.                                                             |
+|                                                                              |
+| First digit sets FX Table speed (0=slowest, F=fastest, second digit is the   |
+| FX Table number.                                                             |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Gxx | SPEED TABLE (GROOVE)                                 | ABCDE |  BOTH   |
+|..............................................................................|
+| Specifies the Speed Table to use, xx is Speed Table number.                  |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Hxx | PRE JUMP/HOP (or terminate Pattern)                  | ABCDE |  BOTH   |
+|..............................................................................|
+| Performs an immediate hop/jump to a specified step in the Pattern or Table.  |
+|                                                                              |
+| PLEASE NOTE THAT THE BEHAVIOUR OF THIS COMMAND INSIDE A PATTERN IS NOT THE   |
+| SAME AS BEHAVIOUR INSIDE A TABLE.                                            |
+|                                                                              |
+| PATTERN : The jump will be made to the specified step. If you specify either |
+|           00, a number lower than the step the command occurs on or a        |
+|           number outside of the range of the Pattern, the Pattern will end.  |
+|           Essentially, the only valid Hxx jump is forwards inside the limits |
+|           of the Pattern.                                                    |
+|                                                                              |
+| TABLE   : Inside a table it is possible to perform a 'random' jump by using  |
+|           the 1st and 2nd digit of the command value to specify the lower    |
+|           and upper limit respectively.                                      |
+|                                                                              |
+| IN BOTH INSTANCES, THE JUMP WILL BE PERFORMED IMMEDIATELY. THIS IS OPPOSITE  |
+| TO THE Jxx COMMAND WHICH PERFORMS THE JUMP AFTER THE CURRENT PATTERN/TABLE   |
+| STEP.                                                                        |
+|                                                                              |
+| However, in the case of Tables, you can use this command in the CM2 column   |
+| and the command in CM1 will be processed before the jump.                    |
+|                                                                              |
+| Note : Inside a Table, if you specify lower and upper limits for the random  |
+|        jump that will result in the destination jump being the same step     |
+|        on which the command occurs, no jump will happen. This is to try to   |
+|        prevent the Table from locking up.                                    |
+|                                                                              |
+| Note : Inside a Table, YOU MUST USE THIS COMMAND IN COMMAND 2 COLUMN OR IT   |
+|        WON'T WORK. This is so that you can combine the immediate jump with   |
+|        another command.                                                      |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Ixx | REFRESH RATE CONTROL                                 | ABCDE |  BOTH   |
+|..............................................................................|
+| This command controls Pulsar's refresh rate, xx determines the rate.         |
+|                                                                              |
+| 00-0F Set rate for one Track/voice, see detail below                         |
+| 10-1F Set rate for all Tracks/voices, see detail below                       |
+|                                                                              |
+| Pulsar normally refreshes the audio synthesis at 240hz, four times per frame |
+| on a 60hz system. Using this command you can tell the audio engine which of  |
+| those refreshes to process, or not.                                          |
+|                                                                              |
+| Each of the lower 4 bits of the xx value is a switch for each refresh e.g.   |
+|                                                                              |
+|   00 (binary:----0000) turns off all refreshes!                              |
+|   01 (binary:----0001) allows the first refresh                              |
+|   04 (binary:----1000) allows the fourth refresh                             |
+|   06 (binary:----1010) allows 2nd and 4th refreshes                          |
+|   0F (binary:----1111) allows all refreshes, maximum rate (4x per frame)     |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Jxx | POST JUMP/HOP (or terminate Pattern)                  | ABCDE |  BOTH  |
+|..............................................................................|
+| Performs a hop/jump to a specified step in the Pattern or Table, AFTER the   |
+| current Pattern/Table step.                                                  |
+|                                                                              |
+| PLEASE NOTE THAT THE BEHAVIOUR OF THIS COMMAND INSIDE A PATTERN IS NOT THE   |
+| SAME AS BEHAVIOUR INSIDE A TABLE.                                            |
+|                                                                              |
+| PATTERN : The jump will be made to the specified step. If you specify either |
+|           00, a number lower than the step the command occurs on or a        |
+|           number outside of the range of the Pattern, the Pattern will end.  |
+|           Essentially, the only valid Hxx jump is forwards inside the limits |
+|           of the Pattern.                                                    |
+|                                                                              |
+| TABLE   : Inside a table it is possible to perform a 'random' jump by using  |
+|           the 1st and 2nd digit of the command value to specify the lower    |
+|           and upper limit respectively.                                      |
+|                                                                              |
+| IN BOTH INSTANCES, THE JUMP WILL HAPPEN AFTER THE CURRENT PATTERN/TABLE      |
+| STEP HAS FINISHED. THIS IS DIFFERENT FROM THE Hxx COMMAND WHICH PERFORMS     |
+| THE JUMP IMMEDIATELY.                                                        |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Kxx | KILL NOTE                                            | ABCDE |  BOTH   |
+|..............................................................................|
+| Kill any playing note after xx ticks.                                        |
+|                                                                              |
+| Note: if using this command on Tracks A, B or D, the note won't actually be  |
+| killed immediately on the tick count expiring. The command actually forces   |
+| the notes ADSR into the Release phase. If you need to kill the note          |
+| immediately, use a Release value of 00 in your ADSR Envelope.                |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Lxx | PITCH SLIDE to note                                  | ABC-- |  BOTH   |
+|..............................................................................|
+| Smoothly side the pitch to the specified note, xx determines the speed with  |
+| 01 being slowest and 7F being the fastest.                                   |
+|                                                                              |
+| Note: you don't need to try to specify positive (00-7F) or negative (FF-80)  |
+|       for the direction. Direction is calculated based on previous note      |
+|                                                                              |
+| Note : slide speed also influenced by 'SWEEP Q' value of current Instrument. |
+|        The higher the 'SWEEP Q' value, the faster and smoother the slide     |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Mxx | GATE TIME*                                           | ABCD- |  BOTH   |
+|..............................................................................|
+| Sets the Gate time for the note, xx is number of ticks before note is        |
+| 'released'. This overrides the setting in the Instrument.                    |
+|                                                                              |
+| In the case of Tracks A, B and D, it's the number of ticks before the        |
+| ADSR envelope is forced into the Release phase.                              |
+|                                                                              |
+| In the case of Track C, it determines the number of ticks before the voice   |
+| is on before being cut off.                                                  |
+|                                                                              |
+| 00 causes the note to be held on until the next note is played.              |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Nxx | HARD FREQUENCY                                       | AB--- |  BOTH   |
+|..............................................................................|
+| This command controls Pulsar's 'hard frequency' rate for Tracks A and B.     |
+|                                                                              |
+| 00-0F Set rate for Track/voice, see detail below                             |
+|                                                                              |
+| For the two square-wave voices, Tracks A an B, it's normally not desirable   |
+| to constantly write to the upper frequency register as doing so causes the   |
+| phase of the output to be reset. The manifestation of this quirk of the      |
+| NES's audio is that you get a small clicking sound when doing effects such   |
+| as Vibrato and Pitch Sweep/Slide. A common way to mitigate the effect is to  |
+| only write those registers when the value needs to change, though it took    |
+| blargg to come up with a clever trick using the NES's hardware sweep to      |
+| fully overcome it.                                                           |
+|                                                                              |
+| Pulsar uses blargg's trick to make click-free Vibrato and Pitch Sweep but    |
+| the Nxx command exploits the phase resetting click sound to impose a         |
+| FM-style modulation to the output of Track A and B.                          |
+|                                                                              |
+| Similar to the Ixx command, the lower 4 bits of the command value tell the   |
+| audio engine on which refresh pass the upper frequency register should be    |
+| 'forced'. The rate at which this happens changes how the modulation affects  |
+| the output sound. e.g.                                                       |
+|                                                                              |
+|   06 (binary:----1010) writes the register on 4th and 2nd refreshes          |
+|   0F (binary:----1111) writes the register every refresh (4 times per frame) |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Oxx | OUTPUT LEVEL*                                        | ABCD- |  BOTH   |
+|..............................................................................|
+| Overrides the Instrument's "LEVEL" parameter, xx being the output scaling    |
+| value from 00 (silent) to 0F (full volume).                                  |
+|                                                                              |
+| For Track C, output will be heard unless a value of 00 is used.              |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Pxx | PITCH SWEEP* (Linear)                                | ABC-- |  BOTH   |
+|..............................................................................|
+| Sweeps the pitch up or down, xx determines both direction and speed. This    |
+| overrides the "SWEEP" setting in the current Instrument.                     |
+|                                                                              |
+| 01 to 7F is upwards sweep, slowest to fastest.                               |
+| FF to 80 is downwards sweep, slowest to fastest.                             |
+|                                                                              |
+| Note : slide speed also influenced by 'PSWEEP Q' value of current Instrument |
+|        The higher the 'PSWEEP Q' value, the faster and smoother the sweep.   |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Qxx | SWEEP Q*                                             | ABCD- |  BOTH   |
+|..............................................................................|
+| Overrides the Instrument's "SWEEP Q" parameter, xx controls the speed of     |
+| several synthesis functions.                                                 |
+|                                                                              |
+| [1] The speed of the arpeggio in the Cxx command.                            |
+| [2] The step speed for Pitch Slide and Pitch Sweep. The lower this value,    |
+|     the less resolution in the sweep/slide. It will sound "blocky".          |
+| [3] The step speed for Vibrato. Like for Pitch Slide/Sweep, the lower this   |
+|     value, the lower the 'quality' of the vibrato.                           |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Rxx | RETRIGGER                                            | ABCDE |  BOTH   |
+|..............................................................................|
+| Causes the current note to be constantly retrigger for the duration of the   |
+| note at a speed set by xx.                                                   |
+|                                                                              |
+| The lower the value of xx, the slower the retriggering speed.                |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Sxx | PITCH SWEEP* (Non-linear)                            | ABC-- |  BOTH   |
+|..............................................................................|
+| Sweeps the pitch up or down, xx determines both direction and speed. This    |
+| overrides the "SWEEP" setting in the current Instrument.                     |
+|                                                                              |
+| 01 to 7F is upwards sweep, slowest to fastest.                               |
+| FF to 80 is downwards sweep, slowest to fastest.                             |
+|                                                                              |
+| Note : slide speed also influenced by 'PSWEEP Q' value of current Instrument |
+|        The higher the 'PSWEEP Q' value, the faster and smoother the sweep.   |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Txx | DETUNE*                                              | ABC-- |  BOTH   |
+|..............................................................................|
+| Sets the detune value for the Track. Detune is like a fine tuneing for the   |
+| pitch of notes on the Track. This overrides the "DETUNE" parameter in the    |
+| current Instrument.                                                          |
+|                                                                              |
+| 01-7F gives a positive detune (makes pitch higher)                           |
+| FF-80 gives a negative detune (makes pitch lower                             |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Uxx | PROBABILITY                                          | ABCDE | PATTERN |
+|..............................................................................|
+| Probability of playing a note on the step that this command is placed on.    |
+|                                                                              |
+| 01 is most likely to play the note                                           |
+| FF is highly unlikely to play the note                                       |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Vxx | VIBRATO*                                             | ABC-- |  BOTH   |
+|..............................................................................|
+| Sets the Vibrato program, overrides the "VIBRATO" parameter in the current   |
+| Instrument. xx is index into Vibrato Table.                                  |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Wxx | DUTY/DUTY TABLE*                                     | AB--- |  BOTH   |
+|..............................................................................|
+| Either directly sets the Duty for the current Instrument or sets a Duty      |
+| Table to run. xx is either one of 4 Duty waveforms or a Duty Table number.   |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Xxx |                                                      | ----- |         |
+|..............................................................................|
+|                                                                              |
+|                                                                              |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Yxx | ECHO*                                                | ABC-D |  BOTH   |
+|..............................................................................|
+| Sets the Echo program, overrides the "ECHO" parameter in the current         |
+| Instrument. xx is index into Echo Table.                                     |
+|                                                                              |
++==============================================================================+
+
++==============================================================================+
+| Zxx | TABLE SPEED                                          | ABCDE |  BOTH   |
+|..............................................................................|
+| Sets the speed of any Tables that are run on the Track.                      |
+|                                                                              |
+| From default, the speed is set to 80 which is the middle of the speed range, |
+| 02 being slowest and FF being the fastest.                                   |
+|                                                                              |
+| 00 has a special function in that it synchronises the Table with the Pattern.|
+|    This means that the Table will advance to the next step each time the     |
+|    Pattern advances a step. Table restarted on each new note.                |
+|                                                                              |
+| 01 has a special function in that it synchronises the Table with the Pattern.|
+|    This is similar to '00' but the table is not restarted on each new note.  |
+|                                                                              |
++==============================================================================+
+
+-------------------------------------------------------------------------------
+
+QUIRKS AND BUGS
+---------------
+
+This is just a collection of information for any strange or experimental
+behaviour. As such, they might get changed, removed or fixed(!) in subsequent
+releases of Pulsar so don't rely on them unless I move them to the main part
+of the manual.
+
+[1] USING PITCH SLIDE (Lxx) IN TABLES
+    Works but is a bit weird. What happens is that the destination note for
+    the slide is calculated from the current note PLUS the Pitch Offset
+    on the step of the Table where the Slide Command is placed.
+
+    e.g. 0F 0C L08 -00
+
+    would slide to a note that is an octave (0C semitones) above the note
+    in the Pattern with a speed of 08.
+    
+    You can also have multiple Slide commands in a table but the results
+    will be very unpredictable.
+
+[2] PLAYING PATTERN FROM RESET BEFORE PLAYING SONG/CHAIN
+    Normally the Transpose value for a Pattern is obtained from a Chain
+    but despite the Transpose value being reset to 0 when the editor
+    is initialised, an indeterminate value for Transpose will be set
+    if you haven't first played the Song or a Chain before playing a
+    Pattern (starting playback from within the Pattern editor).
+
+[3] EDITING NOTES AFTER BOOT/RESET BEFORE A SONG HAS BEEN PLAYED
+    The Instrument sound for Tracks A, B, C and D will have been "reset"
+    so only a very basic sound will be played. For the sample channel,
+    Track E, all notes will play the first sample (sample number 00).
+    This will persist until an Instrument has been set on each Track 
+    (by playing the Song) at which point the prelisten sound should
+    reflect the Instrument settings on each Track.
+
+[4] COMMANDS/TABLES FOR DPCM (TRACK E)
+    Some of the Commands double up as specific functions for DPCM.
+    
+        Exx sets the sample end offset
+        Lxx sets looping on/off (00/01)
+        Pxx sets the sample playback pitch (00-0F)
+        Sxx sets the sample start offset
+
+    You can also use the Table command (Axx) on Track E though it has limited
+    use. The Table columns are also mapped in a different way;
+
+        VL (normally Volume) becomes the sample pitch (00-0F)
+        PT (normally Pitch)  becomes the sample number
+
+    The other quirk with using Table for DPCM is that the sample will be
+    retriggered on every step of the Table. This is because changing any
+    sample playback parameters (in the NES's hardware registers) has no
+    effect until you trigger a sample again.
+
+    
+
+

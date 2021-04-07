@@ -1,0 +1,1081 @@
+ca65 V2.13.2 - (C) Copyright 1998-2005 Ullrich von Bassewitz
+Main file   : pulsar_ram.asm
+Current file: pulsar_ram.asm
+
+000000r 1               		.include "pulsar.h"
+000000r 2               		.include "nes_audio.h"
+000000r 3               ;---------------------------------------------------------------
+000000r 3               ; NES Audio Registers
+000000r 3               ;---------------------------------------------------------------
+000000r 3               
+000000r 3               APU	= $4000
+000000r 3               APU_00	= $4000
+000000r 3               APU_01	= $4001
+000000r 3               APU_02	= $4002
+000000r 3               APU_03	= $4003
+000000r 3               
+000000r 3               APU_04	= $4004
+000000r 3               APU_05	= $4005
+000000r 3               APU_06	= $4006
+000000r 3               APU_07	= $4007
+000000r 3               
+000000r 3               APU_08	= $4008
+000000r 3               APU_09	= $4009
+000000r 3               APU_0A	= $400A
+000000r 3               APU_0B	= $400B
+000000r 3               
+000000r 3               APU_0C	= $400C
+000000r 3               APU_0D	= $400D
+000000r 3               APU_0E	= $400E
+000000r 3               APU_0F	= $400F
+000000r 3               
+000000r 3               APU_10	= $4010
+000000r 3               APU_11	= $4011
+000000r 3               APU_12	= $4012
+000000r 3               APU_13	= $4013
+000000r 3               
+000000r 3               APU_14	= $4014
+000000r 3               APU_15	= $4015
+000000r 3               
+000000r 3               ;Not really APU
+000000r 3               APU_16	= $4016
+000000r 3               APU_17	= $4017
+000000r 3               
+000000r 2               
+000000r 2               .export SCREEN		= $2000
+000000r 2               .export PPU0		= $2000
+000000r 2               .export PPU1		= $2001
+000000r 2               .export PPU_STATUS		= $2002
+000000r 2               
+000000r 2               CHR_RAM_0			= $0000
+000000r 2               CHR_RAM_1			= $1000
+000000r 2               
+000000r 2               
+000000r 2               ENABLE_ECHO = 0
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; ROM LAYOUT
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               BANK_EDITOR0 		= $00
+000000r 2               BANK_EDITOR1		= $01
+000000r 2               BANK_ENGINE		= $05
+000000r 2               BANK_FONT			= $02
+000000r 2               BANK_SCREEN		= $03
+000000r 2               BANK_HINTS		= $04
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SPECIAL CHARS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               CHR_SPACE			= $FF
+000000r 2               CHR_EMPTY			= $25
+000000r 2               CHR_SHARP			= $26
+000000r 2               CHR_Y			= $22
+000000r 2               CHR_N			= $17
+000000r 2               CHR_DUTY_00		= $27
+000000r 2               CHR_DUTY_40		= $29
+000000r 2               CHR_DUTY_80		= $2B
+000000r 2               CHR_DUTY_C0		= $2D
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SPRITE CONSTANTS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               SPR_RIGHT_ARROW		= $06
+000000r 2               SPR_LEFT_ARROW		= $07
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; EDITOR CONSTANTS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               EDIT_MODE_SONG		= 0
+000000r 2               EDIT_MODE_CHAIN		= 1
+000000r 2               EDIT_MODE_PATTERN		= 2
+000000r 2               EDIT_MODE_INSTRUMENT	= 3
+000000r 2               EDIT_MODE_DRUMKIT		= 4
+000000r 2               EDIT_MODE_ENVELOPE_TABLE	= 5
+000000r 2               EDIT_MODE_PITCH_TABLE	= 6
+000000r 2               EDIT_MODE_VIBRATO_TABLE	= 7
+000000r 2               EDIT_MODE_DUTY_TABLE	= 8
+000000r 2               EDIT_MODE_ECHO_TABLE	= 9
+000000r 2               EDIT_MODE_SPEED_TABLE	= 10
+000000r 2               EDIT_MODE_NAV_MENU		= 11
+000000r 2               EDIT_MODE_SETUP		= 12
+000000r 2               
+000000r 2               CHAIN_COLUMN_PATTERN	= 0
+000000r 2               CHAIN_COLUMN_TRANSPOSE	= 1
+000000r 2               
+000000r 2               PATTERN_COLUMN_NOTE		= 0
+000000r 2               PATTERN_COLUMN_INSTRUMENT	= 1
+000000r 2               PATTERN_COLUMN_COMMAND	= 2
+000000r 2               PATTERN_COLUMN_COMMAND_DATA	= 3
+000000r 2               
+000000r 2               INSTRUMENT_ROW_ENVELOPE	= 0
+000000r 2               INSTRUMENT_ROW_LEVEL	= 1
+000000r 2               INSTRUMENT_ROW_GATE		= 2
+000000r 2               INSTRUMENT_ROW_DUTY		= 3
+000000r 2               INSTRUMENT_ROW_TABLE	= 4
+000000r 2               INSTRUMENT_ROW_SWEEP	= 5
+000000r 2               INSTRUMENT_ROW_SWEEPQ	= 6
+000000r 2               INSTRUMENT_ROW_VIBRATO	= 7
+000000r 2               INSTRUMENT_ROW_DETUNE	= 8
+000000r 2               INSTRUMENT_ROW_HARDFREQ	= 9
+000000r 2               INSTRUMENT_ROW_ECHO		= 10
+000000r 2               INSTRUMENT_ROW_AUX		= 11
+000000r 2               
+000000r 2               
+000000r 2               DRUMKIT_COLUMN_SAMPLE	= 0
+000000r 2               DRUMKIT_COLUMN_PITCH	= 1
+000000r 2               DRUMKIT_COLUMN_START_OFFSET	= 2
+000000r 2               DRUMKIT_COLUMN_END_OFFSET	= 3
+000000r 2               DRUMKIT_COLUMN_LOOP		= 4
+000000r 2               DRUMKIT_COLUMN_ROOT		= 5
+000000r 2               
+000000r 2               ENVELOPE_COLUMN_ATTACK	= 0
+000000r 2               ENVELOPE_COLUMN_DECAY	= 1
+000000r 2               ENVELOPE_COLUMN_SUSTAIN	= 2
+000000r 2               ENVELOPE_COLUMN_RELEASE	= 3
+000000r 2               
+000000r 2               TABLE_COLUMN_VOLUME		= 0
+000000r 2               TABLE_COLUMN_PITCH		= 1
+000000r 2               TABLE_COLUMN_FX1		= 2
+000000r 2               TABLE_COLUMN_FX1_DATA	= 3
+000000r 2               TABLE_COLUMN_FX2		= 4
+000000r 2               TABLE_COLUMN_FX2_DATA	= 5
+000000r 2               
+000000r 2               VIBRATO_COLUMN_SPEED	= 0
+000000r 2               VIBRATO_COLUMN_DEPTH	= 1
+000000r 2               VIBRATO_COLUMN_ACCELERATE	= 2
+000000r 2               VIBRATO_COLUMN_DELAY	= 3
+000000r 2               
+000000r 2               DUTY_COLUMN_DUTY		= 0
+000000r 2               DUTY_COLUMN_DELAY		= 1
+000000r 2               DUTY_COLUMN_JUMP		= 2
+000000r 2               
+000000r 2               ECHO_COLUMN_SPEED		= 0
+000000r 2               ECHO_COLUMN_LEVEL		= 1
+000000r 2               ECHO_COLUMN_ATTENUATION	= 2
+000000r 2               
+000000r 2               COMMAND_A		= 0
+000000r 2               COMMAND_B		= 1
+000000r 2               COMMAND_C		= 2
+000000r 2               COMMAND_D		= 3
+000000r 2               COMMAND_E		= 4
+000000r 2               COMMAND_F		= 5
+000000r 2               COMMAND_G		= 6
+000000r 2               COMMAND_H		= 7
+000000r 2               COMMAND_I		= 8
+000000r 2               COMMAND_J		= 9
+000000r 2               COMMAND_K		= 10
+000000r 2               COMMAND_L		= 11
+000000r 2               COMMAND_M		= 12
+000000r 2               COMMAND_N		= 13
+000000r 2               COMMAND_O		= 14
+000000r 2               COMMAND_P		= 15
+000000r 2               COMMAND_Q		= 16
+000000r 2               COMMAND_R		= 17
+000000r 2               COMMAND_S		= 18
+000000r 2               COMMAND_T		= 19
+000000r 2               COMMAND_U		= 20
+000000r 2               COMMAND_V		= 21
+000000r 2               COMMAND_W		= 22
+000000r 2               COMMAND_X		= 23
+000000r 2               COMMAND_Y		= 24
+000000r 2               COMMAND_Z		= 25
+000000r 2               
+000000r 2               
+000000r 2               editorModes		= 12
+000000r 2               
+000000r 2               KEYS_DOUBLE_TAP_SPEED	= $06
+000000r 2               KEYS_REPEAT_DELAY	= $06
+000000r 2               KEYS_REPEAT_SPEED	= $00
+000000r 2               
+000000r 2               songModeColumns	= 5
+000000r 2               chainModeColumns	= 2
+000000r 2               patternModeColumns	= 4
+000000r 2               instrumentModeColumns	= 1
+000000r 2               drumkitModeColumns	= 5
+000000r 2               tableModeColumns	= 6
+000000r 2               envelopeModeColumns	= 4
+000000r 2               vibratoModeColumns	= 4
+000000r 2               dutyModeColumns	= 3
+000000r 2               echoModeColumns	= 3
+000000r 2               speedModeColumns	= 1
+000000r 2               navModeColumns	= 1
+000000r 2               setupModeColumns	= 1
+000000r 2               
+000000r 2               songModeRows	= 16
+000000r 2               chainModeRows	= 16
+000000r 2               patternModeRows	= 16
+000000r 2               instrumentModeRows	= 12
+000000r 2               drumkitModeRows	= 14
+000000r 2               tableModeRows	= 16
+000000r 2               envelopeModeRows	= 16
+000000r 2               vibratoModeRows	= 16
+000000r 2               dutyModeRows	= 16
+000000r 2               echoModeRows	= 16
+000000r 2               speedModeRows	= 16
+000000r 2               navModeRows		= 12
+000000r 2               setupModeRows	= 16
+000000r 2               
+000000r 2               SONG_TRACK_A	= 0
+000000r 2               SONG_TRACK_B	= 1
+000000r 2               SONG_TRACK_C	= 2
+000000r 2               SONG_TRACK_D	= 3
+000000r 2               SONG_TRACK_E	= 4
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SRAM MAP FOR 8KB
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               NUMBER_OF_NOTES	= 7*12
+000000r 2               MAX_NUMBER_OF_SAMPLES	= $40
+000000r 2               
+000000r 2               SIZE_OF_HEADER		= $10
+000000r 2               
+000000r 2               TRACKS_PER_SONG		= $05
+000000r 2               STEPS_PER_TRACK		= $40
+000000r 2               
+000000r 2               NUMBER_OF_CHAINS		= $20
+000000r 2               STEPS_PER_CHAIN		= $10
+000000r 2               BYTES_PER_CHAIN_STEP	= $02
+000000r 2               
+000000r 2               NUMBER_OF_PATTERNS		= $20
+000000r 2               STEPS_PER_PATTERN		= $10
+000000r 2               BYTES_PER_PATTERN_STEP	= $04
+000000r 2               
+000000r 2               NUMBER_OF_INSTRUMENTS	= $20
+000000r 2               STEPS_PER_INSTRUMENT	= $0C
+000000r 2               BYTES_PER_INSTRUMENT_STEP	= $01
+000000r 2               
+000000r 2               NUMBER_OF_DRUMKITS		= $02
+000000r 2               STEPS_PER_DRUMKIT		= $0C
+000000r 2               BYTES_PER_DRUMKIT_STEP	= $05
+000000r 2               
+000000r 2               NUMBER_OF_ENVELOPES		= $20
+000000r 2               BYTES_PER_ENVELOPE		= $04
+000000r 2               
+000000r 2               NUMBER_OF_TABLES		= $10
+000000r 2               STEPS_PER_TABLE		= $10
+000000r 2               BYTES_PER_TABLE_STEP	= $06
+000000r 2               
+000000r 2               NUMBER_OF_VIBRATOS		= $10
+000000r 2               BYTES_PER_VIBRATO		= $04
+000000r 2               
+000000r 2               NUMBER_OF_DUTY_TABLES	= $10
+000000r 2               STEPS_PER_DUTY_TABLE	= $10
+000000r 2               BYTES_PER_DUTY_TABLE_STEP	= $03
+000000r 2               
+000000r 2               NUMBER_OF_ECHOES		= $10
+000000r 2               BYTES_PER_ECHO		= $03
+000000r 2               
+000000r 2               NUMBER_OF_SPEED_TABLES	= $10
+000000r 2               STEPS_PER_SPEED_TABLE	= $10
+000000r 2               BYTES_PER_SPEED_TABLE_STEP	= $01
+000000r 2               
+000000r 2               
+000000r 1               
+000000r 1               ;---------------------------------------------------------------
+000000r 1               ; RAM
+000000r 1               ;---------------------------------------------------------------
+000000r 1               
+000000r 1               .SEGMENT		"RAM"
+000000r 1               sprBuf:		.include "spr_vars.asm"
+000000r 2  xx           SPR00_Y: 		.RES 1
+000001r 2  xx           SPR00_CHAR: 	.RES 1
+000002r 2  xx           SPR00_ATTR: 	.RES 1
+000003r 2  xx           SPR00_X: 		.RES 1
+000004r 2               
+000004r 2  xx           SPR01_Y: 		.RES 1
+000005r 2  xx           SPR01_CHAR: 	.RES 1
+000006r 2  xx           SPR01_ATTR: 	.RES 1
+000007r 2  xx           SPR01_X: 		.RES 1
+000008r 2               
+000008r 2  xx           SPR02_Y: 		.RES 1
+000009r 2  xx           SPR02_CHAR: 	.RES 1
+00000Ar 2  xx           SPR02_ATTR: 	.RES 1
+00000Br 2  xx           SPR02_X: 		.RES 1
+00000Cr 2               
+00000Cr 2  xx           SPR03_Y: 		.RES 1
+00000Dr 2  xx           SPR03_CHAR: 	.RES 1
+00000Er 2  xx           SPR03_ATTR: 	.RES 1
+00000Fr 2  xx           SPR03_X: 		.RES 1
+000010r 2               
+000010r 2  xx           SPR04_Y: 		.RES 1
+000011r 2  xx           SPR04_CHAR: 	.RES 1
+000012r 2  xx           SPR04_ATTR: 	.RES 1
+000013r 2  xx           SPR04_X: 		.RES 1
+000014r 2               
+000014r 2  xx           SPR05_Y: 		.RES 1
+000015r 2  xx           SPR05_CHAR: 	.RES 1
+000016r 2  xx           SPR05_ATTR: 	.RES 1
+000017r 2  xx           SPR05_X: 		.RES 1
+000018r 2               
+000018r 2  xx           SPR06_Y: 		.RES 1
+000019r 2  xx           SPR06_CHAR: 	.RES 1
+00001Ar 2  xx           SPR06_ATTR: 	.RES 1
+00001Br 2  xx           SPR06_X: 		.RES 1
+00001Cr 2               
+00001Cr 2  xx           SPR07_Y: 		.RES 1
+00001Dr 2  xx           SPR07_CHAR: 	.RES 1
+00001Er 2  xx           SPR07_ATTR: 	.RES 1
+00001Fr 2  xx           SPR07_X: 		.RES 1
+000020r 2               
+000020r 2  xx           SPR08_Y: 		.RES 1
+000021r 2  xx           SPR08_CHAR: 	.RES 1
+000022r 2  xx           SPR08_ATTR: 	.RES 1
+000023r 2  xx           SPR08_X: 		.RES 1
+000024r 2               
+000024r 2  xx           SPR09_Y: 		.RES 1
+000025r 2  xx           SPR09_CHAR: 	.RES 1
+000026r 2  xx           SPR09_ATTR: 	.RES 1
+000027r 2  xx           SPR09_X: 		.RES 1
+000028r 2               
+000028r 2  xx           SPR0A_Y: 		.RES 1
+000029r 2  xx           SPR0A_CHAR: 	.RES 1
+00002Ar 2  xx           SPR0A_ATTR: 	.RES 1
+00002Br 2  xx           SPR0A_X: 		.RES 1
+00002Cr 2               
+00002Cr 2  xx           SPR0B_Y: 		.RES 1
+00002Dr 2  xx           SPR0B_CHAR: 	.RES 1
+00002Er 2  xx           SPR0B_ATTR: 	.RES 1
+00002Fr 2  xx           SPR0B_X: 		.RES 1
+000030r 2               
+000030r 2  xx           SPR0C_Y: 		.RES 1
+000031r 2  xx           SPR0C_CHAR: 	.RES 1
+000032r 2  xx           SPR0C_ATTR: 	.RES 1
+000033r 2  xx           SPR0C_X: 		.RES 1
+000034r 2               
+000034r 2  xx           SPR0D_Y: 		.RES 1
+000035r 2  xx           SPR0D_CHAR: 	.RES 1
+000036r 2  xx           SPR0D_ATTR: 	.RES 1
+000037r 2  xx           SPR0D_X: 		.RES 1
+000038r 2               
+000038r 2  xx           SPR0E_Y: 		.RES 1
+000039r 2  xx           SPR0E_CHAR: 	.RES 1
+00003Ar 2  xx           SPR0E_ATTR: 	.RES 1
+00003Br 2  xx           SPR0E_X: 		.RES 1
+00003Cr 2               
+00003Cr 2  xx           SPR0F_Y: 		.RES 1
+00003Dr 2  xx           SPR0F_CHAR: 	.RES 1
+00003Er 2  xx           SPR0F_ATTR: 	.RES 1
+00003Fr 2  xx           SPR0F_X: 		.RES 1
+000040r 2               
+000040r 2  xx           SPR10_Y: 		.RES 1
+000041r 2  xx           SPR10_CHAR: 	.RES 1
+000042r 2  xx           SPR10_ATTR: 	.RES 1
+000043r 2  xx           SPR10_X: 		.RES 1
+000044r 2               
+000044r 2  xx           SPR11_Y: 		.RES 1
+000045r 2  xx           SPR11_CHAR: 	.RES 1
+000046r 2  xx           SPR11_ATTR: 	.RES 1
+000047r 2  xx           SPR11_X: 		.RES 1
+000048r 2               
+000048r 2  xx           SPR12_Y: 		.RES 1
+000049r 2  xx           SPR12_CHAR: 	.RES 1
+00004Ar 2  xx           SPR12_ATTR: 	.RES 1
+00004Br 2  xx           SPR12_X: 		.RES 1
+00004Cr 2               
+00004Cr 2  xx           SPR13_Y: 		.RES 1
+00004Dr 2  xx           SPR13_CHAR: 	.RES 1
+00004Er 2  xx           SPR13_ATTR: 	.RES 1
+00004Fr 2  xx           SPR13_X: 		.RES 1
+000050r 2               
+000050r 2  xx           SPR14_Y: 		.RES 1
+000051r 2  xx           SPR14_CHAR: 	.RES 1
+000052r 2  xx           SPR14_ATTR: 	.RES 1
+000053r 2  xx           SPR14_X: 		.RES 1
+000054r 2               
+000054r 2  xx           SPR15_Y: 		.RES 1
+000055r 2  xx           SPR15_CHAR: 	.RES 1
+000056r 2  xx           SPR15_ATTR: 	.RES 1
+000057r 2  xx           SPR15_X: 		.RES 1
+000058r 2               
+000058r 2  xx           SPR16_Y: 		.RES 1
+000059r 2  xx           SPR16_CHAR: 	.RES 1
+00005Ar 2  xx           SPR16_ATTR: 	.RES 1
+00005Br 2  xx           SPR16_X: 		.RES 1
+00005Cr 2               
+00005Cr 2  xx           SPR17_Y: 		.RES 1
+00005Dr 2  xx           SPR17_CHAR: 	.RES 1
+00005Er 2  xx           SPR17_ATTR: 	.RES 1
+00005Fr 2  xx           SPR17_X: 		.RES 1
+000060r 2               
+000060r 2  xx           SPR18_Y: 		.RES 1
+000061r 2  xx           SPR18_CHAR: 	.RES 1
+000062r 2  xx           SPR18_ATTR: 	.RES 1
+000063r 2  xx           SPR18_X: 		.RES 1
+000064r 2               
+000064r 2  xx           SPR19_Y: 		.RES 1
+000065r 2  xx           SPR19_CHAR: 	.RES 1
+000066r 2  xx           SPR19_ATTR: 	.RES 1
+000067r 2  xx           SPR19_X: 		.RES 1
+000068r 2               
+000068r 2  xx           SPR1A_Y: 		.RES 1
+000069r 2  xx           SPR1A_CHAR: 	.RES 1
+00006Ar 2  xx           SPR1A_ATTR: 	.RES 1
+00006Br 2  xx           SPR1A_X: 		.RES 1
+00006Cr 2               
+00006Cr 2  xx           SPR1B_Y: 		.RES 1
+00006Dr 2  xx           SPR1B_CHAR: 	.RES 1
+00006Er 2  xx           SPR1B_ATTR: 	.RES 1
+00006Fr 2  xx           SPR1B_X: 		.RES 1
+000070r 2               
+000070r 2  xx           SPR1C_Y: 		.RES 1
+000071r 2  xx           SPR1C_CHAR: 	.RES 1
+000072r 2  xx           SPR1C_ATTR: 	.RES 1
+000073r 2  xx           SPR1C_X: 		.RES 1
+000074r 2               
+000074r 2  xx           SPR1D_Y: 		.RES 1
+000075r 2  xx           SPR1D_CHAR: 	.RES 1
+000076r 2  xx           SPR1D_ATTR: 	.RES 1
+000077r 2  xx           SPR1D_X: 		.RES 1
+000078r 2               
+000078r 2  xx           SPR1E_Y: 		.RES 1
+000079r 2  xx           SPR1E_CHAR: 	.RES 1
+00007Ar 2  xx           SPR1E_ATTR: 	.RES 1
+00007Br 2  xx           SPR1E_X: 		.RES 1
+00007Cr 2               
+00007Cr 2  xx           SPR1F_Y: 		.RES 1
+00007Dr 2  xx           SPR1F_CHAR: 	.RES 1
+00007Er 2  xx           SPR1F_ATTR: 	.RES 1
+00007Fr 2  xx           SPR1F_X: 		.RES 1
+000080r 2               
+000080r 2  xx           SPR20_Y: 		.RES 1
+000081r 2  xx           SPR20_CHAR: 	.RES 1
+000082r 2  xx           SPR20_ATTR: 	.RES 1
+000083r 2  xx           SPR20_X: 		.RES 1
+000084r 2               
+000084r 2  xx           SPR21_Y: 		.RES 1
+000085r 2  xx           SPR21_CHAR: 	.RES 1
+000086r 2  xx           SPR21_ATTR: 	.RES 1
+000087r 2  xx           SPR21_X: 		.RES 1
+000088r 2               
+000088r 2  xx           SPR22_Y: 		.RES 1
+000089r 2  xx           SPR22_CHAR: 	.RES 1
+00008Ar 2  xx           SPR22_ATTR: 	.RES 1
+00008Br 2  xx           SPR22_X: 		.RES 1
+00008Cr 2               
+00008Cr 2  xx           SPR23_Y: 		.RES 1
+00008Dr 2  xx           SPR23_CHAR: 	.RES 1
+00008Er 2  xx           SPR23_ATTR: 	.RES 1
+00008Fr 2  xx           SPR23_X: 		.RES 1
+000090r 2               
+000090r 2  xx           SPR24_Y: 		.RES 1
+000091r 2  xx           SPR24_CHAR: 	.RES 1
+000092r 2  xx           SPR24_ATTR: 	.RES 1
+000093r 2  xx           SPR24_X: 		.RES 1
+000094r 2               
+000094r 2  xx           SPR25_Y: 		.RES 1
+000095r 2  xx           SPR25_CHAR: 	.RES 1
+000096r 2  xx           SPR25_ATTR: 	.RES 1
+000097r 2  xx           SPR25_X: 		.RES 1
+000098r 2               
+000098r 2  xx           SPR26_Y: 		.RES 1
+000099r 2  xx           SPR26_CHAR: 	.RES 1
+00009Ar 2  xx           SPR26_ATTR: 	.RES 1
+00009Br 2  xx           SPR26_X: 		.RES 1
+00009Cr 2               
+00009Cr 2  xx           SPR27_Y: 		.RES 1
+00009Dr 2  xx           SPR27_CHAR: 	.RES 1
+00009Er 2  xx           SPR27_ATTR: 	.RES 1
+00009Fr 2  xx           SPR27_X: 		.RES 1
+0000A0r 2               
+0000A0r 2  xx           SPR28_Y: 		.RES 1
+0000A1r 2  xx           SPR28_CHAR: 	.RES 1
+0000A2r 2  xx           SPR28_ATTR: 	.RES 1
+0000A3r 2  xx           SPR28_X: 		.RES 1
+0000A4r 2               
+0000A4r 2  xx           SPR29_Y: 		.RES 1
+0000A5r 2  xx           SPR29_CHAR: 	.RES 1
+0000A6r 2  xx           SPR29_ATTR: 	.RES 1
+0000A7r 2  xx           SPR29_X: 		.RES 1
+0000A8r 2               
+0000A8r 2  xx           SPR2A_Y: 		.RES 1
+0000A9r 2  xx           SPR2A_CHAR: 	.RES 1
+0000AAr 2  xx           SPR2A_ATTR: 	.RES 1
+0000ABr 2  xx           SPR2A_X: 		.RES 1
+0000ACr 2               
+0000ACr 2  xx           SPR2B_Y: 		.RES 1
+0000ADr 2  xx           SPR2B_CHAR: 	.RES 1
+0000AEr 2  xx           SPR2B_ATTR: 	.RES 1
+0000AFr 2  xx           SPR2B_X: 		.RES 1
+0000B0r 2               
+0000B0r 2  xx           SPR2C_Y: 		.RES 1
+0000B1r 2  xx           SPR2C_CHAR: 	.RES 1
+0000B2r 2  xx           SPR2C_ATTR: 	.RES 1
+0000B3r 2  xx           SPR2C_X: 		.RES 1
+0000B4r 2               
+0000B4r 2  xx           SPR2D_Y: 		.RES 1
+0000B5r 2  xx           SPR2D_CHAR: 	.RES 1
+0000B6r 2  xx           SPR2D_ATTR: 	.RES 1
+0000B7r 2  xx           SPR2D_X: 		.RES 1
+0000B8r 2               
+0000B8r 2  xx           SPR2E_Y: 		.RES 1
+0000B9r 2  xx           SPR2E_CHAR: 	.RES 1
+0000BAr 2  xx           SPR2E_ATTR: 	.RES 1
+0000BBr 2  xx           SPR2E_X: 		.RES 1
+0000BCr 2               
+0000BCr 2  xx           SPR2F_Y: 		.RES 1
+0000BDr 2  xx           SPR2F_CHAR: 	.RES 1
+0000BEr 2  xx           SPR2F_ATTR: 	.RES 1
+0000BFr 2  xx           SPR2F_X: 		.RES 1
+0000C0r 2               
+0000C0r 2  xx           SPR30_Y: 		.RES 1
+0000C1r 2  xx           SPR30_CHAR: 	.RES 1
+0000C2r 2  xx           SPR30_ATTR: 	.RES 1
+0000C3r 2  xx           SPR30_X: 		.RES 1
+0000C4r 2               
+0000C4r 2  xx           SPR31_Y: 		.RES 1
+0000C5r 2  xx           SPR31_CHAR: 	.RES 1
+0000C6r 2  xx           SPR31_ATTR: 	.RES 1
+0000C7r 2  xx           SPR31_X: 		.RES 1
+0000C8r 2               
+0000C8r 2  xx           SPR32_Y: 		.RES 1
+0000C9r 2  xx           SPR32_CHAR: 	.RES 1
+0000CAr 2  xx           SPR32_ATTR: 	.RES 1
+0000CBr 2  xx           SPR32_X: 		.RES 1
+0000CCr 2               
+0000CCr 2  xx           SPR33_Y: 		.RES 1
+0000CDr 2  xx           SPR33_CHAR: 	.RES 1
+0000CEr 2  xx           SPR33_ATTR: 	.RES 1
+0000CFr 2  xx           SPR33_X: 		.RES 1
+0000D0r 2               
+0000D0r 2  xx           SPR34_Y: 		.RES 1
+0000D1r 2  xx           SPR34_CHAR: 	.RES 1
+0000D2r 2  xx           SPR34_ATTR: 	.RES 1
+0000D3r 2  xx           SPR34_X: 		.RES 1
+0000D4r 2               
+0000D4r 2  xx           SPR35_Y: 		.RES 1
+0000D5r 2  xx           SPR35_CHAR: 	.RES 1
+0000D6r 2  xx           SPR35_ATTR: 	.RES 1
+0000D7r 2  xx           SPR35_X: 		.RES 1
+0000D8r 2               
+0000D8r 2  xx           SPR36_Y: 		.RES 1
+0000D9r 2  xx           SPR36_CHAR: 	.RES 1
+0000DAr 2  xx           SPR36_ATTR: 	.RES 1
+0000DBr 2  xx           SPR36_X: 		.RES 1
+0000DCr 2               
+0000DCr 2  xx           SPR37_Y: 		.RES 1
+0000DDr 2  xx           SPR37_CHAR: 	.RES 1
+0000DEr 2  xx           SPR37_ATTR: 	.RES 1
+0000DFr 2  xx           SPR37_X: 		.RES 1
+0000E0r 2               
+0000E0r 2  xx           SPR38_Y: 		.RES 1
+0000E1r 2  xx           SPR38_CHAR: 	.RES 1
+0000E2r 2  xx           SPR38_ATTR: 	.RES 1
+0000E3r 2  xx           SPR38_X: 		.RES 1
+0000E4r 2               
+0000E4r 2  xx           SPR39_Y: 		.RES 1
+0000E5r 2  xx           SPR39_CHAR: 	.RES 1
+0000E6r 2  xx           SPR39_ATTR: 	.RES 1
+0000E7r 2  xx           SPR39_X: 		.RES 1
+0000E8r 2               
+0000E8r 2  xx           SPR3A_Y: 		.RES 1
+0000E9r 2  xx           SPR3A_CHAR: 	.RES 1
+0000EAr 2  xx           SPR3A_ATTR: 	.RES 1
+0000EBr 2  xx           SPR3A_X: 		.RES 1
+0000ECr 2               
+0000ECr 2  xx           SPR3B_Y: 		.RES 1
+0000EDr 2  xx           SPR3B_CHAR: 	.RES 1
+0000EEr 2  xx           SPR3B_ATTR: 	.RES 1
+0000EFr 2  xx           SPR3B_X: 		.RES 1
+0000F0r 2               
+0000F0r 2  xx           SPR3C_Y: 		.RES 1
+0000F1r 2  xx           SPR3C_CHAR: 	.RES 1
+0000F2r 2  xx           SPR3C_ATTR: 	.RES 1
+0000F3r 2  xx           SPR3C_X: 		.RES 1
+0000F4r 2               
+0000F4r 2  xx           SPR3D_Y: 		.RES 1
+0000F5r 2  xx           SPR3D_CHAR: 	.RES 1
+0000F6r 2  xx           SPR3D_ATTR: 	.RES 1
+0000F7r 2  xx           SPR3D_X: 		.RES 1
+0000F8r 2               
+0000F8r 2  xx           SPR3E_Y: 		.RES 1
+0000F9r 2  xx           SPR3E_CHAR: 	.RES 1
+0000FAr 2  xx           SPR3E_ATTR: 	.RES 1
+0000FBr 2  xx           SPR3E_X: 		.RES 1
+0000FCr 2               
+0000FCr 2  xx           SPR3F_Y: 		.RES 1
+0000FDr 2  xx           SPR3F_CHAR: 	.RES 1
+0000FEr 2  xx           SPR3F_ATTR: 	.RES 1
+0000FFr 2  xx           SPR3F_X: 		.RES 1
+000100r 2               
+000100r 2               
+000100r 2               .export SPR00_Y,SPR00_CHAR,SPR00_ATTR,SPR00_X
+000100r 2               .export SPR01_Y,SPR01_CHAR,SPR01_ATTR,SPR01_X
+000100r 2               .export SPR02_Y,SPR02_CHAR,SPR02_ATTR,SPR02_X
+000100r 2               .export SPR03_Y,SPR03_CHAR,SPR03_ATTR,SPR03_X
+000100r 2               .export SPR04_Y,SPR04_CHAR,SPR04_ATTR,SPR04_X
+000100r 2               .export SPR05_Y,SPR05_CHAR,SPR05_ATTR,SPR05_X
+000100r 2               .export SPR06_Y,SPR06_CHAR,SPR06_ATTR,SPR06_X
+000100r 2               .export SPR07_Y,SPR07_CHAR,SPR07_ATTR,SPR07_X
+000100r 2               .export SPR08_Y,SPR08_CHAR,SPR08_ATTR,SPR08_X
+000100r 2               .export SPR09_Y,SPR09_CHAR,SPR09_ATTR,SPR09_X
+000100r 2               .export SPR0A_Y,SPR0A_CHAR,SPR0A_ATTR,SPR0A_X
+000100r 2               .export SPR0B_Y,SPR0B_CHAR,SPR0B_ATTR,SPR0B_X
+000100r 2               .export SPR0C_Y,SPR0C_CHAR,SPR0C_ATTR,SPR0C_X
+000100r 2               .export SPR0D_Y,SPR0D_CHAR,SPR0D_ATTR,SPR0D_X
+000100r 2               .export SPR0E_Y,SPR0E_CHAR,SPR0E_ATTR,SPR0E_X
+000100r 2               .export SPR0F_Y,SPR0F_CHAR,SPR0F_ATTR,SPR0F_X
+000100r 2               .export SPR10_Y,SPR10_CHAR,SPR10_ATTR,SPR10_X
+000100r 2               .export SPR11_Y,SPR11_CHAR,SPR11_ATTR,SPR11_X
+000100r 2               .export SPR12_Y,SPR12_CHAR,SPR12_ATTR,SPR12_X
+000100r 2               .export SPR13_Y,SPR13_CHAR,SPR13_ATTR,SPR13_X
+000100r 2               .export SPR14_Y,SPR14_CHAR,SPR14_ATTR,SPR14_X
+000100r 2               .export SPR15_Y,SPR15_CHAR,SPR15_ATTR,SPR15_X
+000100r 2               .export SPR16_Y,SPR16_CHAR,SPR16_ATTR,SPR16_X
+000100r 2               .export SPR17_Y,SPR17_CHAR,SPR17_ATTR,SPR17_X
+000100r 2               .export SPR18_Y,SPR18_CHAR,SPR18_ATTR,SPR18_X
+000100r 2               .export SPR19_Y,SPR19_CHAR,SPR19_ATTR,SPR19_X
+000100r 2               .export SPR1A_Y,SPR1A_CHAR,SPR1A_ATTR,SPR1A_X
+000100r 2               .export SPR1B_Y,SPR1B_CHAR,SPR1B_ATTR,SPR1B_X
+000100r 2               .export SPR1C_Y,SPR1C_CHAR,SPR1C_ATTR,SPR1C_X
+000100r 2               .export SPR1D_Y,SPR1D_CHAR,SPR1D_ATTR,SPR1D_X
+000100r 2               .export SPR1E_Y,SPR1E_CHAR,SPR1E_ATTR,SPR1E_X
+000100r 2               .export SPR1F_Y,SPR1F_CHAR,SPR1F_ATTR,SPR1F_X
+000100r 2               .export SPR20_Y,SPR20_CHAR,SPR20_ATTR,SPR20_X
+000100r 2               .export SPR21_Y,SPR21_CHAR,SPR21_ATTR,SPR21_X
+000100r 2               .export SPR22_Y,SPR22_CHAR,SPR22_ATTR,SPR22_X
+000100r 2               .export SPR23_Y,SPR23_CHAR,SPR23_ATTR,SPR23_X
+000100r 2               .export SPR24_Y,SPR24_CHAR,SPR24_ATTR,SPR24_X
+000100r 2               .export SPR25_Y,SPR25_CHAR,SPR25_ATTR,SPR25_X
+000100r 2               .export SPR26_Y,SPR26_CHAR,SPR26_ATTR,SPR26_X
+000100r 2               .export SPR27_Y,SPR27_CHAR,SPR27_ATTR,SPR27_X
+000100r 2               .export SPR28_Y,SPR28_CHAR,SPR28_ATTR,SPR28_X
+000100r 2               .export SPR29_Y,SPR29_CHAR,SPR29_ATTR,SPR29_X
+000100r 2               .export SPR2A_Y,SPR2A_CHAR,SPR2A_ATTR,SPR2A_X
+000100r 2               .export SPR2B_Y,SPR2B_CHAR,SPR2B_ATTR,SPR2B_X
+000100r 2               .export SPR2C_Y,SPR2C_CHAR,SPR2C_ATTR,SPR2C_X
+000100r 2               .export SPR2D_Y,SPR2D_CHAR,SPR2D_ATTR,SPR2D_X
+000100r 2               .export SPR2E_Y,SPR2E_CHAR,SPR2E_ATTR,SPR2E_X
+000100r 2               .export SPR2F_Y,SPR2F_CHAR,SPR2F_ATTR,SPR2F_X
+000100r 2               .export SPR30_Y,SPR30_CHAR,SPR30_ATTR,SPR30_X
+000100r 2               .export SPR31_Y,SPR31_CHAR,SPR31_ATTR,SPR31_X
+000100r 2               .export SPR32_Y,SPR32_CHAR,SPR32_ATTR,SPR32_X
+000100r 2               .export SPR33_Y,SPR33_CHAR,SPR33_ATTR,SPR33_X
+000100r 2               .export SPR34_Y,SPR34_CHAR,SPR34_ATTR,SPR34_X
+000100r 2               .export SPR35_Y,SPR35_CHAR,SPR35_ATTR,SPR35_X
+000100r 2               .export SPR36_Y,SPR36_CHAR,SPR36_ATTR,SPR36_X
+000100r 2               .export SPR37_Y,SPR37_CHAR,SPR37_ATTR,SPR37_X
+000100r 2               .export SPR38_Y,SPR38_CHAR,SPR38_ATTR,SPR38_X
+000100r 2               .export SPR39_Y,SPR39_CHAR,SPR39_ATTR,SPR39_X
+000100r 2               .export SPR3A_Y,SPR3A_CHAR,SPR3A_ATTR,SPR3A_X
+000100r 2               .export SPR3B_Y,SPR3B_CHAR,SPR3B_ATTR,SPR3B_X
+000100r 2               .export SPR3C_Y,SPR3C_CHAR,SPR3C_ATTR,SPR3C_X
+000100r 2               .export SPR3D_Y,SPR3D_CHAR,SPR3D_ATTR,SPR3D_X
+000100r 2               .export SPR3E_Y,SPR3E_CHAR,SPR3E_ATTR,SPR3E_X
+000100r 2               .export SPR3F_Y,SPR3F_CHAR,SPR3F_ATTR,SPR3F_X
+000100r 2               
+000100r 1               
+000100r 1               
+000100r 1  xx           debug0:		.RES 1
+000101r 1  xx           debug1:		.RES 1
+000102r 1  xx           debug2:		.RES 1
+000103r 1  xx           debug3:		.RES 1
+000104r 1  xx           editorMode:	.RES 1
+000105r 1  xx           editorModeIndex:	.RES 1
+000106r 1  xx xx xx xx  editorPreviousModes: .RES $10
+00010Ar 1  xx xx xx xx  
+00010Er 1  xx xx xx xx  
+000116r 1               
+000116r 1  xx           hintMode:		.RES 1
+000117r 1  xx           cursorFlashIndex:	.RES 1
+000118r 1  xx           cursorFlashColour:	.RES 1
+000119r 1               
+000119r 1  xx           editorCurrentTrack:	.RES 1
+00011Ar 1  xx           editorCurrentChain:	.RES 1
+00011Br 1  xx           editorCurrentPattern: .RES 1
+00011Cr 1  xx           editorCurrentInstrument: .RES 1
+00011Dr 1  xx           editorCurrentDrumkit: .RES 1
+00011Er 1  xx           editorCurrentEnvelope: .RES 1
+00011Fr 1  xx           editorCurrentTable:	.RES 1
+000120r 1  xx           editorCurrentVibrato:	.RES 1
+000121r 1  xx           editorCurrentDuty:	.RES 1
+000122r 1  xx           editorCurrentEcho:	.RES 1
+000123r 1  xx           editorCurrentSpeed:	.RES 1
+000124r 1               
+000124r 1  xx           editPatternTie:	.RES 1
+000125r 1               
+000125r 1               
+000125r 1  xx           songTrackIndex:	.RES 1
+000126r 1  xx           editChainIndex:	.RES 1
+000127r 1  xx           envelopeIndex:	.RES 1
+000128r 1  xx           vibratoIndex:	.RES 1
+000129r 1  xx           echoIndex:	.RES 1
+00012Ar 1               
+00012Ar 1               editorLastValues:
+00012Ar 1  xx xx xx xx  editSongLastValue:	.RES TRACKS_PER_SONG
+00012Er 1  xx           
+00012Fr 1  xx xx        editChainLastValue:	.RES BYTES_PER_CHAIN_STEP
+000131r 1  xx xx xx xx  editPatternLastValue: .RES BYTES_PER_PATTERN_STEP
+000135r 1  xx xx xx xx  editDrumkitLastValue: .RES (BYTES_PER_DRUMKIT_STEP+1)
+000139r 1  xx xx        
+00013Br 1  xx xx xx xx  editEnvelopeLastValue:	.RES BYTES_PER_ENVELOPE
+00013Fr 1  xx xx xx xx  editTableLastValue:	.RES BYTES_PER_TABLE_STEP
+000143r 1  xx xx        
+000145r 1  xx xx xx xx  editVibratoLastValue:	.RES BYTES_PER_VIBRATO
+000149r 1  xx xx xx xx  editDutyLastValue:	.RES BYTES_PER_DUTY_TABLE_STEP+1
+00014Dr 1  xx xx xx     editEchoLastValue:	.RES BYTES_PER_ECHO
+000150r 1  xx           editSpeedLastValue:	.RES BYTES_PER_SPEED_TABLE_STEP
+000151r 1               editorLastValuesEnd:
+000151r 1               
+000151r 1  xx           editBuffer:	.RES 1
+000152r 1  xx           editBufferFlag:	.RES 1
+000153r 1               
+000153r 1               
+000153r 1               editorKeys:
+000153r 1               
+000153r 1  xx           keysHoldCounterB:	.RES 1
+000154r 1  xx           keysTapCounterB:	.RES 1
+000155r 1  xx           keysTapB:		.RES 1
+000156r 1  xx           keysDoubleTapB:	.RES 1
+000157r 1  xx           keysHoldB:		.RES 1
+000158r 1               
+000158r 1  xx           keysHoldCounterA:	.RES 1
+000159r 1  xx           keysTapCounterA:	.RES 1
+00015Ar 1  xx           keysTapA:		.RES 1
+00015Br 1  xx           keysDoubleTapA:	.RES 1
+00015Cr 1  xx           keysHoldA:		.RES 1
+00015Dr 1               
+00015Dr 1  xx           keysHoldCounterSel:	.RES 1
+00015Er 1  xx           keysTapCounterSel:	.RES 1
+00015Fr 1  xx           keysTapSel:		.RES 1
+000160r 1  xx           keysDoubleTapSel:	.RES 1
+000161r 1  xx           keysHoldSel:	.RES 1
+000162r 1               
+000162r 1  xx           keysRepeatUD:	.RES 1
+000163r 1  xx           keysRepeatOldUD:	.RES 1
+000164r 1  xx           keysRepeatRateUD:	.RES 1
+000165r 1  xx           keysRepeatCounterUD:	.RES 1
+000166r 1               
+000166r 1  xx           keysRepeatLR:	.RES 1
+000167r 1  xx           keysRepeatOldLR:	.RES 1
+000168r 1  xx           keysRepeatRateLR:	.RES 1
+000169r 1  xx           keysRepeatCounterLR:	.RES 1
+00016Ar 1               
+00016Ar 1  xx           PAD1_firea_old:	.RES 1
+00016Br 1  xx           PAD1_fireb_old:	.RES 1
+00016Cr 1  xx           PAD1_sel_old:	.RES 1
+00016Dr 1               
+00016Dr 1               editorKeysEnd:
+00016Dr 1               
+00016Dr 1               
+00016Dr 1  xx xx xx xx  windowBuffer:	.RES 256
+000171r 1  xx xx xx xx  
+000175r 1  xx xx xx xx  
+00026Dr 1  xx xx xx xx  titleBuffer:	.RES 17
+000271r 1  xx xx xx xx  
+000275r 1  xx xx xx xx  
+00027Er 1  00 00 00 00  headerBuffer:	.RES 17,0
+000282r 1  00 00 00 00  
+000286r 1  00 00 00 00  
+00028Fr 1  00 00 00 00  rowBuffer:	.RES 32,0
+000293r 1  00 00 00 00  
+000297r 1  00 00 00 00  
+0002AFr 1  xx           writeScreen:	.RES 1
+0002B0r 1               
+0002B0r 1  xx           dmaUpdateWindow:	.RES 1
+0002B1r 1  xx           dmaUpdateHeader:	.RES 1
+0002B2r 1  xx           dmaUpdateTitle:	.RES 1
+0002B3r 1               
+0002B3r 1  xx           songCursorX:	.RES 1
+0002B4r 1  xx           chainCursorX:	.RES 1
+0002B5r 1  xx           patternCursorX:	.RES 1
+0002B6r 1  xx           instrumentCursorX:	.RES 1
+0002B7r 1  xx           drumkitCursorX:	.RES 1
+0002B8r 1  xx           envelopeCursorX:	.RES 1
+0002B9r 1  xx           tableCursorX:	.RES 1
+0002BAr 1  xx           vibratoCursorX:	.RES 1
+0002BBr 1  xx           dutyCursorX:	.RES 1
+0002BCr 1  xx           echoCursorX:	.RES 1
+0002BDr 1  xx           speedCursorX:	.RES 1
+0002BEr 1  xx           navMenuCursorX:	.RES 1
+0002BFr 1  xx           setupCursorX:	.RES 1
+0002C0r 1               
+0002C0r 1               
+0002C0r 1               
+0002C0r 1  xx           songCursorY:	.RES 1
+0002C1r 1  xx           chainCursorY:	.RES 1
+0002C2r 1  xx           patternCursorY:	.RES 1
+0002C3r 1  xx           instrumentCursorY:	.RES 1
+0002C4r 1  xx           drumkitCursorY:	.RES 1
+0002C5r 1  xx           envelopeCursorY:	.RES 1
+0002C6r 1  xx           tableCursorY:	.RES 1
+0002C7r 1  xx           vibratoCursorY:	.RES 1
+0002C8r 1  xx           dutyCursorY:	.RES 1
+0002C9r 1  xx           echoCursorY:	.RES 1
+0002CAr 1  xx           speedCursorY:	.RES 1
+0002CBr 1  xx           navMenuCursorY:	.RES 1
+0002CCr 1  xx           setupCursorY:	.RES 1
+0002CDr 1               
+0002CDr 1  xx           songFirstRow:	.RES 1
+0002CEr 1  xx           chainFirstRow:	.RES 1
+0002CFr 1  xx           patternFirstRow:	.RES 1
+0002D0r 1  xx           instrumentFirstRow:	.RES 1
+0002D1r 1  xx           drumkitFirstRow:	.RES 1
+0002D2r 1  xx           envelopeFirstRow:	.RES 1
+0002D3r 1  xx           tableFirstRow:	.RES 1
+0002D4r 1  xx           vibratoFirstRow:	.RES 1
+0002D5r 1  xx           dutyFirstRow:	.RES 1
+0002D6r 1  xx           echoFirstRow:	.RES 1
+0002D7r 1  xx           speedFirstRow:	.RES 1
+0002D8r 1  xx           navFirstRow:	.RES 1
+0002D9r 1  xx           setupFirstRow:	.RES 1
+0002DAr 1               
+0002DAr 1  xx           drumkitCursorX_old:	.RES 1
+0002DBr 1               
+0002DBr 1               ;---------------------------------------------------------------
+0002DBr 1               ; Player Variables
+0002DBr 1               ;---------------------------------------------------------------
+0002DBr 1               
+0002DBr 1               
+0002DBr 1               
+0002DBr 1  xx           plyrPlaying:		.RES 1
+0002DCr 1               
+0002DCr 1  xx           plyrSongStartIndex:		.RES 1
+0002DDr 1               
+0002DDr 1  xx xx xx xx  plyrTrackIndex:		.RES 5
+0002E1r 1  xx           
+0002E2r 1               
+0002E2r 1  xx xx xx xx  plyrPatternIndex:		.RES 5
+0002E6r 1  xx           
+0002E7r 1               
+0002E7r 1  xx xx xx xx  plyrPatternStepCounter:	.RES 5
+0002EBr 1  xx           
+0002ECr 1               
+0002ECr 1  xx xx xx xx  plyrPatternJump:		.RES 5
+0002F0r 1  xx           
+0002F1r 1               
+0002F1r 1  xx xx xx xx  plyrChainIndex:		.RES 5
+0002F5r 1  xx           
+0002F6r 1               
+0002F6r 1  xx xx xx xx  plyrCurrentChain:		.RES 5
+0002FAr 1  xx           
+0002FBr 1               
+0002FBr 1  xx xx xx xx  plyrCurrentChainTranspose:	.RES 5
+0002FFr 1  xx           
+000300r 1               
+000300r 1  xx xx xx xx  plyrCurrentInstrument:	.RES 5
+000304r 1  xx           
+000305r 1               
+000305r 1  xx xx xx xx  plyrCurrentNote:		.RES 5
+000309r 1  xx           
+00030Ar 1               
+00030Ar 1  xx xx xx xx  plyrNoteCounter:		.RES 5
+00030Er 1  xx           
+00030Fr 1               
+00030Fr 1  xx xx xx xx  plyrCurrentPattern:		.RES 5
+000313r 1  xx           
+000314r 1               
+000314r 1  xx xx xx xx  plyrCurrentPatternFX:	.RES 5
+000318r 1  xx           
+000319r 1               
+000319r 1  xx xx xx xx  plyrCurrentPatternFXData:	.RES 5
+00031Dr 1  xx           
+00031Er 1               
+00031Er 1               plyrInstrumentCopy:
+00031Er 1  xx xx xx xx  plyrInstrumentCopyA:	.RES STEPS_PER_INSTRUMENT
+000322r 1  xx xx xx xx  
+000326r 1  xx xx xx xx  
+00032Ar 1  xx xx xx xx  plyrInstrumentCopyB:	.RES STEPS_PER_INSTRUMENT
+00032Er 1  xx xx xx xx  
+000332r 1  xx xx xx xx  
+000336r 1  xx xx xx xx  plyrInstrumentCopyC:	.RES STEPS_PER_INSTRUMENT
+00033Ar 1  xx xx xx xx  
+00033Er 1  xx xx xx xx  
+000342r 1  xx xx xx xx  plyrInstrumentCopyD:	.RES STEPS_PER_INSTRUMENT
+000346r 1  xx xx xx xx  
+00034Ar 1  xx xx xx xx  
+00034Er 1  xx xx xx xx  plyrInstrumentCopyE:	.RES STEPS_PER_DRUMKIT * BYTES_PER_DRUMKIT_STEP
+000352r 1  xx xx xx xx  
+000356r 1  xx xx xx xx  
+00038Ar 1               
+00038Ar 1               
+00038Ar 1  xx xx xx xx  envelopeCounter:		.RES 4
+00038Er 1  xx xx xx xx  envelopePhase:		.RES 4
+000392r 1  xx xx xx xx  envelopeAmp:		.RES 4
+000396r 1               
+000396r 1  xx xx xx xx  noteNumber:		.RES 5
+00039Ar 1  xx           
+00039Br 1               
+00039Br 1  xx xx xx     noteAddFrac:		.RES 3
+00039Er 1  xx xx xx xx  noteAddNote:		.RES 4
+0003A2r 1               
+0003A2r 1  xx xx xx xx  pitchLo:			.RES 5
+0003A6r 1  xx           
+0003A7r 1  xx xx xx xx  pitchHi:			.RES 5
+0003ABr 1  xx           
+0003ACr 1  xx xx        pitchHiOld:		.RES 2
+0003AEr 1  xx xx        pitchLoOld:		.RES 2
+0003B0r 1               
+0003B0r 1  xx xx xx     plyrPitchSweepDelta:	.RES 3
+0003B3r 1  xx xx xx     plyrPitchSweepLo:		.RES 3
+0003B6r 1               
+0003B6r 1  xx xx        plyrCurrentDuty:		.RES 2
+0003B8r 1  xx xx        plyrDutyIndex:		.RES 2
+0003BAr 1  xx xx        plyrDutyTableDelay:		.RES 2
+0003BCr 1               
+0003BCr 1  xx xx xx xx  plyrTableVolume:		.RES 4
+0003C0r 1  xx xx xx xx  plyrTablePitch:		.RES 4
+0003C4r 1  xx xx xx xx  plyrTableIndex:		.RES 5
+0003C8r 1  xx           
+0003C9r 1  xx xx xx xx  plyrTableSpeed:		.RES 5
+0003CDr 1  xx           
+0003CEr 1  xx xx xx xx  plyrTableCounter:		.RES 5
+0003D2r 1  xx           
+0003D3r 1  xx xx xx xx  plyrTableJump:		.RES 5
+0003D7r 1  xx           
+0003D8r 1  xx xx xx xx  plyrTableDoStep:		.RES 5
+0003DCr 1  xx           
+0003DDr 1               
+0003DDr 1  xx           plyrTableTrackE:		.RES 1
+0003DEr 1               
+0003DEr 1  xx           plyrFxTemp1:		.RES 1
+0003DFr 1  xx           plyrFxTemp2:		.RES 1
+0003E0r 1  xx           plyrFxDataTemp1:		.RES 1
+0003E1r 1  xx           plyrFxDataTemp2:		.RES 1
+0003E2r 1  xx           plyrFxTempIndex:		.RES 1
+0003E3r 1               
+0003E3r 1  xx           plyrFxType:		.RES 1	;0 = pattern, 1 = table
+0003E4r 1               
+0003E4r 1               
+0003E4r 1               
+0003E4r 1  xx           patternLastNote:		.RES 1
+0003E5r 1               
+0003E5r 1  xx xx xx xx  plyrCurrentSpeedTable:	.RES 5
+0003E9r 1  xx           
+0003EAr 1  xx xx xx xx  plyrSpeedTableIndex:	.RES 5
+0003EEr 1  xx           
+0003EFr 1               
+0003EFr 1  xx xx xx xx  plyrChordNotes:		.RES 4
+0003F3r 1               
+0003F3r 1  xx xx xx xx  plyrPatternChordIndex:	.RES 4
+0003F7r 1  xx xx xx xx  plyrPatternChordCounter:	.RES 4
+0003FBr 1  xx xx xx xx  plyrPatternChordNote:	.RES 4
+0003FFr 1               
+0003FFr 1  xx           getNoteTemp0:		.RES 1
+000400r 1  xx           getNoteTemp1:		.RES 1
+000401r 1               
+000401r 1  xx xx xx xx  plyrKillCounter:		.RES 5
+000405r 1  xx           
+000406r 1  xx xx xx xx  plyrDelayNoteCounter:	.RES 5
+00040Ar 1  xx           
+00040Br 1  xx xx xx xx  plyrDelayNote:		.RES 5
+00040Fr 1  xx           
+000410r 1               
+000410r 1  xx xx xx     plyrVibPos:		.RES 3
+000413r 1  xx xx xx     plyrVibSpeedCounter:	.RES 3
+000416r 1  xx xx xx     plyrVibDelta:		.RES 3
+000419r 1  xx xx xx     plyrVibLastDelta:		.RES 3
+00041Cr 1  xx xx xx     plyrVibSpeedLo:		.RES 3
+00041Fr 1  xx xx xx     plyrVibDepthMod:		.RES 3
+000422r 1  xx xx xx     plyrVibDepthModCounter:	.RES 3
+000425r 1               
+000425r 1  xx xx xx     plyrSlideSpeed:		.RES 3
+000428r 1  xx xx xx     plyrSlideDestination:	.RES 3
+00042Br 1  xx xx xx     plyrPreviousNote:		.RES 3
+00042Er 1               
+00042Er 1  xx xx xx xx  V_APU:			.RES 16
+000432r 1  xx xx xx xx  
+000436r 1  xx xx xx xx  
+00043Er 1               
+00043Er 1  xx           dpcmStart:		.RES 1
+00043Fr 1  xx           dpcmLength:		.RES 1
+000440r 1  xx           dpcmPitch:		.RES 1
+000441r 1  xx           dpcmDC:			.RES 1
+000442r 1  xx           plyrDpcmOn:		.RES 1
+000443r 1               
+000443r 1  xx xx xx xx  plyrKeyOn:		.RES 5
+000447r 1  xx           
+000448r 1               
+000448r 1  xx xx xx xx  vuIndex:			.RES 5
+00044Cr 1  xx           
+00044Dr 1  xx xx xx xx  vuCounter:		.RES 5
+000451r 1  xx           
+000452r 1               
+000452r 1  xx xx xx xx  plyrRetriggerSpeed:		.RES 5
+000456r 1  xx           
+000457r 1  xx xx xx xx  plyrRetriggerCounter:	.RES 5
+00045Br 1  xx           
+00045Cr 1               
+00045Cr 1  xx           pulsarPassCounter:		.RES 1
+00045Dr 1  xx xx xx xx  pulsarIntensity:		.RES 5
+000461r 1  xx           
+000462r 1               
+000462r 1  xx           copyBufferObjectType:	.RES 1
+000463r 1  xx           copyBufferObject:		.RES 1
+000464r 1  xx           copyBufferStartIndex:	.RES 1
+000465r 1  xx           copyBufferEndIndex:		.RES 1
+000466r 1               
+000466r 1               			.IF ENABLE_ECHO=1
+000466r 1               plyrEchoIndex:		.RES 1
+000466r 1               plyrEchoSpeed:		.RES 1
+000466r 1               plyrEchoInitAttn:		.RES 1
+000466r 1               plyrEchoAttn:		.RES 1
+000466r 1               plyrEchoCounter:		.RES 1
+000466r 1               			.ENDIF
+000466r 1               
+000466r 1               .export debug0,debug1,debug2,debug3
+000466r 1               .export editorMode,editorModeIndex,editorPreviousModes
+000466r 1               .export hintMode, cursorFlashColour,cursorFlashIndex
+000466r 1               .export editorCurrentTrack,editorCurrentChain,editorCurrentPattern,editorCurrentInstrument
+000466r 1               .export editorCurrentDrumkit,editorCurrentEnvelope,editorCurrentTable,editorCurrentVibrato
+000466r 1               .export editorCurrentDuty,editorCurrentEcho,editorCurrentSpeed
+000466r 1               .export editPatternTie
+000466r 1               .export songTrackIndex,editChainIndex,envelopeIndex,vibratoIndex,echoIndex
+000466r 1               .export editorLastValues,editorLastValuesEnd
+000466r 1               .export editSongLastValue,editChainLastValue,editPatternLastValue,editDrumkitLastValue
+000466r 1               .export editEnvelopeLastValue,editTableLastValue,editVibratoLastValue,editDutyLastValue
+000466r 1               .export editEchoLastValue,editSpeedLastValue
+000466r 1               .export editBuffer, editBufferFlag
+000466r 1               .export editorKeys,editorKeysEnd
+000466r 1               .export keysHoldCounterB,keysTapCounterB,keysTapB,keysDoubleTapB,keysHoldB
+000466r 1               .export keysHoldCounterA,keysTapCounterA,keysTapA,keysDoubleTapA,keysHoldA
+000466r 1               .export keysHoldCounterSel,keysTapCounterSel,keysTapSel,keysDoubleTapSel,keysHoldSel
+000466r 1               .export keysRepeatUD,keysRepeatOldUD,keysRepeatRateUD,keysRepeatCounterUD
+000466r 1               .export keysRepeatLR,keysRepeatOldLR,keysRepeatRateLR,keysRepeatCounterLR
+000466r 1               .export PAD1_firea_old,PAD1_fireb_old,PAD1_sel_old
+000466r 1               .export windowBuffer,titleBuffer,headerBuffer,rowBuffer,writeScreen
+000466r 1               .export dmaUpdateWindow,dmaUpdateHeader,dmaUpdateTitle
+000466r 1               .export songCursorX,chainCursorX,patternCursorX,instrumentCursorX,drumkitCursorX
+000466r 1               .export envelopeCursorX,tableCursorX,vibratoCursorX,dutyCursorX,echoCursorX
+000466r 1               .export speedCursorX,navMenuCursorX,setupCursorX
+000466r 1               .export songCursorY,chainCursorY,patternCursorY,instrumentCursorY,drumkitCursorY
+000466r 1               .export envelopeCursorY,tableCursorY,vibratoCursorY,dutyCursorY,echoCursorY
+000466r 1               .export speedCursorY,navMenuCursorY,setupCursorY
+000466r 1               .export songFirstRow,chainFirstRow,patternFirstRow,instrumentFirstRow,drumkitFirstRow
+000466r 1               .export envelopeFirstRow,tableFirstRow,vibratoFirstRow,dutyFirstRow,echoFirstRow
+000466r 1               .export speedFirstRow,navFirstRow,setupFirstRow
+000466r 1               .export drumkitCursorX_old
+000466r 1               .export plyrPlaying,plyrSongStartIndex,plyrTrackIndex,plyrPatternIndex,plyrPatternStepCounter
+000466r 1               .export plyrPatternJump,plyrChainIndex,plyrCurrentChain,plyrCurrentChainTranspose
+000466r 1               .export plyrCurrentInstrument,plyrCurrentNote,plyrNoteCounter
+000466r 1               .export plyrCurrentPattern,plyrCurrentPatternFX,plyrCurrentPatternFXData
+000466r 1               .export plyrInstrumentCopy,plyrInstrumentCopyA,plyrInstrumentCopyB,plyrInstrumentCopyC
+000466r 1               .export plyrInstrumentCopyD,plyrInstrumentCopyE
+000466r 1               .export envelopeCounter,envelopePhase,envelopeAmp
+000466r 1               .export noteNumber
+000466r 1               .export noteAddFrac,noteAddNote
+000466r 1               .export pitchLo,pitchHi,pitchHiOld,pitchLoOld
+000466r 1               .export plyrPitchSweepDelta,plyrPitchSweepLo
+000466r 1               .export plyrCurrentDuty,plyrDutyIndex,plyrDutyTableDelay
+000466r 1               .export plyrTableVolume,plyrTablePitch,plyrTableIndex,plyrTableSpeed
+000466r 1               .export plyrTableCounter,plyrTableJump,plyrTableDoStep
+000466r 1               .export plyrTableTrackE
+000466r 1               .export plyrFxTemp1,plyrFxTemp2,plyrFxDataTemp1,plyrFxDataTemp2
+000466r 1               .export plyrFxType
+000466r 1               .export patternLastNote,plyrCurrentSpeedTable,plyrSpeedTableIndex
+000466r 1               .export plyrChordNotes,plyrPatternChordIndex,plyrPatternChordCounter,plyrPatternChordNote
+000466r 1               .export getNoteTemp0,getNoteTemp1
+000466r 1               .export plyrKillCounter,plyrDelayNoteCounter,plyrDelayNote
+000466r 1               .export plyrVibPos,plyrVibSpeedCounter,plyrVibDelta,plyrVibLastDelta
+000466r 1               .export plyrVibSpeedLo,plyrVibDepthMod,plyrVibDepthModCounter
+000466r 1               .export plyrSlideSpeed,plyrSlideDestination,plyrPreviousNote
+000466r 1               .export V_APU
+000466r 1               .export dpcmStart,dpcmLength,dpcmPitch,dpcmDC,plyrDpcmOn
+000466r 1               .export plyrKeyOn
+000466r 1               .export vuIndex,vuCounter
+000466r 1               .export plyrRetriggerSpeed,plyrRetriggerCounter
+000466r 1               .export pulsarPassCounter,pulsarIntensity
+000466r 1               .export copyBufferObjectType,copyBufferObject,copyBufferStartIndex,copyBufferEndIndex
+000466r 1               

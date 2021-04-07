@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Object Hierarchy</h2>
+		<p>The diagram just covers the relationship between primary objects in Pulsar but each object type is explained below.</p>
+		
+		<span class="centerImage">
+			<img src="images/objectDiagram.png" />
+			<div class="clearFix"></div>
+		</span>
+		
+		<br />
+		
+		<h2>Object Types</h2>
+		
+		<p>To clarify, an <em>Object</em> refers to a collection of related parameters or data in Pulsar.</p>
+		
+		<h5>Song</h5>
+		<p>A <a href="Page_Song.html">Song</a> is made up of 5 vertical columns, each column representing each of the sound-generating voices of the NES. From left-to-right the columns are labelled A, B, C, D and E. In Pulsar, the five columns are generally referred to as <em>Tracks</em>.</p>
+		<p>Each Track is made up of a number of <em>Chains</em>.
+		
+		<h5>Chain</h5>
+		<p>A <em><a href="Page_Chain.html">Chain</a></em> is a sequence of up-to sixteen <em>Patterns</em>. There are two columns in a Chain and sixteen rows. On each row you specify the Pattern number and the transpose value for the Pattern on that particular row of the Chain. The Chain length can be anywhere between one and sixteen rows.</p>
+		
+		<h5>Pattern</h5>
+		<p>A <em><a href="Page_Pattern.html">Pattern</a></em> is where you enter all the musical data to make up your Song. There are sixteen steps per Pattern and each Pattern has 3 dedicated columns: Note, <em>Instrument</em> and <em>Command</em>.</p>
+		
+		<h5>Instrument</h5>
+		<p>An <em><a href="Page_Instrument.html">Instrument</a></em> is a collection of synthesis parameters that tell Pulsar how to generate sound. Instruments are used by Tracks A, B, C and D though not all parameters are operational for every Track because of the characteristics of each of the hardware voices. Track E (DPCM) uses <em>Drumkits</em> instead of Instruments.
+		
+		<h5>Drumkit</h5>
+		<p>A <em><a href="Page_Drumkit.html">Drumkit</a></em> is used on Track E (DPCM) instead of Instruments and is essentially 12 DPCM samples mapped over an octave with several playback parameters for each individual sample.</p>
+				
+		<h5>Command</h5>
+		<p><em><a href="CommandOverview.html">Commands</a></em> are used in Patterns to control many aspects of music playback and sound generation in Pulsar.</p>
+		
+		<h5>Envelope</h5>
+		<p><em><a href="Page_Envelope.html">Envelopes</a></em> are ADSR Envelopes used by Instruments to shape the amplitude of individual notes (for Tracks A, B and D).</p>
+		
+		<h5>Duty Table</h5>
+		<p><em><a href="Page_Duty.html">Duty Tables</a></em> are used by Instruments to shape the Duty characteristics of the two square-wave channels (Tracks A and B).</p>
+		
+		<h5>Vibrato</h5>
+		<p>In Pulsar, <em><a href="Page_Vibrato.html">Vibrato</a></em> is actually a Vibrato Object that contains several parameters that control the characteristics of the Vibrato effect.</p>
+		
+		<h5>Table</h5>
+		<p><em><a href="Page_Table.html">Tables</a></em> are a table of pitch offsets, volume scaling and two Command columns that are applied in real-time to each note during playback.</p>
+		
+		<h5>Echo</h5>
+		<p>In Pulsar, <em><a href="Page_Echo.html">Echo</a></em> is actually an Echo Object that contains several parameters that control the characteristics of the Echo effect.</p>
+		
+		<h5>MultiFX</h5>
+		<p><em><a href="Page_MultiFX.html">MultiFX</a></em> are a variation on a Table but can be used to control the sound on Track A, B, C and D simultaneously.</p>
+		
+		<h5>Speed Table</h5>
+		<p><em><a href="Page_Speed.html">Speed</a> Tables</em> are used to control the playback speed of your song.</p>
+		
+		<br /><hr /><br />
+		<h3>Object Count &amp; Size</h3>
+		<p>Here's a list of the count of each type of object in Pulsar and, where appropriate, the size of those objects (generally in 'steps').</p>
+		<p><bold>Note: </bold>There is no loading and saving in Pulsar. The eight Songs are all contained in one .sav file and all eight Song share the use of all the other objects (Chains, Patterns, Instruments etc.)
+		</p>
+		<table class="controls">
+		<thead><th>Object</th><th>Count</th><th>Size</th></thead>
+		<tr><td>Songs</td><td><code>00 - 07</code></td><td><code>00 - 7E</code> steps</td></tr>
+		<tr><td>Chains</td><td><code>00 - 7E</code></td><td><code>00 - 0F</code> steps</td></tr>
+		<tr><td>Patterns</td><td><code>00 - 7E</code></td><td><code>00 - 0F</code> steps</td></tr>
+		<tr><td>Instruments</td><td><code>00 - 1F</code></td><td></td></tr>
+		<tr><td>Drumkits</td><td><code>00 - 07</code></td><td><code>0C</code> samples in each</td></tr>
+		<tr><td>Envelopes</td><td><code>00 - 1F</code></td><td></td></tr>
+		<tr><td>Duty Tables</td><td><code>00 - 1F</code></td><td><code>00 - 0F</code> steps</td></tr>
+		<tr><td>Vibrato</td><td><code>00 - 1F</code></td><td></td></tr>
+		<tr><td>Tables</td><td><code>00 - 37</code></td><td><code>00 - 0F</code> steps</td></tr>
+		<tr><td>Echo</td><td><code>00 - 1F</code></td><td></td></tr>
+		<tr><td>MultiFX</td><td><code>00 - 0F</code></td><td><code>00 - 0F</code> steps</td></tr>
+		<tr><td>Speed Tables</td><td><code>00 - 1F</code></td><td><code>00 - 0F</code> steps</td></tr>
+		</table>
+		
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

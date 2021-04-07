@@ -1,0 +1,21 @@
+rm pulsar.nes
+#rm *.o
+
+ca65 pulsar_ram.asm
+ca65 ROM_00.asm
+ca65 ROM_01.asm
+ca65 ROM_02.asm
+ca65 ROM_03.asm
+ca65 ROM_04.asm
+ca65 ROM_05.asm
+ca65 ROM_06.asm
+ca65 ROM_07.asm
+ld65 -C sxrom.cfg -m pulsar.map -o pulsar.nes pulsar_ram.o ROM_00.o ROM_01.o ROM_02.o ROM_03.o ROM_04.o ROM_05.o ROM_06.o ROM_07.o
+
+if [ -e "pulsar.nes" ]
+then
+echo
+open "pulsar.nes"
+#open -a "/Users/neilbaldwin/Library/Parallels/Windows XP.pvm/Windows Applications/fceux.exe.app" pulsar.nes
+#open -a "/Users/neilbaldwin/Library/Parallels/Windows XP.pvm/Windows Applications/fceuxdsp.exe [1].app" pulsar.nes
+fi

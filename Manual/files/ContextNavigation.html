@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		<h2>Navigating Between Pages</h2>
+		<p>The only four pages you can 'freely' navigate between are Song, Chain, Pattern &amp; Instrument (or Drumkit if the current Track is Track E). While on any of these pages you can move between them with <code><bold>B + RIGHT</bold></code> (to go <em>forward</em>) and <code><bold>B + LEFT</bold></code> (to go <em>back</em>).</p>
+		<p>Apart from using the <a href="Page_NavMenu.html"><em>Navigation Menu</em></a>
+		, the only way to access all the other editor pages is via <bold>Context Navigation</bold>.</p>
+		<br />
+		<h2 id="context">Context Navigation</h2>
+		<p>As mentioned in <em><a href="BasicControls.html">Basic Controls</a></em>, the core of Pulsar's navigation is based on one context-driven key: <bold>tapping <code><bold>B</bold></code></bold>. It's all designed to be obvious and intuitive but here's a list of the context jumps for reference.</p>
+		
+		<table class="navigation">
+			<thead>
+				<th>To Jump To</th><th>Put Cursor</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'><a href="Page_Chain.html">Chain editor</a></td><td class='rightColumn'>on Chain number in Song</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Pattern.html">Pattern editor</a></td><td class='rightColumn'>on Pattern number in Chain</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Instrument.html">Instrument editor</a></td><td class='rightColumn'>in the Instrument column ('<code>IN</code>') of a Pattern, with the current Track being A,B,C or D <sup>*1</sup></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Drumkit.html">Drumkit editor</a></td><td class='rightColumn'>in the Instrument column ('<code>IN</code>') of a Pattern, with the current Track being E <sup>*1</sup></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Envelope.html">ADSR (envelope) editor</a></td>
+				<td class='rightColumn'>
+					<ul>
+					<li>on <code>ENVELOPE</code> row of Instrument</li>
+					<li>on Envelope command (<code>E--</code>) in a Pattern or Table</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Duty.html">Duty Table editor</a></td>
+				<td class='rightColumn'>
+					<ul>
+					<li>on <code>DUTY</code> row of Instrument, as long as you have a Duty Table number set and not a Duty waveform <sup>*2</sup></li>
+					<li>on Duty command (<code>W--</code>) in a Pattern or Table</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Table.html">Table editor</a></td>
+				<td class='rightColumn'>
+					<ul>
+					<li>on <code>TABLE</code> row of Instrument</li>
+					<li>on Table command (<code>A--</code>) in a Pattern or Table</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Vibrato.html">Vibrato editor</a></td>
+				<td class='rightColumn'>
+					<ul>
+					<li>on <code>VIBRATO</code> row of Instrument</li>
+					<li>on Vibrato command (<code>V--</code>) in a Pattern or Table</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Echo.html">Echo editor</a></td>
+				<td class='rightColumn'>
+					<ul>
+					<li>on <code>ECHO</code> row of Instrument</li>
+					<li>on Echo command (<code>Y--</code>) in a Pattern or Table</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_Speed.html">Speed Table editor</a></td>
+				<td class='rightColumn'>
+					on Speed Table command (<code>G--</code>) in a Pattern or Table
+				</td>
+			</tr>
+			<tr>
+				<td class='leftColumn'><a href="Page_MultiFX.html">MultiFX editor</a></td>
+				<td class='rightColumn'>
+					on MultiFX command (<code>F--</code>) in a Pattern or Table
+				</td>
+			</tr>
+		</table>
+
+		<p>Where appropriate, when you make the jump to a new editor page, either the object number in the editor will reflect the object number you jumped from or, in the case of list-form parameters such as the Envelope List or Echo List, your cursor will be placed on the row of the list that contains the object number you jumped from.</p>
+
+		<div class="postTable">
+			<h5>Notes</h5>
+			<div class="notes"><sup>*1 </sup>Notice that the same context jump will jump to either the Instrument editor or the Drumkit editor depending on the current Track. Tracks A, B, C and D use Instruments whereas Track E uses Drumkits.</div>
+			<div class="notes"><sup>*2 </sup>The context jump will only work if you are specifying a Duty Table for the Duty setting of an Instrument. If you have specified a single Duty setting there is no associated Duty Table therefore the jump does nothing.</div>
+		</div>
+		
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

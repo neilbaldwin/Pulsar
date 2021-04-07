@@ -1,0 +1,122 @@
+*** IMPORTANT ***
+-----------------
+
+NEED THOROUGH TESTING OF SRAM 32 STUFF!!!
+
+- cloning/cleaning needs looking at. If you put 4 empty patterns in a chain, clean command thinks they're free
+  but they aren't removed from chain so it becomes a problem.
+
+When organising SRAM banks, don't forget that _FLAGS need to go with their respective objects.
+Means that 128 Patterns won't fit in one 8K bank so need to be 127 or 126 max (125?)
+
+- Make Bxx into Vibrato command (change all text: manual, screen, hint boxes etc.)
+  Then Vxx will be used for Volume command later
+
+GENERAL
+-------
+DONE - Update manual with mute and solo stuff
+DONE - Keys could do with a rethink. Not very nice to use on a control pad.
+
+DONE - Implement new key scheme using B as modifier for navigating editor pages
+
+DONE - Implemet Smart Transpose in Song and Chain?
+
+DONE - Make RIGHT nav go to Instrument/Drumkit page from note column in Patterns
+
+Player
+-------
+DONE - improve random range stuff
+- change slide code to compare actual lo/hi byte values of destination note instead of offset
+- playing pattern/chain needs to handle transpose
+DONE - make echo work properly and on A, B & D
+DONE - remaining commands
+
+DONE - pre-listen notes when song is stopped need work - sound gets cutoff and transpose problems
+DONE - do re-trigger command
+DONE - handle bitwise value for Nxx
+DONE - Speed Table needs proper implementation
+DONE - Add remaining Commands
+DONE - Add second command handling in Table
+DONE - Add Vibrato
+DONE - Add Pitch Slide
+DONE - Add handling of smooth sliding/vibrato
+DONE - Add Track E / DPCM
+DONE - Play notes on entry needs thinking about and implementing in Editor too
+DONE - have separate handler stub for pattern/table commands - need table of "allow" flags for each
+DONE - need way to quit table - maybe JFF?
+DONE - implement table stuff for DPCM
+DONE - speed table changing stuff isn't working
+
+Editor
+------
+DONE - need to shuffle stuff around to properly accommodate page title
+
+DONE - Check copy and paste for FX Tables (need to add "FX " to copy buffer name stuff)
+
+DONE - Change Pattern and Table screens FXx is now CM
+DONE - Update hint box text for command Fxx
+DONE - update Context Navigation stuff in manual for Fxx command.
+
+DONE - need to clear RAM copy of drumkit with something useful
+DONE! - add note preview to Drukmit editor?
+DONE - Create 8K SRAM version (currently only SRAM map is handled, not NVRAM handling/iNES header)
+
+DONE - do markers for;
+  DONE Drumkit - put triangle on note as it plays
+  DONE Duty - triangle follow table index
+
+DONE - proper start/stop handling
+DONE!!! - split editor over two banks!?
+  main loop in fixed bank, array of bank numbers for each mode, set bank before jmp (xxxx)
+  need to duplicate certain routines in each bank - phex stuff etc.
+
+- add copy/paste
+  DONE - chains
+  DONE - patterns
+  DONE - instrument (whole instrument)
+  DONE - drumkit
+  DONE - table
+  DONE - duty
+  DONE - speed
+
+DONE - copy buffer status
+DONE - error message when trying to paste incompatible data
+DONE - start Setup Menu (need Song Purge first of all)
+DONE - mute/solo
+
+DONE - insert/delete steps in
+  DONE - song
+  DONE - chain
+  DONE - pattern
+  DONE - table
+  DONE - duty table
+  DONE - speed table
+  
+DONE - Try having cursor steady when moving around and only flashing when modifying value
+DONE - Context jumps for commands
+DONE (need display)- SELECT+B + LR = change track, need to display track number/name too
+DONE - Add editBuffer method from Song Edit to all HOLD_A methods in each editor
+DONE - Finish off playback cursors
+DONE NEEDS TEST - handle commands that are not valid on particular tracks
+DONE - display pulse waveform in duty table command
+DONE - display pattern notes 1 octave down if current editing track is C
+
+Misc
+----
+- RLE name-tables?
+
+BUGS!
+-----
+DONE - DPCM - stopping song leaves channel clicking
+DONE - VU - soloed channel doesn't show on VU meter
+Table arpeggio + downwards sweep gets pitch out of whack!
+DONE - Player - tie notes need old freq resetting (hi and lo)
+Player - putting a slide on a step with no note produces odd results (but sort of correct!)
+Player/Editor - sometimes get weird note when inserting/deleting row
+DONE - Player - table and (at least) vibrato are cut off on a blank cell
+Editor : changing editor track should redraw editor always
+DONE - Player : sometimes tables stop working!
+DONE - Player/Editor : something is corrupting SRAM - sometimes drum patterns get messed up
+
+
+

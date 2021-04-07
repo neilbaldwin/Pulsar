@@ -1,0 +1,226 @@
+LOAD/SAVE
+---------
+
+16 Slots (maybe only 8)
+
+Load Slot
+Save Slot
+Clear Slot
+
+Maintain pointer and length of each slot in table;
+ need separate table entry for each SRAM bank: 1 song = 3 banks
+
+When saving a slot
+ - erase old content
+ - shuffle data to fill gap
+ - write new data at end
+ - update pointer table
+
+When saving
+ - clean song
+ - flood all unused data with FF so data will RLE better
+ - RLE pack each SRAM Bank
+
+When loading
+ - clear all 3 song banks
+ - unpack 3 banks into respective places
+ 
+
+Cleaning song could be improved by packing used patterns/chains/tables/duty tables/fx tables etc together and translating
+all occurrences before saving. Would improve RLE but complicates saving process somewhat.
+
+
+FX TABLE
+--------
+A         B         C    D
+00 00 00  00 00 00  00   00 00
+
+
+START/STOP
+----------
+
+SEL+START = always start song from beginning
+
+START in SONG : start Song from current row
+
+START in CHAIN : start single voice in current chain, starting from current row. Loop. If current row = FF, start at 00
+
+START in PATTERN : start single voice in current Pattern.
+
+START anywhere else : same as START in Pattern - just loop one Pattern
+
+
+
+
+
+
+
+ECHO
+----
+
+Store
+
+Duty + Amp --------
+Lo Freq    --------
+Hi Freq    --------
+Hard Freq  --------
+
+4 streams, 4 bytes per frame (number of refreshes per frame), * 16
+
+256 ($0100)
+
+
+
+
+
+DPCM
+----
+
+When playing, turn off DPCM by writing $0F to $4015
+
+Then set the DC offset to #$40 ($4011)
+
+Sample pitch & loop (#$40) : $4010
+
+Sample start : $4012
+Sample length: $4013
+
+Write #$1F to $4015 to start
+
+lda addressTable
+sta start
+eor #$3f
+clc
+adc addressTable+1
+sta length
+
+
+Navigation
+----------
+
+Song
+	SELECT+RIGHT to move to Chain, chain number is number under cursor, if = $FF just jump to Chain without
+	setting pattern number
+	
+Chain
+	SELECT+RIGHT to move to Pattern, pattern number is on current line, if $FF just jump
+	
+Pattern
+
+	SELECT+RIGHT on instrument jumps to Instrument with that number, or if $FF just jump
+		though if current Track is E, jump to Drumkit
+		
+	SELECT+RIGHT if command = Table (T?), jump to Table
+	SELECT+RIGHT if command = Envelope, jump to envelope table
+	SELECT+RIGHT if command = Duty, jump to duty table
+	SELECT+RIGHT if command = Vibrato, jump to vibrato table
+	
+	
+Pitch Slide/Sweep
+-----------------
+
+Pitch Slide = slide to new pitch, override vibrato
+Pitch Sweep = slide pitch, vibrato effects pitch too
+
+Need sweep high/low in instruments.
+
+Instrument Aux
+---------------
+
+Each instrument has an auxiliary tap into certain parameters.
+
+e.g. Envelope attack/decay/sustain/releae
+or   Gate time
+or   Vibrato parameters
+
+then a specific pattern command can write values to these parameters.
+
+
+Unison Mode:
+------------
+Instrument has "Unison" parameter. %xxxxxxNTS
+
+Unison Mode
+  where N = sync with noise channel
+        T = sync with triangle channel
+        S = sync with square channel (whichever square voice you are using, it syncs the other)
+
+Unison Priority
+  probably used bit 7 of Unison Mode. If bit 7 set, this voice takes priority over sync children
+
+Unison Pitch
+  need fractional detune (or low byte added to value that gets written to lower 8 bits) and also semitone offsets
+
+
+Command - PROBABILITY
+---------------------
+
+Pattern Command that determines probability of note on that step playing.
+
+Command - NOTE FROM SCALE
+-------------------------
+
+Instead of playing note on step, play random note from scale (scale number = data portion of FX) using note as root.
+Could also be used in a Table command?
+
+
+Instrument
+----------
+Envelope	00 (table index)
+Gate		00
+FX		00 (table number)
+Pitch Sweep	00
+Vibrato		00 (table index)
+Duty		00 (table index)
+Hard Pitch	00
+Detune		00
+
+
+8KB Memory Map
+--------------
+Header		($0010) Stuff
+Song		($0140)	5 tracks x 64 steps
+Chains		($0200)	16 chains, 2 bytes per step, 16 steps
+Patterns 	($0800)	32 patterns, 4 bytes per step, 16 steps
+			(note, volume, fx1, fx1 data)
+
+Instruments 	($0200)	32 * 16 bytes per instrument
+Drumkit 	($0080)	2 kits * 16 sounds * 4 parameters 
+			(sample number+loop[bit 7], pitch offset, start offset, end offset)
+Pitch Tables	($0300)	16 * 6 * 8
+			(pitch, volume, fx1, fx1data, fx2, fx2 data)
+Vibrato Table	($0040)	16 * 4
+Envelope Table	($0080)	32 * 4 (don't scroll, flip pages)
+Speed Table	($0020)	16 * 2
+Duty Table	($0040)	32 * 2 (don't scroll, flip pages)		
+TOTAL		($1230)
+		
+REMAIN	($DD0)
+
+32KB Memory Map
+---------------
+
+Bank 0/1	Patterns ($4000)	2 banks, 64 patterns in each bank
+		128 x 8 x 16
+Bank 2	Song ($0500)	5 x 256
+	Chains ($0800)	64 x 2 x 16
+	Tables ($0A00)	32 x 5 x 16
+	
+Bank 3	
+
+
+		
+
+Drum Kit
+--------
+
+Map several octaves in semitone steps.
+Each semitone : sample number, start offset, length offset, loop
+3 octaves = 36 notes x 4 = 144 bytes
+4 octaves = 48 notes x 4 = 192 bytes
+
+
+
+
+
+

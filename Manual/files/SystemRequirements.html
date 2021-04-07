@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+				<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Requirements</h2>
+		
+		<h5>Support Trouble</h5>
+		
+		<p>At the time of writing this manual the requirements to be able to run Pulsar are a little bit controversial.</p>
+		
+		<p>The <em>problem</em> with Pulsar is that it was originally designed to work with a SXROM configuration in order to be able to use 32KB SRAM/NVRAM. However, currently Nestopia is the only NES emulator that supports this configuration. Further to that, and even more troubling, is that even PowerPak development cartridge doesn't properly support 32KB NVRAM.</p>
+		<p>However, I do have a PowerPak mapper update given to me by Brian Parker (PowerPak creator) that fixes the problem. As of yet though this mapper update isn't part of the 'official' PowerPak mappers but Brian assures me that it will be sometime soon.</p>
+		<p>Until that happens Brian has given me permission to distribute the mapper update with Pulsar so you'll find it in the release ZIP file in the 'PowerPak' folder. I'd recommend backing up the old version of the mapper file.</p>
+		
+		<h5>What You'll Need</h5>
+		
+		<p>- A NES emulator or an actual NES - either will do though as I said, until there is PowerPak support for SXROM+32KBNVRAM, you'll only be able to run Pulsar32 using Nestopia</p>
+		
+		<p>- A control pad, if you're using NES hardware</p>
+		
+		<p>- A knowledge of existing trackers, especially LSDJ, will help enormously</p>
+		
+		<p>- An understanding of <a href="Glossary.html#hexadecimal" title="">hexadecimal</a> numbers</p>
+		
+		<p>- An understanding of the audio capabilities and limitations of the NES</p>
+		
+		<h5>What You'll Get</h5>
+		<p>Check the 'readme.txt' file included in the release for a list of files.</p>
+		
+		<br />
+		<hr />
+		<br />
+		<h2>Useful Links</h2>
+		
+		<h5>Nestopia NES Emulator</h5>
+		<p>Nestopia is available for <a href="http://nestopia.sourceforge.net/">Windows</a> and <a href="http://www.bannister.org/software/nestopia.htm">OSX</a>.</p>
+		<br />
+		<h5>PowerPak NES Dev Cart</h5>
+		<p>PowerPak carts are available from <a href='http://www.retrousb.com'>Retro USB</a></p>
+		<br />
+		<h5>NESDEV Wiki - Audio Overview</h5>
+		<p>A simplified version of blargg's authoratative NES APU (Audio Processing Unit) documentation can be found <a href="http://wiki.nesdev.com/w/index.php/APU_basics" title="">here</a>
+		
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

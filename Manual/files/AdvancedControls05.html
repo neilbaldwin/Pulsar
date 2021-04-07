@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Advanced Controls 5 - Block Transpose and Smart Transpose</h2>
+		
+		<p>In the <a href="Page_Pattern.html">Pattern</a>, <a href="Page_Table.html">Table</a> and <a href="Page_MultiFX.html">MultiFX</a> (MFX) editor pages there is an additional
+		control to modify multiple values in a column simultaneously.</p>
+		
+		<p>There are two modes (accessed via two different key combinations);</p>
+		
+		<p><bold>Block Transpose</bold> : every value in the column is modified.</p>
+		<p><bold>Smart Transpose</bold> : only values in the current column that match the value under the cursor are modified.</p>
+		
+		<p>Every column in a Pattern, Table or MultiFX can be modified this way.</p>
+	
+		<table class="controls" id="advanced05a">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To Block Transpose all values in a column</td><td class='rightColumn'>with the cursor anywhere in the required column, hold <em>A+SELECT</em> then tap <em>L/R</em></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'>To Smart Transpose all values in a column</td><td class='rightColumn'>put the cursor on a value that you wish to modify, hold <em>A+SELECT</em> then tap <em>U/D</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">	
+		<h5>Block and Smart Transpose Explained</h5>
+
+		<p><bold>Note</bold> : Both these functions have very little in the way of range checking or error checking of the modified values and there no undo so use with caution!</p>
+		
+		<p>It is very possible and very easy to <em>flatten</em> the values you are modifying, even when using <em>Smart Transpose</em>. What do I mean by 'flatten'?
+		</p>
+		
+		<p>Consider the following hypothetical (part of a) Pattern;</p>
+		
+		<br />
+		<div class="dataExample">
+			<div class="data"><em>00</em> C 4 -- ---</div>
+			<div class="data"><em>01</em> --- -- ---</div>
+			<div class="data"><em>02</em> C 4 -- ---</div>
+			<div class="data"><em>03</em> --- -- ---</div>
+			<div class="data"><em>04</em> A 4 -- ---</div>
+			<div class="data"><em>05</em> --- -- ---</div>
+			<div class="data"><em>06</em> A 4 -- ---</div>
+			<div class="data"><em>07</em> --- -- ---</div>
+		</div>
+		<br />
+		<p>If you put the cursor on one of the <bold><code>C 4</code></bold> notes then use the Smart Transpose to modify the pitch upwards, the pitch of these notes will change but leave the <bold><code>A 4</code></bold> notes unmodified.</p>
+		   <p>However, eventually, the <bold><code>C 4</code></bold> notes will become <bold><code>A 4</code></bold> (if you transpose them high enough). At this point if you continue to use Smart Transpose, all four notes will start to be transposed because they all now match (<bold><code>A 4</code></bold>).		
+		</div>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

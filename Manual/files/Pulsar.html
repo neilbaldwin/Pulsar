@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div>
+
+	<div class="clearFix"></div>
+	<div id="container">
+		<div id="sidebar">
+			<ul>
+				<li><a href="Pulsar.html">Home</a></li>
+				<li><a href="ScreenLayout.html">Screen Layout</a></li>
+				<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+				<li><a href='ControlsOverview.html'>Controls</a></li>
+				<li><a href='CommandOverview.html'>Commands</a></li>
+				<li><a href='ContextNavigation.html'>Navigation</a></li>				
+				<li><a href='Objects.html'>Objects</a></li>
+				<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+			</ul>
+		</div> <!-- sidebar -->
+
+		<div id="content">
+			<h3>Introduction</h3>
+			<p>Pulsar is a music tracker that runs on a NES/Famicom (or in your favourite
+			NES emulator), designed and created by Neil Baldwin.
+			</p>
+			
+			<span class="centerImage">
+				<img src="images/screenShot01.png" />
+				<div class="clearFix"></div>
+			</span>
+			
+			<p>Perhaps the most radical feature of Pulsar is that the synthesis engine runs 
+			independently from the sequencer and runs at 180hz - that's 3 times faster 
+			than a "normal" NES audio engine. The advantage of this is that all 
+			modulation-based effects have 3 times the resolution so you can get 
+			ultra-fast and super-smooth sounds. At the same time it has allowed me to
+			exploit a few quirks of the NES's audio to provide some unique ways to craft
+			your NES music and sounds.</p>
+			
+			<p>It was this approach which, to a large extent, dictated the design of the 
+			sequencing/UI of Pulsar and why it shares so much in common with 
+			LSDJ: LSDJ really makes great use of a simple, fast interface and because
+			I'm updating the audio engine 3 times per frame, speed and simplicity 
+			were paramount.</p>
+			
+			<p>Pulsar borrows heavily from the design, layout and commands of LSDJ. If you've used LSDJ you'll probably be pretty familiar with Pulsar's UI. There are a few little 
+			differences though so watch out for those.</p>
+
+			<p>I openly tip my hat to <a href='http://littlesounddj.com/'>Johan Kotlinksi</a> for his work on LSDJ. It's safe
+			to say that Pulsar probably wouldn't exist without it. Or at the very
+			least it would've taken me a lot longer to create.</p>
+			
+			<br />
+			
+			<h3>Conventions</h3>
+			
+			<p>All numbers are expressed in <a href="Glossary.html#hexadecimal" title="">hexadecimal</a> (base 16) both in the manual and
+			in Pulsar itself.
+			</p>
+			<p>Where a number can be positive or negative, the values are in <a href="Glossary.html#2scomplement" title="">two's compliment</a>.</p>
+			<br />
+			
+			<h3>Manual</h3>
+			<p>Use the navigation on the left to get around the manual. There's plenty of hyperlinks that should enable you to find the information you need quickly.</p>
+			<p>I recommend a modern browser. It's been tested on the latest version of Safari, Chrome and Firefox.</p>
+			<p>If you'd like a different colour scheme for the manual I've provided 3 different ones. To change them, use a text editor to edit the file 'css/Pulsar.css' and change the second line to include the colour scheme you'd like, either 'PulsarColours_white.css', 'PulsarColours_green.css' or 'PulsarColours_blue.css'. You could also create your own colour scheme by editing those .css files or creating a new one. All the colours used in the manual are contained in those .css files.</p>
+			<br />
+			<h3>Contact</h3>
+			<p>Problems, errors or suggestions? Let me know: <a href="mailto:neil@ntrq.net"><bold>neil@ntrq.net</bold></a>
+		</div>
+	<div class="clearFix"></div>
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div>
+	</div>
+</body>
+</html>

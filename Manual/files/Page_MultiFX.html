@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>MultiFX Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/mfxScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p><em>MultiFX</em> are fairly similar to <em>Tables</em> but with several major differences:</p>
+<div class="postTable">
+	<table>
+	<tr>
+	<td><ul>
+		<li>MultiFX can use any <bold>combination</bold> of voices A, B, C &amp; D</li>
+		<li>MultiFX are always one-shot, they don't loop</li>
+		<li>MultiFX can be triggered from <bold>any</bold> Track</li>
+		<li>MultiFX only contains pitch and volume information (and Duty for Tracks A &amp; B) - there are no Commands</li>
+		<li>MultiFX pitch information is always absolute as opposed to <code>Tables</code> that normally use relative pitch offsets</li>
+	</ul></td>
+	</tr>
+	</table>
+</div>
+
+<h5>MultiFX Layout</h5>
+<p>The layout of a MultiFX is unashamedly cluttered and a little overwhelming at first glance but they are actually very simple. It's the lack of spaces between the columns for each voice that makes them hard to read, that's why you see the letters <code>A, B, C &amp; D</code> at the top of the columns. The position of the letters marks the first column of values for each voice. You'll also see that the spacing is not equal between the voice markers. This is because only voices A &amp; B have pitch, volume and duty values while voice C only has pitch information and voice D has pitch and volume.</p>
+<p>From left-to-right the columns are:</p>
+<table>
+	<colgroup width="15%"/>
+	<colgroup />
+<tr>
+	<td><code><bold>Pitch A</bold></code></td>
+	<td>sets the pitch for voice A. Values are absolute, <code>00</code> is the lowest pitch</td>
+</tr>
+<tr>
+	<td><code><bold>Amp A</bold></code></td>
+	<td>sets the amplitude for voice A, <code>00</code> to <code>0F</code></td>
+</tr>
+<tr>
+	<td><code><bold>Duty A</bold></code></td>
+	<td>sets the duty for voice A, values are waveform icons that represent the pulse width
+</tr>
+<tr>
+	<td><code><bold>Pitch B</bold></code></td>
+	<td>sets the pitch for voice B. Values are absolute, <code>00</code> is the lowest pitch</td>
+</tr>
+<tr>
+	<td><code><bold>Amp B</bold></code></td>
+	<td>sets the amplitude for voice B, <code>00</code> to <code>0F</code></td>
+</tr>
+<tr>
+	<td><code><bold>Duty B</bold></code></td>
+	<td>sets the duty for voice B, values are waveform icons that represent the pulse width
+</tr>
+<tr>
+	<td><code><bold>Pitch C</bold></code></td>
+	<td>sets the pitch for voice C. Values are absolute, <code>00</code> is the lowest pitch</td>
+</tr>
+<tr>
+	<td><code><bold>Pitch D</bold></code></td>
+	<td>sets the noise frequency for voice D. <code>00</code> to <code>0F</code> is 'normal' noise, <code>10</code> to <code>1F</code> accesses the 'tone' noise (metallic sounding)</tr>
+<tr>
+	<td><code><bold>Amp D</bold></code></td>
+	<td>sets the amplitude for voice D, <code>00</code> to <code>0F</code></td>
+</tr>
+</table>
+<br />
+<h5>All Voices?</h5>
+<p>Whilst you <em>can</em> use all four voices (A, B, C &amp; D) simultaneously, you probably don't always want to. To have a MultiFX ignore one of the voices, just clear the Pitch cell(s) (<code>'--'</code>) and no registers for that voice will be written for that step(s) of the MultiFX.</p>
+
+<h5>MultiFX Operation</h5>
+<p>Similar to <em>Tables</em>, Pulsar processes MultiFX from top to bottom. The rate at which Pulsar steps through the MultiFX is actually determined by the Command that is used to trigger one - <bold><code>Fxx</code></bold>. The right-hand digit is the MultiFX number, <code>0-F</code> while the left-hand digit sets the MultiFX speed, <code>0-F</code> with <code>0</code> being the slowest speed. Whilst being compact and simple, this feature also means you can get more mileage out of a single MultiFX simply be varying the playback speed in the <code>Fxx</code> command.</p>
+
+<h5>What Do MultiFX Actually Do?</h5>
+<p>In essence they're like multi-voice sound effects and they just stuff pitch, amplitude and duty values into the NES's sound registers right at the end of the audio processing chain. By doing this, while there is activity on a voice in the MultiFX, they overwrite whatever is normally playing on those voices. When the MultiFX ends (or there is empty cells), whatever audio is supposed to be heard will be heard again as if nothing happened.</p>
+<p>They are primarily designed to create synthesised drums, conveniently but complex and rich. That's not to say you couldn't do pretty much anything with them - create glitches, little one-shot arpeggios, multi-voice chords, weird effects etc.</p>
+<h5>Trigger From Any Track?</h5>
+<p>Yes. Probably one of the coolest features of MultiFX is that you can place the triggers for them in Patterns used in ANY of the five Tracks of your Song (even the DCM track, Track E!). This means that they're easy to slot into your Patterns wherever you have a spare cell in the Command column.</p>
+<h5>Priority</h5>
+<p>MultiFX take priority over everything else (apart from DCM - DCM is not used in MultiFX) wherever they are played. If you happened to play more than one MultiFX simultaneously, the Tracks are processed from left-to-right so the rightmost Track will always be highest priority.</p>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+				<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Screen Layout</h2>
+		<p>The UI in Pulsar, like LSDJ, is all based on a single-screen-per-editor format.</p>
+		<br/>
+		<span class="centerImage">
+			<img src="images/screenLayout01.png" />
+			<div class="clearFix"></div>
+		</span>
+		<h5>Editor Name</h5>
+		<p>This text tells you which editor page you are currently in.</p>
+		<h5>Object Number</h5>
+		<p>Where applicable, this number is the current Object you are editing. In this case <code>'SONG 00'</code> shows you are editing Song 00. Some editor pages don't require an object number as the objects they relate to are presented in a list format and in those cases the object you are editing are represented by a whole row of the list.</p>
+		<p>
+		<h5>Editor Window</h5>
+		<p>This area is pretty much the only part of the display that will change as you go through the different editor pages and is where your editing cursor is limited to. This is also the area of the display that is affected by the Colours options in the Setup Page.</p>
+		<h5>Copy Buffer Info</h5>
+		<p>This information gets updated each time you copy an object (or part of an object) to the Copy Buffer.</p>
+		<h5>Tempo</h5>
+		<p>Shows you the current tempo of the Song. You can't actually edit the BPM setting of a Song directly - the playback speed of a Song is controlled by the Speed Tables. Therefore this display is for information only.</p>
+		<h5>Channel Status</h5>
+		<p>This is a little row of 5 'lights' that tell you the status of each Track. A steady green light means the Track is active. A steady grey light means the Track is muted. A blinking red light means that the Track has been <em>soloed</em>.</p>
+		<h5>VU Meters</h5>
+		<p>Here are 5 dynamic meters that represent activity on each Track. For Tracks A,B and D the amplitude is represented by the height of the bar. Tracks C and E don't have amplitude information and because of that the meters for those Tracks just hit maximum each time a new note is played.</p>
+		<h5>Track Info</h5>
+		<p>This tells you which Track and Track Step Pulsar regards as the 'current' Track. This is handy for certain editing functions when you're not in the Song Editor.</p>
+		<h5>Chain Info</h5>
+		<p>Similar to Track Info, this tells you which Chain and Chain Step Pulsar regards as the current Chain. Handy to know when you're in the Pattern editor, for example.</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

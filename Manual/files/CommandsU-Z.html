@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<ul>
+			<li><a href="CommandsA-E.html#command_a"><code>A</code> - table</a></li>
+			<li><a href="CommandsA-E.html#command_b"><code>B</code> - vibrato</a></li>
+			<li><a href="CommandsA-E.html#command_c"><code>C</code> - chord</a></li>
+			<li><a href="CommandsA-E.html#command_d"><code>D</code> - delay note</a></li>
+			<li><a href="CommandsA-E.html#command_e"><code>E</code> - envelope</a></li>
+			<li><a href="CommandsF-J.html#command_f"><code>F</code> - multiFX</a></li>
+			<li><a href="CommandsF-J.html#command_g"><code>G</code> - speed table</a></li>
+			<li><a href="CommandsF-J.html#command_h"><code>H</code> - jump (pre)</a></li>
+			<li><a href="CommandsF-J.html#command_i"><code>I</code> - refresh rate</a></li>
+			<li><a href="CommandsF-J.html#command_j"><code>J</code> - jump (post)</a></li>
+			<li><a href="CommandsK-O.html#command_k"><code>K</code> - kill note</a></li>
+			<li><a href="CommandsK-O.html#command_l"><code>L</code> - slide</a></li>
+			<li><a href="CommandsK-O.html#command_m"><code>M</code> - gate time</a></li>
+			<li><a href="CommandsK-O.html#command_n"><code>N</code> - hard frq</a></li>
+			<li><a href="CommandsK-O.html#command_o"><code>O</code> - output level</a></li>
+			<li><a href="CommandsP-T.html#command_p"><code>P</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_q"><code>Q</code> - pitch q</a></li>
+			<li><a href="CommandsP-T.html#command_r"><code>R</code> - repeat</a></li>
+			<li><a href="CommandsP-T.html#command_s"><code>S</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_t"><code>T</code> - detune</a></li>
+			<li><a href="CommandsU-Z.html#command_u"><code>U</code> - probability</a></li>
+			<li><a href="CommandsU-Z.html#command_v"><code>V</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_w"><code>W</code> - duty</a></li>
+			<li><a href="CommandsU-Z.html#command_x"><code>X</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_y"><code>Y</code> - echo</a></li>
+			<li><a href="CommandsU-Z.html#command_z"><code>Z</code> - table speed</a></li>
+		</ul>		
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Commands U - Z</h2>
+		
+<table class="commandTable" id="command_u">
+	<thead>
+		<th width="10%"><code>Uxx</code></th>
+		<th>Note Probability</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>When placed on the same step as a note, makes the playback of that note dependent on a weighted random number. The higher the value of <code>XX</code> the less likely the note will play.</p>
+	
+			</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_v">
+	<thead>
+		<th width="10%"><code>Vxx</code></th>
+		<th>--- Reserved For Future Feature ---</th>
+		<th width="10%"><code>-----</code></th>
+		<th width="20%"><code>Unused</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>                               
+		 </p> 
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_w">
+	<thead>
+		<th width="10%"><code>Wxx</code></th>
+		<th>Set Duty or Duty Table</th>
+		<th width="10%"><code>AB---</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Overrides the <code><a href="Page_Instrument.html#DUTY">DUTY</a></code> setting of the current Instrument.</p>
+		 <p>First four values are small icons that represent a fixed pulse width (duty). Subsequent values are <a href="Page_Duty.html">Duty Table</a> numbers starting at <code>00</code></p>    
+         
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_x">
+	<thead>
+		<th width="10%"><code>Xxx</code></th>
+		<th>--- Reserved For Future Feature ---</th>
+		<th width="10%"><code>-----</code></th>
+		<th width="20%"><code>Unused</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>                               
+		 </p> 
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_y">
+	<thead>
+		<th width="10%"><code>Yxx</code></th>
+		<th>Echo</th>
+		<th width="10%"><code>AB-D-</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Overrides the <code><a href="Page_Instrument.html#ECHO">ECHO</a></code> setting of the current Instrument</p>
+		 <p><code>XX</code> is an Echo program from the <em><a href="Page_Echo.html">Echo List</a></em>.</p>
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_z">
+	<thead>
+		<th width="10%"><code>Zxx</code></th>
+		<th>Table Speed</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+<p>Sets the speed of any Tables that are run on the Track.</p>                      
+
+<p>The default Table Speed is set to <code>80</code> which is the middle of the speed range, 
+<code>02</code> being slowest and <code>FF</code> being the fastest.                                   
+
+<p><code><bold>00</bold></code> has a special function in that it synchronises the Table with the Pattern.
+   This means that the Table will advance to the next step each time the     
+   Pattern advances a step. Table is restarted on each new note.</p>              
+ 
+ <p><code><bold>01</bold></code> has a special function in that it synchronises the Table with the Pattern. This is similar to <code>'00'</code> but the table is not restarted on each new note.</p>
+ 		</td>
+	</tr>
+</table>
+<br />
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

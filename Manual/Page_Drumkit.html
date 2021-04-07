@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Drumkit Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/drumkitScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Whereas Tracks A, B, C &amp; D use <em>Instruments</em>, Track E uses <em>Drumkits.</em></p>
+<p>Each row of the Drumkit could be referred to as a <em>Drum</em>. Each Drum is a collection of values that specify a DCM sample and several parameters to describe the playback of that sample. Of course, even though the sounds are referred to as 'Drums', the samples could be any sound at all.</p>
+<p>From left-to-right the parameters are:</p>
+<br />
+<table>
+	<colgroup width="10%"/>
+	<colgroup />
+	<tr id="E_SM">
+		<td><code><bold>SM</bold></code></td>
+		<td>specifies DCM sample number for the Drum sound. <code>00</code> is the first sample in the ROM, the maximum value is of course dependent on how many samples are in your ROM</td>
+	</tr>
+	<tr id="E_PT">
+		<td><code><bold>PT</bold></code></td>
+		<td>specifies the playback 'pitch' of the sample. This number doesn't really bear any relationship to musical pitch, it's just a value written to one of the APU registers to control the playback speed, <code>00</code> being the slowest and <code>0F</code> being the fastest. Because of the relatively poor quality of the NES's DCM samples, <code>0F</code> is the most useful and used setting</td>
+	</tr>
+	<tr id="E_ST">
+		<td><code><bold>ST</bold></code></td>
+		<td>specifies a starting offset for the sample playback of each Drum. A value of <code>00</code> plays the sample from the beginning. The valid range of this parameter depends on the sample. There are no checks in place to prevent you setting the start offset past the <em>end</em> of a sample.</td>
+	</tr>
+<tr id="E_EN">
+	<td><code><bold>EN</bold></code></td>
+	<td>specifies an end offset for the sample plaback of each Drum. A value of <code>00</code> means the sample will play to it's natural end. Values higher than <code>00</code> will truncate the sample accordingly. Like <code>ST</code> the value is not checked against the length of the sample so you can specific a value that's bigger than the actual sample length. In both cases nothing drastic will happen, it will just sound odd</td>
+</tr>
+<tr>
+	<td><code><bold>L</bold></code></td>
+	<td>specifies whether the sample should be one-shot (<code>N</code>) or looped (<code>Y</code>). Sample looping occurs between the start and end of the sample but it is also affected by the start (ST) and end (EN) offsets</td>
+</tr>
+</table>
+
+<br /><hr /><br />
+<h4><code>'KIT ROOT'</code></h4>
+<p>The other parameter you can set for a Drumkit is the <em>Drumkit Root</em>. This sets the Pattern note that will trigger the first Drum in the Drumkit. The first Drum is the one at the top of the table (<code>00</code>). The rest of the Drumkit is triggered by subsequent semi-tones above the Kit Root. This value is set per-Drumkit.</p>
+<br />
+<h4><code>'THIS NOTE'</code></h4>
+<p>This is not an editable parameter but is displayed to let you know which Pattern note will trigger the Drum that your cursor is currently on. As you can see in the screen-grab, the Kit Root is <code>A 1</code> and the cursor is on the first Drum of the Drumkit, hence <code>THIS NOTE</code> is shown as <code>A 1</code>.</p>
+
+<h5>Drumkit Commands</h5>
+<p>Several <em>Commands</em> have been reused to provide functions specifically for Drumkits (Track E). The Commands are listed <a href="CommandOverview.html#tracke_commands" title="">here</a> .</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

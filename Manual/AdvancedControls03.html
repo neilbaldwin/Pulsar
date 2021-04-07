@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Advanced Controls 3 - Mute, Solo and Context-driven Playback</h2>
+		
+		<br />
+		<h4>Mute and Solo</h4>
+		<p>At any time you can either <em>mute</em> the current Track or <em>solo</em> it. The current
+		Track refers to the one you are currently editing and is always shown in the
+		bottom-left information display: <code><bold>TRK: X:YY</bold></code> where <code><bold>'X'</bold></code> is the Track and <code><bold>'YY'</bold></code> is the row of the Track your cursor was last on.</p>
+		<p>You can mute/solo a track from ANY editor page.</p>
+		
+		<table class="controls" id="advanced03a">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To mute/unmute the current Track from within any editor page</td><td class='rightColumn'>hold <em>B</em> then tap <em>SELECT</em></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'>To solo/unsolo the current Track from within any editor page</td><td class='rightColumn'>hold <em>B</em> then tap <em>START</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">	
+			<h5>Mute</h5>
+			<p>When a Track is muted you will hear no audio output from it. You'll see that the VU meter associated with the Track will stop responding and the status light underneath will be grey instead of green.</p>
+			
+			<h5>Solo</h5>
+			<p>When a Track is <em>soloed</em>, audio output will only be heard from that Track. You'll see that all the other VU meters are no longer responding, their
+			 corresponding status lights will be grey and the current track's status
+			 light will be blinking red.</p>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<h4 id="contextPlayback">Context Playback</h4>
+		<p>As well as using the method described in Basic Controls (SELECT + START) to play your Song from the first step, there are several other ways you can play your music.</p>
+		<p>These <em>context-driven</em> playback modes are all controlled with the <bold>START</bold> button.</p>
+		
+		<table class="controls" id="advanced03b">
+			<thead>
+				<th style="width:200px">Location</th><th>Action</th>
+			</thead>
+			<tr>
+				<td>Song Editor</td><td>pressing <em>START</em> causes Song playback to start from cursor position and each Track will loop back to where you started it when an empty cell <em>'--'</em> is reached.</td>
+			</tr>
+			<tr>
+				<td>Chain Editor</td><td>pressing <em>START</em> plays only the current Chain on the current Track, which loops when an empty cell, <em>'--'</em> is reached </em></td>
+			</tr>
+			<tr>
+				<td>Pattern Editor</td><td>pressing <em>START</em> loops only the current Pattern on the current Track</td>
+			</tr>
+			<tr>
+				<td>All Other Editors</td><td>pressing <em>START</em> loops only the Pattern on the current Track that was last accessed by the Pattern Editor</td>
+			</tr>
+		</table>
+
+		<div class="postTable">
+		<bold>Note: </bold>Because the playback engine gets the Transpose setting from the current Chain, if you use the context-driven playback to playback a single Pattern, the transpose value will likely be wrong and you might not hear the pitches you were expecting. Mostly you can force Pulsar to use the 'correct' Transpose value by momentarily playing the Chain that contains that Pattern.
+		</div>		
+		<div class="postTable">
+		<h5>Song-in-a-Song!</h5>
+		<p>When starting playback from the Song editor, because playback starts from (and loops back to) the step your cursor is on as opposed to the very first Song step, this means that you can actually define loops within your Song, Song-In-A-Song!</p>
+		<p>For example, consider this hypothetical (truncated) Song layout:</p>
+		<br />
+		<div class="dataExample">
+			<div class="data"><em>00</em> 01 02 03 04 05</div>
+			<div class="data"><em>01</em> 01 02 03 04 05</div>
+			<div class="data"><em>02</em> -- -- -- -- --</div>
+			<div class="data"><em>03</em> 01 02 03 04 05</div>
+			<div class="data"><em>04</em> 01 02 03 04 05</div>
+			<div class="data"><em>05</em> 01 02 03 04 05</div>
+			<div class="data"><em>06</em> -- -- -- -- --</div>
+		</div>
+		<br />
+		<p>If you start the Song with the cursor on step <bold><code>00</code></bold> (the step number is the left-hand column), playback will start and loop between step <bold><code>00</code></bold> and <bold><code>01</code></bold>.</p>
+		<p>But if you start the Song with the cursor on step <bold><code>03</code></bold>, playback will start and loop through steps <bold><code>03</code></bold>, <bold><code>04</code></bold> and <bold><code>05</code></bold>.</p>
+		</div>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

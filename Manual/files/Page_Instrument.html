@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Instrument Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/instrumentScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Tracks A, B, C and D use "Instruments" as the basis for their sound 
+generation. The parameters are reasonably self-explanatory.</p>
+<br />
+<table>
+	<colgroup width="15%"/>
+	<colgroup />
+	<tr>
+		<td><code><bold>ENVELOPE</bold></code></td>
+		<td>specifies the ADSR Envelope number for the Instrument. Envelopes are defined and edited in the <em>Envelope List</em> page. Used on Tracks A, B &amp; D only</td>
+	</tr>
+	<tr id="LEVEL">
+		<td><code><bold>LEVEL</bold></code></td>
+		<td>scales the output of the ADSR Envelope. <code>00</code> is silent, <code>0F</code> is maximum volume. Affects Tracks A, B &amp; D only</td>
+	</tr>
+	<tr id="GATE">
+		<td><code><bold>GATE</bold></code></td>
+		<td>sets the length of time in ticks/frames that notes are held for before triggering the Release phase of the ADSR. A value of <code>00</code> means the note will be infinite (until a new note or a Kill command)</td>
+	</tr>
+<tr id="DUTY">
+	<td><code><bold>DUTY</bold></code></td>
+	<td>sets either one of four pulse waveforms or the Duty Table number to use for this Instrument. Effects Tracks A &amp; B only</td>
+</tr>
+<tr>
+	<td><code><bold>TABLE</bold></code></td>
+	<td>selects a Pitch/Command table for the Instrument. <code>'--'</code> means that a Table is not used for this Instrument. Valid for Tracks A, B, C &amp; D.</td>
+</tr>
+<tr>
+	<td><code><bold>PSWEEP</bold></code></td>
+	<td>sets a Pitch Sweep amount for the Instrument. <code>00</code> to <code>7F</code> is up, <code>FF</code> to <code>80</code> is down. See below for explanation of the differences between this and <code>SWEEP. Valid for Tracks A, B and C.</code></td>
+</tr>
+<tr id="PSWEEP_Q">
+	<td><code><bold>PSWEEP-Q</bold></code></td>
+	<td>sets the resolution of the <code>PSWEEP</code> effect. This setting also affects the resolution of <code>VIBRATO</code> and the speed of the Chord (<code>Cxx</code>) Command. Valid for Tracks A, B and C</td>
+</tr>
+<tr>
+	<td><code><bold>SWEEP</bold></code></td>
+	<td>sets SWEEP value for the Instrument. <code>00</code> to <code>7F</code> is up, <code>FF</code> to <code>80</code> is down. Valid for Tracks A, B and C.</td>
+</tr>
+<tr>
+	<td><code><bold>VIBRATO</bold></code></td>
+	<td>selects the Vibrato program for the Instrument. Vibrato settings are edited and defined in the <em>Vibrato List</em>. A value of <code>'--'</code> means no Vibrato. Valid for Tracks A, B and C.</td>
+</tr>
+<tr id="DETUNE">
+	<td><code><bold>DETUNE</bold></code></td>
+	<td>sets fine tuning for the Instrument. Values can be positive or negative (2's complement, of course). Valid for Tracks A, B and C.</td>
+</tr>
+<tr>
+	<td><code><bold>HARD FRQ</bold></code></td>
+	<td>sets the <em>Hard Frequency</em> intensity for Tracks A and B. See below for explanation. Valid for Tracks A and B.</td>
+</tr>
+<tr id="ECHO">
+	<td><code><bold>ECHO</bold></code></td>
+	<td>select the Echo program for the Instrument. A value of <code>'--'</code> means no Echo is selected. Valid for Tracks A, B and D.</td>
+</tr>
+
+</table>
+<br /><hr />
+<h5>PSWEEP and SWEEP</h5>
+<p>The difference between <code>PSWEEP</code> and <code>SWEEP</code> is that <code>PSWEEP</code> attempts to provide a
+linear sweeping so that the perceived pitch change is even throughout all octaves. <code>SWEEP</code> is
+the more traditional way of adding a constant to the output frequency which
+, because the NES has non-linear pitch, means that the higher the pitch, 
+the faster the sweep (and vice versa). The other quite clever thing about 
+<code>PSWEEP</code> is that it works better in conjunction with other pitch modulation 
+such as arpeggio etc. to give a more musical result. <code>SWEEP</code> is not affected by
+<code>PSWEEP-Q</code>.</p>
+<br />
+<h5>HARD FREQUENCY</h5>
+<p><em>Hard Frequency</em> is an odd effect. There's a 'quirk' with the two square channels on the NES whereby an audible click/pop can be heard when the upper register of the voice's frequency (or 'period')  is written to by the audio engine. Normally it's an undesirable effect but because Pulsar is refreshed 3 times per frame, constantly writing to these registers produces some interesting noises. The <code>HARD FRQ</code> setting has a range of <code>00</code> to <code>07</code> which tells Pulsar on which refresh pass to write the upper frequency registers, <code>00</code> being never and <code>07</code> being always.</p>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

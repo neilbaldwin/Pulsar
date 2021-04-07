@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+			<ul>
+				<li><a href="Page_Song.html">Song Editor</a></li>
+				<li><a href="Page_Chain.html">Chain Editor</a></li>
+				<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+				<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+				<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+				<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+				<li><a href="Page_Table.html">Table Editor</a></li>
+				<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+				<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+				<li><a href="Page_Echo.html">Echo List Editor</a></li>
+				<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+				<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+				<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+				<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+			</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Chain Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/chainScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>A Chain has two columns. The first one labelled <bold><code>"PT"</code> </bold>contains Pattern numbers 
+which will play in sequence from top to bottom. The second column, <bold><code>"TR"</code></bold>, is 
+the transpose value applied to the Pattern on each step of the Chain. The Transpose value can be positive or negative.</p>
+
+<p>A Chain has a maximum of sixteen steps (<code>00</code> to <code>0F</code>) but the Chain will end when 
+a blank cell <code>"--"</code> is encountered.</p>
+
+<p><bold>Note: </bold>If you have an empty cell on step <code>00</code>, Pulsar will think that this Chain is 
+empty and will skip this Chain in the Song.</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Vibrato List Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/vibratoScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Tracks A, B &amp; C can use <em>Vibrato</em> to cyclically modulate the pitch of a playing note. (ref: <a href="http://en.wikipedia.org/wiki/Vibrato">Vibrato</a>). Like an <em>Envelope</em>, a Vibrato is actually a Pulsar object that is made up of four parameters that desribe the character of the modulation. The numbers down the left-hand side of the Vibrato List are the numbers you specify in the <code>VIBRATO</code> parameter of Instruments or when using the Vibrato Command (<code>Bxx</code>). Each row of the Vibrato List is one Vibrato object.</p>
+<p>From left-to-right the parameters are:</p>
+<br />
+<table>
+	<colgroup width="7%"/>
+	<colgroup />
+<tr>
+	<td><code><bold>SP</bold></code></td>
+	<td>specifies the Speed of the Vibrato effect, range <code>00</code> to <code>0F</code> <bold><sup>*1</sup></bold></td>
+</tr>
+	<tr>
+		<td><code><bold>DP</bold></code></td>
+		<td>specifies the depth of the Vibrato effect, the amount the pitch is modulated away from its original frequency, range <code>00</code> to <code>1F</code></td>
+	</tr>
+	<tr>
+		<td><code><bold>AC</bold></code></td>
+		<td>specifies Acceleration of the Vibrato effect. A value of <code>00</code> will mean that the Vibrato starts at the specified Depth (DP). Any other value will cause the Vibrato Depth to start at zero and build to the specified Depth. <code>01</code> is the slowest Acceleration, <code>FF</code> is the fastest</td>
+	</tr>
+<tr>
+	<td><code><bold>DL</bold></code></td>
+	<td>specifies a Delay before Vibrato starts. The value is in 'ticks' and counts from the beginning of a new note. If you have Acceleration specified, the accelerating won't start until after the Delay</td>
+</tr>
+</table>
+<div class="postTable">
+	<p><bold><sup>*1 </sup></bold> As described on the Instrument page, the Instrument setting <code>PSWEEP-Q</code> affects the speed of other effects (besides <code>PSWEEP</code>) and Vibrato speed is one of them. As a guide, a <code>PSWEEP-Q</code> setting of about <code>80</code> gives the most flexibility for Vibrato. Lower <code>PSWEEP-Q</code> values will eventually make the Vibrato sound 'steppy' (this is deliberate) and while higher <code>PSWEEP-Q</code> values are fine, if set too high the slowest Vibrato Speed (SP) setting won't be particularly slow.</p>
+</div>
+<br /><hr /><br />
+<h5>Extra Vibrato Information</h5>
+<p>I'm using a sine table and fractional pitch frequencies to give the same 
+perceived depth of pitch modulation over every octave. Because the number of
+entries in the sine table is an even number, when using some of the higher 
+depth settings, an odd number in the SP column (01, 03 etc.) might make the 
+pitch sound a bit off. There's not much I can do about this but it is only 
+with extreme depth (DP) settings, which aren't particularly musical anyway!</p>
+
+<h5>Credit Where It's Due</h5>
+<p>I use blargg's smooth pitch modulation trick for click-free vibrato (and pitch sweep).</p>
+
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

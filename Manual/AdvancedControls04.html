@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Advanced Controls 4 - Copy and Paste</h2>
+		
+		<p>It is possible to copy whole or part of certain Pulsar objects; Chains,
+		Patterns, Instruments<sup>*1</sup>, Drumkits, Tables, Duty Tables, MultiFx and Speed Tables.</p>
+		
+		<p>I wanted to come up with a method that was fast and immediate without the need for complicated controls to mark blocks of data. It's not an ideal system but it is really useful.
+		</p>		
+		<table class="controls" id="advanced04a">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To copy whole or part of an object</td><td class='rightColumn'>put the cursor on the first row of the object you wish to copy, hold <em>SELECT</em> then tap <em>LEFT</em></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'>To paste data from the Copy Buffer into an object</td><td class='rightColumn'>put the cursor on the destination row, hold <em>SELECT</em> then tap <em>RIGHT</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">	
+		<h5>Copy And Paste Explained</h5>
+
+		<p>
+		When you copy data to the copy buffer, data FROM the row the cursor is on to
+		the END of the current object is copied. e.g. putting the cursor on step <bold><code>07</code></bold> of a Pattern will copy rows <bold><code>07,08,09,0A,0B,0C,0D,0E and 0F</code></bold> to the copy buffer.</p>
+		<p>The copy buffer status (bottom right of Pulsar's screen)
+		is then updated to show you what you've just copied. e.g. <bold><code>PAT:00:07</code></bold> means you copied data from Pattern <bold><code>00</code></bold>, row <bold><code>07</code></bold> (to the end of the Pattern).</p>
+		
+		
+		<p>When you come to paste the data, the data in the destination object will
+		be overwritten by the data in the copy buffer but only as much as either the
+		length of the copy buffer data or until the paste operation would exceed the
+		limits of the destination object.</p>
+		
+		<p>For example, (using the example above as the copy buffer) putting the cursor on row
+		<bold><code>0B</code></bold> of a Pattern and pasting the data from the copy buffer will
+		overwrite step <bold><code>0B,0C,0D,0E</code></bold> and <bold><code>0F</code></bold> of the destination pattern with the
+		first 5 rows of the copy buffer contents.</p>
+
+		<h5>Object Types</h5>
+		<p>The 3 letter codes to indicate the type of data in the copy buffer are fairly self-explanatory but just in case, here's a list.</p>
+		<br />
+		<bold>
+		<code>CHN - Chain</code><br />
+		<code>PAT - Pattern</code><br />
+		<code>INS - Instrument</code><br />
+		<code>DRM - Drumkit</code><br />
+		<code>TAB - Table</code><br />
+		<code>DUT - Duty Table</code><br />
+		<code>MFX - MultiFX</code><br />
+		<code>SPD - Speed Table</code><br />
+		</bold>
+		<br />
+		<p>Pulsar won't allow you to mix data. For example if you copy Pattern data into the copy buffer, you can only paste it into a Pattern. Attempting to paste data into an object of a different type will give you an error message.
+		</div>
+		
+		
+		<br /><hr /><br />
+		<div class="postTable">
+			<p><sup>*1 </sup>It's only possible to copy whole Instruments, copying part of an Instrument does not work.</p>
+		</div>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

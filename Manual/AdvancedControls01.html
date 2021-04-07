@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+		
+		<h2>Advanced Controls 1 - More Editing</h2>
+		
+		<table class="controls" id="advanced01a">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To insert next unused Chain or Pattern</td><td class='rightColumn'>put the cursor where you want the Chain/Pattern to be created then <em>DOUBLE-TAP A</em></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'>To clone a Chain or Pattern</td><td class='rightColumn'>put the cursor on a Chain or Pattern you'd like to clone, hold <em>SELECT</em> then tap <em>A</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">	
+		<h5>Insert Next Unused Chain/Pattern</h5>
+		<p>As you start to edit Chains and Patterns they are internally marked as being used. This then allows Pulsar to be able to find an unused/empty Chain or Pattern automatically.</p>
+		
+		<h5>Clone Chain/Pattern</h5>
+		<p>This function comes in really handy if you want to make variations on an existing Chain or Pattern quickly and easily. The Chain or Pattern number under the cursor is duplicated to a new Chain/Pattern and the number of the new object will replace the old one.</p>
+		<p>With both of these commands, if there are no free/unused Chains/Patterns, 
+		nothing will happen. In this situation, it is possible that there may be empty 
+		Chains/Patterns that are not being used in your Song but Pulsar has marked 
+		them as being used (perhaps you used them at some point but have since 
+		changed your mind). There is a function in the Setup Page, "Clean Songs" which
+		will scan your Song and 'reset' any unused Chains/Patterns, if any exist. 
+		Afterwards you might try cloning a Chain/Pattern again and hopefully you'll
+		find that it works. If not, you've probably used all the Chains/Patterns. Sorry!</p>
+		</div>
+
+		<table class="controls" id="advanced01b">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To toggle a note between 'normal' and 'tie'</td><td class='rightColumn'>put the cursor on a note in the Pattern editor, hold <em>SELECT</em> then tap <em>A</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">
+			<h5>'Normal' and 'Tie' Notes</h5>
+			<p>There are two types of notes in Pulsar, <em>normal</em> and <em>tie</em> notes. When a normal note is played there are many audio parameters that are reset or initialised such as the ADSR envelope being restarted at the Attack phase. A <em>tie note</em> bypasses much of this initialisation which makes it really handy for simulating effects like 'hammer on/pull off' (common guitar technique) or for smoothing out a slide-to-note effect.</p>
+			
+			<span class="centerImage">
+				<img src="images/tienoteScreen.png" />
+				<div class="clearFix"></div>
+			</span>		
+			<p>In the editor, tie notes appear dark grey to make them visually distinct. When adjusting the pitch of a tie note it will momentarily change colour. This is just to improve readability. To change a tie note back to a normal one just perform the same button press on a tie note.</p>
+		</div>
+		
+		<table class="controls" id="advanced01c">
+			<thead>
+				<th>Function</th><th>Buttons</th>
+			</thead>
+			<tr>
+				<td class='leftColumn'>To delete an entire row</td><td class='rightColumn'>put the cursor on the row you want to delete, hold <em>B+A</em> then tap <em>UP</em></em></td>
+			</tr>
+			<tr>
+				<td class='leftColumn'>To insert a row</td><td class='rightColumn'>put the cursor where you'd like to make the insert, hold <em>B+A</em> then tap <em>DOWN</em></td>
+			</tr>
+		</table>
+		
+		<div class="postTable">
+		<em>NOTE: these two functions work for Song, Chain, Pattern, Table, Duty Table, Speed Table and MultiFX editors</em>
+		<br /><br />
+		<h5>Delete Entire Row</h5>
+		<p>The contents of the row your cursor is on is deleted and all rows below 
+		    are shifted up one step. A "blank" row is added at the end of the table. 
+		    You cannot delete the last row of any table.</p>
+		<h5>Insert Row</h5>
+		<p>The rows below your cursor are shifted down one step. The contents of the 
+		    row the cursor is on remains intact. Any rows that get 'pushed off' the bottom of a table are lost forever. You cannot insert a row on the last 
+		    row of any table.</p>
+		</div>
+		
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

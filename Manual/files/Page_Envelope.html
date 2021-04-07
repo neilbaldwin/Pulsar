@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Envelope (ADSR) List Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/envelopeScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Tracks A, B and D are able to use an ADSR Envelope to shape the amplitude of the sound. There's a <a href="#ADSR_Diagram">handy diagram</a> at the bottom of the page which might help if you're unsure of what an ADSR envelope does.</p> <p>Unlike pages such as Chain and Pattern Editor (and Instrument) where one object at a time is presented on screen, the <em>ADSR List</em> page is one of the pages that presents several objects in a list-form.</p>
+<p>This means that the numbers running down the left-hand side of the screen are the Envelope numbers that you specify in an Instrument or Command and that each row is an entire Envelope object made up of, in this case, four individual parameters.</p>
+<p>From left-to-right those parameters are:</p>
+<br />
+<table>
+	<colgroup width="8%"/>
+	<colgroup />
+	<tr>
+		<td><code><bold>AT</bold></code></td>
+		<td>specifies the <em>Attack</em> speed for the Envelope. This is the time taken for the amplitude to go from <code>00</code> to maximum <bold><sup>*1</sup></bold></td>
+	</tr>
+	<tr>
+		<td><code><bold>DC</bold></code></td>
+		<td>specifies the <em>Decay</em> speed for the Envelope. This is the time taken for the amplitude to go from maximum <sup><bold>*1 </bold></sup> to the <em>Sustain Level</em></td>
+	</tr>
+	<tr>
+		<td><code><bold>SU</bold></code></td>
+		<td>specifies the <em>Sustain Level</em> for the Envelope. This is the level at which the amplitude is held until the Release phase. The time component of Sustain is controlled by the <em>Gate Time</em> parameter of the Instrument or by the Kill command (<code>Kxx</code>)</td>
+	</tr>
+<tr>
+	<td><code><bold>RL</bold></code></td>
+	<td>specifies the <em>Release</em> speed for the Envelope. This is the time taken for the amplitude to go from the <em>Sustain Level</em> to zero. The Release phase is triggered either after the <em>Gate Time</em> has expired (set in Instrument) or if a Kill command (<code>Kxx</code>) is used while a note is active</td>
+</tr>
+</table>
+<br />
+<div class="postTable">
+	<p><bold><sup>*1 </sup></bold>The amplitude range of each of the NES's voices that have an amplitude setting is <code>00</code> to <code>0F</code>, with <code>00</code> being silent and <code>0F</code> being the maximum output volume. However, because Pulsar has a <code>LEVEL</code> parameter (set in Instruments or by the Output command, <code>Oxx</code>), the maximum amplitude that the ADSR is scaled by this setting and therefore may not necessarily be <code>0F</code>.</p>
+</div>
+<br />
+<h5>PARAMETER SETTINGS</h5>
+<p>For Attack (AT), Decay (DC) and Release (RL), <code>01</code> is the slowest speed and <code>FF</code> is the fastest. The Sustain (SU) parameter range is <code>00</code> to <code>0F</code>.</p>
+<h5>SPECIAL SETTINGS</h5>
+<p>If you specify <code>00</code> for the Attack (AT) parameter, the amplitude will start at maximum and at the Decay phase.</p>
+<p>If you speficy <code>00</code> for the Decay (DC) parameter, the Decay phase will be skipped and the amplitude will start at the Sustain Level.</p>
+<p>You can specify <code>00</code> for the Sustain Level. In this case the Envelope will effectively end after the Decay phase.</p>
+<p>If you specify <code>00</code> for the Release (RL) parameter, when the Gate Time ends or a note is Kill-ed (<code>Kxx</code>) the output will be silenced immediately.</p>
+<br /><hr /><br />
+
+<h3 id="ADSR_Diagram">ADSR Diagram</h3>
+<p>Shamelessly copied from a really great diagram on <a href='http://www.audiomulch.com/images/blog/southpole-expedition-part-3-pattern-sequenced-adsr-envelopes-adsr-timing.png'>Audiomulch</a> website.</p>
+<p>I included this as I thought it showed the relationship between all the parameters really clearly and in an understandable way.</p>
+<br />
+<span class="centerImage">
+	<img src="images/adsrDiagram.png" />
+	<div class="clearFix"></div>
+</span>
+<br />
+
+
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

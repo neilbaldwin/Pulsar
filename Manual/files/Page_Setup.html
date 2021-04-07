@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Setup &amp; Utility Menu</h2>
+		
+		<span class="centerImage">
+			<img src="images/setupScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+		<p>The <em>Setup Menu</em> is where you perform several utility tasks. The menu is accessed either via the <em>Navigation Menu</em> or via the shortcut: <bold>hold <code>SELECT</code> and tap <code>UP</code></bold></p>
+		<p>Where a value can be modified the usual method of holding <code>A</code> and using <code>U/D/L/R</code> to change the value is used. Where a setting is a <code>Y/N</code> toggle or an <code>OK</code> button, just tap the <code>A</code> button on the selected menu item.</p>
+		<br />
+<table>
+	<colgroup width="20%"/>
+	<colgroup />
+	<tr>
+		<td><code><bold>SONG</bold></code></td>
+		<td>here you can select which Song (<code>00</code> to <code>07</code>) is 'loaded' into Pulsar's Song editor. <bold>Please note that all eight Songs share the same pool of resources i.e. Chains, Patterns, Instruments etc.</td>
+	</tr>
+	<tr>
+		<td><code><bold>SONG SPEED</bold></code></td>
+		<td>sets the starting Speed Table for each Song</td>
+	</tr>
+	<tr>
+		<td><code><bold>PRELISTEN</bold></code></td>
+		<td>by default, as you enter/edit notes in a Pattern or when you're editing a Drumkit, Pulsar plays the note/sample. In case you want to turn that feature off, here's where you do it</td>
+	</tr>
+<tr>
+	<td><code><bold>CLEAR SONG</bold></code></td>
+	<td>clears the CURRENT song (not <em>all</em> Songs). Only the Song is affected, all other resources (Chains, Patterns, Instruments etc. remain intact)</td>
+</tr>
+<tr>
+	<td><code><bold>CLEAN SONGS</bold></code></td>
+	<td>this function scans all of the Songs and determines which Chains and Patterns are unused. Any unused Chains and Patterns are cleared and they will be available again for functions such as <em>Cloning</em></td>
+</tr>
+<tr>
+	<td><code><bold>INIT ALL</bold></code></td>
+	<td>clears EVERYTHING!</td>
+</tr>
+<tr>
+	<td><code><bold>COLOR</bold></code></td>
+	<td>four 8-bit hexadecimal numbers that are used to control the colours used in the editor Window. Note: only the editor window is affected. <br/><br/>
+	  Because of the way the NES's screen works (and because I'm a bit lazy), one of the colour elements is not seen on this screen (it's the colour of the left-hand column in most of the editor windows) so you'll sometimes have to jump to another page to see the results of the change. I might improve this in future releases.<br/><br/>Also, <bold>if you mess the colours up and want to reset them, hold <code>A</code> and then restart Pulsar (reset the NES) and the colours will be returned to default
+	</td>
+</tr>
+</table>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

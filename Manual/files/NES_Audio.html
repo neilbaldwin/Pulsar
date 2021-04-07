@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div>
+
+	<div class="clearFix"></div>
+	<div id="container">
+		<div id="sidebar">
+			<ul>
+				<li><a href="Pulsar.html">Home</a></li>
+				<li><a href="ScreenLayout.html">Screen Layout</a></li>
+				<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+				<li><a href='ControlsOverview.html'>Controls</a></li>
+				<li><a href='CommandOverview.html'>Commands</a></li>
+				<li><a href='ContextNavigation.html'>Navigation</a></li>				
+				<li><a href='Objects.html'>Objects</a></li>
+				<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+			</ul>
+		</div> <!-- sidebar -->
+
+		<div id="content">
+		<h3>NES Audio</h3>
+		<p>This is not intended as an in-depth examination of the NES's audio capabilities but just a brief introduction, hopefully just enough to help you understand more about the way Pulsar is designed and the limitations placed on it by the NES hardware.</p>
+		<p>The NES has four monophonic sound-generating 'voices': two pulse (or square) wave, one triangle wave and one noise.</p>
+		<p>In addition the NES is able to play low-quality samples via the 5th voice, often referred to as then DPCM/DMC/DCM voice.</p>
+		<h5>Square, Triangle and Noise</h5>
+		<p>The four sound-generating voices all vary in capability. The two square-wave voices are essentially identical.</p>
+		<table class="controls">
+		<colgroup><col width="10%" /><col width="20%"/><col width="20%"/><col /></colgroup>
+		<thead><th>Voice</th><th>Pitch</th><th>Amplitude</th><th>Tone</th></thead>
+		<tr><td>Square</td><td>Approx. 6 octaves</td><td>Yes. 16 levels</td><td>One of four pulse widths is selectable</td></tr>
+		<tr><td>Triangle</td><td>Approx. 6 octaves but output pitch is one octave lower than the two square-wave voices</td><td>No. Output level is fixed, voice can be on or off.</td><td>No</td></tr>
+		<tr><td>Noise</td><td>16 frequency settings</td><td>Yes. 16 levels</td><td>Two modes are selectable: "noise" and "tone". The "tone" mode is a well known characteristic of NES audio, a harsh metallic sound that appears in many NES games.</td></tr>
+		</table>
+
+		<h5>DPCM/DCM/DMC Voice</h5>
+		<p>Discussion of the technical details of the 5th "sample" voice are beyond the scope of this document. DPCM stands for <em>Differential Pulse Code Modulation</em>, if you're interested in reading more about it on the internet. The NES uses the most basic form of DPCM called "Delta Modulation' which uses a 1-bit data stream. Here's a Wikipedia article on <a href="http://en.wikipedia.org/wiki/Delta_modulation" title="">Delta Modulation</a></p>
+		<p>Essentially the voice plays 1-bit PCM samples at one of sixteen playback rates (though mostly only the highest few are used, mainly becuase the samples tend to sound pretty terrible at lower speeds). You can read more about Pulsar's handling of the sample voice on the <a href="Page_Drumkit.html" title="">Drumkit</a> page.</p>
+		<h5>List of Samples in Pulsar ROM</h5>
+		<p>Eventually I plan to release a ROM patching tool that will allow you to patch the Pulsar ROM with your own DPCM samples (as I did with NTRQ). For now, here's the list of included samples;</p>
+		<ul>
+			<li>00 TR808 Kick</li>
+			<li>01 TR808 Snare</li>
+			<li>02 TR808 Clap</li>
+			<li>03 TR808 Cowbell</li>
+			<li>04 TR808 Rimshot</li>
+			<li>05 TR909 Kick</li>
+			<li>06 TR909 Snare 1</li>
+			<li>07 TR909 Snare 2</li>
+			<li>08 TR707 Kick 1</li>
+			<li>09 TR707 Snare 1</li>
+			<li>0A TR707 Snare 2</li>
+			<li>0B TR707 Rimshot</li>
+			<li>0C TR707 Hi Tom</li>
+			<li>0D TR707 Clap</li>
+			<li>0E TR707 Snare + Clap</li>
+		</ul>
+		</div> <!-- content -->
+	<div class="clearFix"></div>
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div>
+	</div>
+</body>
+</html>

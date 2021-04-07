@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Pattern Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/patternScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>A Pattern has 3 columns: <bold><code>NTE</code></bold> = notes, <bold><code>IN</code></bold> = instrument and <bold><code>CM1</code></bold> = command.
+</p>
+<h5>Note Column</h5>
+<p>The Notes column is pretty self explanatory. The only special feature 
+of this is the ability to make a note into a "tie-note" (and back again). 
+A tie-note is one where the pitch is changed but certain aspects of the 
+synthesis are not reset/initialised as they are with a normal note. Things 
+such as the ADSR Envelope. When Pulsar encounters a tie-note, if another note
+is already playing, the ADSR Envelope of that note will continue rather than 
+being initialised to the Attack stage.</p>
+
+<div class="postTable"><h5>Track D Notes</h5>
+<p>The noise voice doesn't have notes as such, instead the noise 
+frequency is just a number, <code>00</code> to <code>0F</code>. In Pulsar this is represented by the first sixteen notes, <code>"A 1"</code> to <code>"C 3"</code>. Notes <code>"C#3"</code> to <code>"E 4"</code> are used to access the "tone mode" (metallic-sounding noise that the NES is reknowned for).</p></div>
+
+<h5>Instruments</h5>
+<p>Again, pretty obvious what you put in here. One difference 
+between Pulsar and LSDJ is that Pulsar doesn't require an Instrument number 
+on each note. Instead, once an Instrument is specified it will remain in use 
+on that Track until a new one is set.</p>
+
+<h5>CM1</h5>
+<p>This is actually two columns. The first one, a single letter, is the 
+<a href="CommandOverview.html">Command</a> type. The second one is the parameter/data associated with the 
+Command. You edit them both separately and the <a href="ContextNavigation.html">Context Navigation</a> works on
+either column.</p>
+
+<h5>Handy Hints!</h5>
+<p>If you put the cursor on a command (either the Command letter or the parameter) and 
+      hold A for a short while, a hint box will appear giving you a (very) 
+      brief explanation of the command. You can change commands while the box 
+      is still visible. Once you let got of A (or tap B to delete the 
+      command) the hint box disappears again.</p>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

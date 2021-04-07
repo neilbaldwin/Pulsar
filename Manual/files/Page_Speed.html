@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Speed Table Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/speedScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>The Speed Table Editor shows one entire Speed Table. Speed Tables are similar to <em>Grooves</em> in LSDJ. However, because Pulsar/NES cannot run at arbitrary tempos as LSDJ can, Speed Tables not only control the 'groove' of your Song but also the playback speed.</p>
+<p>You must specify the starting Speed Table for each Song in the <em>Setup Page</em> but you can also select a Speed Table within your Song by using the Speed Table command <code>Gxx</code></p>
+<p>As you can see, the Speed Table only has one column labelled <bold><code>SP</code></bold> - this is the number of ticks taken by each Pattern step.</p>
+<p>Pulsar will step through the Speed Table until either the end (step <code>0F</code>) or until an empty cell, <code>'--'</code>. At that point the Speed Table will start again at the beginning and continue looping.</p>
+<p>If you just want a 'straight' speed then just set your desired speed in the first step of the Speed Table. If you want to create a 'groove' then you can specify multiple speeds (up to sixteen in one Speed Table). There are the same number of steps in a Speed Table as there is in a Pattern so that you could set the tick speed for the individual steps of an entire Pattern if you wanted to.</p>
+<p><bold>Note: </bold>Messing about with the values in a running Speed Table while the Song is playing can sometimes throw it out of sync (mostly when you have multiple speeds in a Speed Table). If that happens you can just restart your Song. Changing Speed Tables via Commands is fine though.</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

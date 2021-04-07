@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<ul>
+			<li><a href="CommandsA-E.html#command_a"><code>A</code> - table</a></li>
+			<li><a href="CommandsA-E.html#command_b"><code>B</code> - vibrato</a></li>
+			<li><a href="CommandsA-E.html#command_c"><code>C</code> - chord</a></li>
+			<li><a href="CommandsA-E.html#command_d"><code>D</code> - delay note</a></li>
+			<li><a href="CommandsA-E.html#command_e"><code>E</code> - envelope</a></li>
+			<li><a href="CommandsF-J.html#command_f"><code>F</code> - multiFX</a></li>
+			<li><a href="CommandsF-J.html#command_g"><code>G</code> - speed table</a></li>
+			<li><a href="CommandsF-J.html#command_h"><code>H</code> - jump (pre)</a></li>
+			<li><a href="CommandsF-J.html#command_i"><code>I</code> - refresh rate</a></li>
+			<li><a href="CommandsF-J.html#command_j"><code>J</code> - jump (post)</a></li>
+			<li><a href="CommandsK-O.html#command_k"><code>K</code> - kill note</a></li>
+			<li><a href="CommandsK-O.html#command_l"><code>L</code> - slide</a></li>
+			<li><a href="CommandsK-O.html#command_m"><code>M</code> - gate time</a></li>
+			<li><a href="CommandsK-O.html#command_n"><code>N</code> - hard frq</a></li>
+			<li><a href="CommandsK-O.html#command_o"><code>O</code> - output level</a></li>
+			<li><a href="CommandsP-T.html#command_p"><code>P</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_q"><code>Q</code> - pitch q</a></li>
+			<li><a href="CommandsP-T.html#command_r"><code>R</code> - repeat</a></li>
+			<li><a href="CommandsP-T.html#command_s"><code>S</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_t"><code>T</code> - detune</a></li>
+			<li><a href="CommandsU-Z.html#command_u"><code>U</code> - probability</a></li>
+			<li><a href="CommandsU-Z.html#command_v"><code>V</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_w"><code>W</code> - duty</a></li>
+			<li><a href="CommandsU-Z.html#command_x"><code>X</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_y"><code>Y</code> - echo</a></li>
+			<li><a href="CommandsU-Z.html#command_z"><code>Z</code> - table speed</a></li>
+		</ul>		
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Commands F - J</h2>
+		
+<table class="commandTable" id="command_f">
+	<thead>
+		<th width="10%"><code>Fxy</code></th>
+		<th>Trigger MultiFX</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>First digit, <code>X</code>, is the <a href="Page_MultiFX.html">MultiFX</a> playback speed, second digit, <code>Y</code>, is the MultiFX number. For the playback speed, <code>0</code> is slowest, <code>F</code> is the fastest.</p>                               
+		 <p>It's possible to trigger a MultiFX from any Track.</p>               
+		                                                                              
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_g">
+	<thead>
+		<th width="10%"><code>Gxx</code></th>
+		<th>Select Speed Table (<em>'Groove'</em>)</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Specifies a <a href="Page_Speed.html">Speed Table</a> to use, <code>xx</code> is Speed Table number.                               
+		 </p> 
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_h">
+	<thead>
+		<th width="10%"><code>Hxy</code></th>
+		<th>(pre) Jump or Terminate Pattern/Table</th>
+		<th width="10%"><code>ABCD-</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		<p>Performs an immediate jump to the <a href="Page_Pattern.html">Pattern</a>/<a href="Page_Table.html">Table</a> step specified by <code>xy</code>.</p>
+		<p><bold>Note: </bold> the operation of this command differs slightly depending on whether you use it in a Pattern or inside a Table:</p>
+		<ul>
+		<li><bold>Pattern: </bold>The jump will be made to the specified step. If you specify either
+		<code>00</code>, a number lower than the step the command occurs on or a       
+		number outside of the range of the Pattern (<code>00 - 0F</code>), the Pattern will end. 
+		Essentially, the only valid <code>Hxx</code> jump in a Pattern is forwards to a destination step within the limits
+		of the Pattern.</li>
+		<li><bold>Table: </bold>Inside a table it is possible to perform a 'random' jump by using the 1st and 2nd digit of the command value to specify the lower and upper limit respectively.If you want to perform a direct jump to a specific Table step, set both digits of the command parameter to the same value (that of the desired destination step).
+		</li>
+		</ul>                                  
+		<p><bold>In both cases the jump will be performed IMMEDIATELY before the current step is processed. This is different from the <code>Jxx</code> command which makes the jump AFTER the current step has been processed.</bold></p>
+		<p>However, when used in a Table, by using the command in the second Command column, <code>CM2</code>, the command in the <code>CM1</code> column will be processed before the jump is executed. In fact you <em>must</em> use the <code>Hxx</code> command in the <code>CM2</code> column of a Table, otherwise it does not operate.</p>
+		<p><bold>Note: </bold> Inside a Table, if you specify lower and upper limits for the random jump that will result in the destination jump being the same step   
+		on which the command occurs, no jump will happen. This is to try to 
+		prevent the Table from locking up.</p>                                  
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_i">
+	<thead>
+		<th width="10%"><code>Ixx</code></th>
+		<th>Refresh Rate Control</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>This command controls Pulsar's refresh rate.
+		 </p>
+		 <p><code>00 - 07</code> sets refresh rate for current Track only</p>
+		 <p><code>10 - 17</code> sets refresh rate for all Tracks</p>
+		 <p>Pulsar normally refreshes the audio synthesis 3 times per frame (approx. 180hz). Using this command you can tell Pulsar which of those 3 refreshes should actually occur.</p>
+		 <p>The parameter for this command is a bit mask e.g.</p>
+		 <p><code>00 (-----000 binary)</code> allow no synthesis refreshing!</p>
+		 <p><code>01 (-----001 binary)</code> allow 1st refresh</p>
+		 <p><code>05 (-----101 binary)</code> allow 1st and 3rd refresh</p>
+		 <p>and so on.</p>
+		 <p>Note: this does not affect music playback speed, just the synthesis engine. It essentially (and crudely) just slows down all the effects.</p>
+		 </td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_j">
+	<thead>
+		<th width="10%"><code>Jxy</code></th>
+		<th>(post) Jump or Terminate Pattern</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		<p>Performs a jump to the Pattern/Table step specified by <code>xy</code> AFTER the current step has been processed.</p>
+		<p><bold>Note: </bold> the operation of this command differs slightly depending on whether you use it in a Pattern or inside a Table:</p>
+		<ul>
+		<li><bold>Pattern: </bold>The jump will be made to the specified step. If you specify either
+		<code>00</code>, a number lower than the step the command occurs on or a       
+		number outside of the range of the Pattern (<code>00 - 0F</code>), the Pattern will end. 
+		Essentially, the only valid <code>Hxx</code> jump in a Pattern is forwards to a destination step within the limits
+		of the Pattern.</li>
+		<li><bold>Table: </bold>Inside a table it is possible to perform a 'random' jump by using the 1st and 2nd digit of the command value to specify the lower and upper limit respectively.If you want to perform a direct jump to a specific Table step, set both digits of the command parameter to the same value (that of the desired destination step).
+		</li>
+		</ul>                                  
+		<p><bold>In both cases the jump will be performed AFTER the current step is processed. This is different from the <code>Hxx</code> command which makes the jump BEFORE the current step is processed.</bold></p>
+                     
+		</td>
+	</tr>
+</table>
+<br />
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

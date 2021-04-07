@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Table Editor Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/tableScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p><em>Tables</em> are a composite way to manipulate the audio synthesis in real time. If you're familiar with LSDJ you'll be at an advantage (though there are a few differences in Pulsar that you'll have to watch out for). If not, this might be a bit heavy going. Some experimentation and patience will pay off though - Tables are probably the most powerful aspect of Pulsar (as they are in LSDJ)</p>
+<p><em>Tables</em> are actually valid for all five Tracks (A, B, C, D and E) though operation differs slightly for Track C (mainly because of lack of amplitude on that Track) and drastically for Track E (mainly because the parameters do different things and many of the Commands are not valid for Track E).</p>
+<p>You can read about how Tables are implemented for Track E in the section 'Quirks And Bugs'. The reason it is relegated to that section is because it's still experimental and may change at some point in the future.</p>
+<p>Let's get the parameters out of the way first and then some explanations will follow:</p>
+<br />
+<table>
+	<colgroup width="10%"/>
+	<colgroup />
+	<tr>
+		<td><code><bold>VL</bold></code></td>
+		<td>scales the output volume of the current note. <code>00</code> is silent, <code>08</code> is about 50% and <code>0F</code> is maximum (no scaling). For Track C, <code>00</code> is silent and any other value is full volume (Track C has no scalable amplitude, it's either on or off)</td>
+	</tr>
+	<tr>
+		<td><code><bold>PT</bold></code></td>
+		<td>specifies the Pitch offset applied to the current note. You can specify positive, negative or absolute pitch using this parameter.<br /><br />
+		  <code>00 </code>= no offset (original pitch of note)<br />
+		  <code>01 to 50 </code>= positive offset<br />
+		  <code>FF to B1 </code>= negative offset<br />
+		  <code>51 to B0 </code>= absolute pitch, 51 being lowest note and B0 being the highest<br /><br />
+		  </td>
+	</tr>
+	<tr>
+		<td><code><bold>CM1</bold></code></td>
+		<td>whereas in a Pattern there is only one Command column, in a Table there are two. The is the first one. A value of <code>'-xx'</code> means no Command.</td>
+	</tr>
+<tr>
+	<td><code><bold>CM2</bold></code></td>
+	<td>and this is the second Command column. A value of <code>'-xx'</code> means no Command.</td>
+</tr>
+</table>
+
+<br /><hr /><br />
+<h5>TABLE OPERATION</h5>
+<p>There are two ways to trigger a Table. The first occurs at the start of each new note as long as you've specified a Table number in the Instrument definition that the note is using. The other way is by using a Run Table command (<code>Axx</code>) in a Pattern (actually you can use a Run Table command <em>inside</em> another Table too but that's just for the masochists!)</p>
+<p>What normally happens when a Table is triggered is that, starting at step <code>00</code>, the Volume and Pitch offsets are added to the current playing note, then the two Command columns are processed. Then, while the note is still playing and at a preset rate, the next and subsequent Table steps are processed until the end of the Table (step <code>0F</code>). At this point the Table loops back to step <code>00</code> and continues until the note is ended.</p>
+<br />
+<h5>SPECIAL FUNCTIONS</h5>
+<p>There are some Commands that have a special function within Tables and affect how the Table is processed.</p>
+<div class="postTable">
+	<p><bold><code>Zxx</code></bold> command can be used to set the time between each step of the Table. <code>02</code> is the slowest speed while <code>FF</code> is the fastest. <code>00</code> and <code>01</code> run the table in one of two sync modes</p>
+	<div class="postTable">
+		<p><bold><code>00</code></bold> synchronises the Table steps with the current Pattern steps. Each time the Pattern moves to the next step, so does the Table.</p>
+		<p><bold><code>01</code></bold> synchronises the Table (like <code>00</code>) but, while in <em>Mode 00</em>, the Table will start at the first step with each new note, in mode <code>01</code> the Table will run freely and so will not restart when a new note is played.</p>
+	</div>
+	<p><bold><code>Hxx/Jxx</code></bold> commands can be used to affect the flow of the Table by jumping to random (or direct) Table steps. These two Commands can also be used to loop the Table on a particular step (or around a block of several steps) and also to terminate the Table before it's natural end. Please see the individual descriptions of each Command for details.</p>
+	 <p>In the case of the <code>Hxx</code> command, note that it only works in the <code>CM2</code> column because of the fact that the jump happens immediately as opposed to <em>after</em> the step has been processed. In this way you can put another Command in the <code>CM1</code> column which will be processed before the <code>Hxx</code> jump.</p>
+</div>
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

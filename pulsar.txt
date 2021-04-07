@@ -1,0 +1,96 @@
+NOTE
+----
+
+Data in SRAM is not initialised unless you boot the ROM with SELECT held down. Be sure to do this the first time you run it so that the data is "formatted" properly - some emulators don't save the SRAM file unless it has been written to.
+
+
+Controls
+--------
+
+U/D/L/R to move around
+Tap B+A to clear a value (value is context sensitive)
+Hold A + L/R to increase/decrease value by 1
+Hold A + U/D to increase/decrease value by $10 or $0C (notes) or sometimes it will by by 1 if small range
+Hold SELECT + L/R to move between editor windows
+
+
+Song
+----
+
+5 tracks, A, B, C, D & E, each corresponding to hardware voices
+
+Chain
+-----
+
+2 columns, PT = pattern number (or phrase), TR = transpose value
+
+Pattern (phrase)
+----------------
+
+4 columns, NOTE, INS = instrument, FX = two columns, A-Z = command, 00-FF = command parameter
+
+
+Instrument
+----------
+
+ENVELOPE: envelope number (see below)
+LEVEL : max volume (00 to 0F) for this instrument
+GATE : key on time, 00 = infinite
+DUTY : duty table for this instrument
+SWEEP : pitch sweep for this instrument
+VIBRATO : index into vibrato table
+HARD FRQ : modifies writing of hi freq register
+ECHO SPED : echo speed
+ECHO LVL : echo initial volume
+ECHO DEC : echo attenuation
+DETUNE : detune value for this instrument
+
+Drumkit
+-------
+
+For DPCM only
+
+Covers one octave (so rows 00 to 0B), limited to 2 currently but will be expanded.
+
+SM = sample number
+PT = sample playback rate (00 to 0F)
+ST = start offset
+EN = end offset
+L = loop (Y/N)
+
+ROOT = note number that triggers drum 00
+
+ADSR Table
+----------
+
+AT = attack speed
+DC = decay speed
+SU = sustain level (00-0F)
+RL = release speed
+
+
+Table
+-----
+
+6 columns
+
+VL = volume modifier (00-0F)
+PT = pitch modifier
+FX1 = two columns, A-Z = command, 00-FF = command parameter
+FX2 = two columns, A-Z = command, 00-FF = command parameter
+
+Vibrato Table
+-------------
+
+SP = vibrato speed
+DP = vibrato depth
+AC = vibrato acceleration
+DL = delay before vibrato is heard
+
+Duty Table
+----------
+
+DT = duty setting (00/40/80/C0)
+DL = delay before next step
+JM = jump, "--" = drop through to next step, otherwise = index to jump to
+

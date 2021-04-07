@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<ul>
+			<li><a href="CommandsA-E.html#command_a"><code>A</code> - table</a></li>
+			<li><a href="CommandsA-E.html#command_b"><code>B</code> - vibrato</a></li>
+			<li><a href="CommandsA-E.html#command_c"><code>C</code> - chord</a></li>
+			<li><a href="CommandsA-E.html#command_d"><code>D</code> - delay note</a></li>
+			<li><a href="CommandsA-E.html#command_e"><code>E</code> - envelope</a></li>
+			<li><a href="CommandsF-J.html#command_f"><code>F</code> - multiFX</a></li>
+			<li><a href="CommandsF-J.html#command_g"><code>G</code> - speed table</a></li>
+			<li><a href="CommandsF-J.html#command_h"><code>H</code> - jump (pre)</a></li>
+			<li><a href="CommandsF-J.html#command_i"><code>I</code> - refresh rate</a></li>
+			<li><a href="CommandsF-J.html#command_j"><code>J</code> - jump (post)</a></li>
+			<li><a href="CommandsK-O.html#command_k"><code>K</code> - kill note</a></li>
+			<li><a href="CommandsK-O.html#command_l"><code>L</code> - slide</a></li>
+			<li><a href="CommandsK-O.html#command_m"><code>M</code> - gate time</a></li>
+			<li><a href="CommandsK-O.html#command_n"><code>N</code> - hard frq</a></li>
+			<li><a href="CommandsK-O.html#command_o"><code>O</code> - output level</a></li>
+			<li><a href="CommandsP-T.html#command_p"><code>P</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_q"><code>Q</code> - pitch q</a></li>
+			<li><a href="CommandsP-T.html#command_r"><code>R</code> - repeat</a></li>
+			<li><a href="CommandsP-T.html#command_s"><code>S</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_t"><code>T</code> - detune</a></li>
+			<li><a href="CommandsU-Z.html#command_u"><code>U</code> - probability</a></li>
+			<li><a href="CommandsU-Z.html#command_v"><code>V</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_w"><code>W</code> - duty</a></li>
+			<li><a href="CommandsU-Z.html#command_x"><code>X</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_y"><code>Y</code> - echo</a></li>
+			<li><a href="CommandsU-Z.html#command_z"><code>Z</code> - table speed</a></li>
+		</ul>		
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Commands K - O</h2>
+		
+<table class="commandTable" id="command_k">
+	<thead>
+		<th width="10%"><code>Kxy</code></th>
+		<th>Kill Note</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Kills a playing note after <code>XX</code> ticks.</p>               
+		 <p><bold>Note:</bold> if using this command on Tracks A, B or D, the note won't actually be
+		 killed immediately on the tick count expiring. The command actually forces 
+		 the notes ADSR into the Release phase. If you need to kill the note        
+		 immediately, use a Release value of <code>00</code> in your ADSR Envelope, in combination with this command.</p>            
+		                                                                            
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_l">
+	<thead>
+		<th width="10%"><code>Lxx</code></th>
+		<th>Slide To Note</th>
+		<th width="10%"><code>ABC--</code></th>
+		<th width="20%"><code>Pattern<sup>*</sup></code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>When placed on the same step as a note, Pulsar attempts to smoothly slide the note from the previous pitch to that note at a speed determined by <code>XX</code>. The smaller the number <code>XX</code> the slower the slide will be. Valid range for the speed is <code>00 - 7F</code>. There is no need to worry about using positive/negative numbers, Pulsar determines the direction for you.</p>
+		 <p><bold>Note: </bold>The <code>PSWEEP-Q</code> setting of the current Instrument will have an effect on the pitch slide. The lower the <code>PSWEEP-Q</code> setting, the slower and more 'steppy' the slide will be.</p>
+		 <p><bold>Tip: </bold>If you want a really smooth slide from one note to another, make the destination note a <em>tie note</em> (hold <code>SELECT</code> and tap <code>A</code>).                             
+		 </p>
+		 <p class="postTable">
+		 <sup>*</sup>It is possible to use this Command inside a table but the results are a little unpredictable.
+		 </p> 
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<hr /><br />
+			<p><bold>Track E: </bold>when used on Track E, this command turns <a href="Page_Drumkit.html#E_LP">Sample Looping</a> (<code>LP</code>) on/off. If <code>XX = 00</code> the looping is turned off. Any other value will turn it on.</p>
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_m">
+	<thead>
+		<th width="10%"><code>Mxx</code></th>
+		<th>Gate Time</th>
+		<th width="10%"><code>ABCD-</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		<p>Sets a new <em>Gate Time</em> by overriding the <code><a href="Page_Instrument.html#GATE">GATE</a></code> setting in the current Instrument.</p>
+		<p>In the case of Tracks A, B and D, the value is the number of ticks until the note's ADSR is forced into the Release phase while for Track C it's the number of ticks until the voice is silenced.</p>
+		<p><bold>Note: </bold>while it may seem the same as the Kill Note command (<code>Kxx</code>), the Kill Note command only affects the note it is placed on whereas this command affects all subsequent notes until a new Instrument is specified (or a new <code>Mxx</code> command!)</p>                         
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_n">
+	<thead>
+		<th width="10%"><code>Nxx</code></th>
+		<th>'Hard Frequency' Control</th>
+		<th width="10%"><code>AB---</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>This command controls Pulsar's <em>Hard Frequency</em> effect, the rate/amount determined by <code>XX</code>. <code>00</code> is off, <code>07</code> is maximum.
+		 </p>
+		 <p class="postTable"><bold>Technical Info: </bold> A side effect of writing the upper period register of the NES's two square voices (Track A &amp; B) is that the output phase gets reset. This manifest itself as a small click. Thus it's become accepted that it's generally a <em>bad</em> idea to constantly write to this register in your audio code as it sounds pretty terrible if you do. Instead, most people have their code only write the register when the value needs to change - think of this as 'soft frequency'.</p>
+		   <p class="postTable">Almost by accident, when experimenting with Pulsar's synthesis engine, I discovered that if you write the upper frequency registers at a much higher rate, some <em>interesting</em> noises are created. This effect I labelled as 'Hard Frequency' as it's pretty much the opposite of only writing the upper frequency when required - i.e. it writes the upper frequency when it doesn't need to.</p>
+		 <p>The parameter for this command is a bit mask e.g.</p>
+		 <p><code>00 (-----000 binary)</code> turn Hard Frequency off</p>
+		 <p><code>01 (-----001 binary)</code> write Hard Frequency on first refresh</p>
+		 <p><code>05 (-----101 binary)</code> write Hard Frequency on 1st and 3rd refresh</p>
+		 <p>and so on.</p>
+		 </td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_o">
+	<thead>
+		<th width="10%"><code>Oxx</code></th>
+		<th>Output Level</th>
+		<th width="10%"><code>ABCD-</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		<p>Overrides the current Instruments <code><a href="Page_Instrument.html#LEVEL">LEVEL</a></code> parameter. <code>0F</code> is full volume, <code>00</code> is silent.</p>
+		<p>For Track C, <code>00</code> turns output off and any other value will turn output on.</p>
+                     
+		</td>
+	</tr>
+</table>
+<br />
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

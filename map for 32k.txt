@@ -1,0 +1,41 @@
+;------------------------------------------------------------------------------
+; Memory Map for 32K, split into 4 8KB Banks
+;------------------------------------------------------------------------------
+
+Bank 00
+-------
+
+Patterns	128	= 8192
+
+
+Bank 01
+-------
+
+Chains	128	= 4096
+Song (steps)	128	=  640
+
+		(3456)
+
+Bank 02
+-------
+
+Instruments	
+
+
+Bank 03
+-------
+
+
+Song
+Chains
+
+Instruments
+Drumkits
+Envelopes
+Table
+Vibrato
+Duty
+Echo
+Speed
+FX
+

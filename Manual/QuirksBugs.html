@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+		<div id="sidebar">
+			<ul>
+<li><a href="Pulsar.html">Home</a></li>
+<li><a href="ScreenLayout.html">Screen Layout</a></li>
+<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+<li><a href='ControlsOverview.html'>Controls</a></li>
+<li><a href='CommandOverview.html'>Commands</a></li>
+<li><a href='ContextNavigation.html'>Navigation</a></li>				
+<li><a href='Objects.html'>Objects</a></li>
+<li><a href='SystemRequirements.html'>Requirements</a></li>
+<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+			</ul>
+		</div> <!-- sidebar -->
+
+		<div id="content">
+		<h2>Bug Database</h2>
+		<p>There is an online and active bug database:</p>
+		<p><a href="http://ntrq.lighthouseapp.com/projects/63135/home
+		">Pulsar Bug Database</a></p>
+		<p>Please register (it's free and simple to do) and submit a ticket there if you think you've found a bug. You can attach files to the bugs too where appropriate so it's quite a handy little setup. Also it would be handy if you could attempt to use the tagging feature as this often help to cut down duplicate bugs (you can search for tickets based on their tags).</p>
+		<p>I monitor the database regularly so it's much better than emailing me or posting bugs to forums.</p>
+		<br ><hr /><br />
+		<h2>Quirks and Known Bugs</h2>
+		<p>This is just a collection of information for any strange or experimental
+		behaviour. As such, they might get changed, removed or fixed(!) in subsequent
+		releases of Pulsar so don't rely on them unless I move them to the main part
+		of the manual.</p>
+		<br />
+		<h5>Using Pitch Slide Command (<code>Lxx</code>) in Tables</h5>
+		<p>This works but is a bit weird. What happens is that the destination note for
+		    the slide is calculated from the current note PLUS the Pitch Offset
+		    on the step of the Table where the Slide Command is placed e.g.</p>
+		
+			<div class="postTable">
+		    <p><code>0F 0C L08 -00</code></p>
+			</div>
+			
+		    <p>would slide to a note that is an octave (<code>0C</code> semitones) above the note in the Pattern with a speed of <code>08</code>.</p>
+		    
+		    <p>You can also have multiple Slide commands in a table but the results
+		    will be very unpredictable.</p>
+		<br />
+		    
+		<h5>Playing Individual Patterns That Are Transposed in Chain</h5>
+		<p>Normally the Transpose value for a Pattern is obtained from a Chain
+		    but despite the Transpose value being reset to 0 when the editor
+		    is initialised, an indeterminate value for Transpose will be set
+		    if you haven't first played the Song or a Chain before playing a
+		    Pattern (starting playback from within the Pattern editor).</p>
+		<br />
+		    
+		<h5>Editing Notes After Reset/Boot-up Before Song Has Been Played</h5>
+		<p>The Instrument sound for Tracks A, B, C and D will have been 'reset'
+		    so only a very basic sound will be played. For the sample channel,
+		    Track E, all notes will play the first sample (sample number 00).
+		    This will persist until an Instrument has been set on each Track 
+		    (by playing the Song) at which point the <em>prelisten</em> sound should
+		    reflect the Instrument settings on each Track.</p>
+		<br />
+		    
+		 <h5>Tables For Track E (DCM)</h5>
+		 <p>It is possible to use the <em>Run Table</em> command (<code>Axx</code>) on Track E though it has limited use. The biggest difference is that the function of the <code>VL</code> and <code>PT</code> columns are mapped to different functions:</p>
+		 <ul>
+		 	<li>the <code>VL</code> column of the Table is used to specify the sample playback speed</li>
+		 	<li>the <code>PT</code> column of the Table is usd to specify a sample number</li>
+		 </ul>
+		 <p>The other quirk with using Tables on Track E is that samples will be
+		     retriggered on every step of the Table. This is because changing any
+		     sample playback parameters (in the NES's hardware registers) has no
+		     effect until you trigger a sample again.</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

@@ -1,0 +1,316 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+
+body {
+	font-family: sans-serif;
+	font-size: 14px;
+	padding: 0;
+	margin: 20px 20px 20px 20px;
+	min-width: 760px;
+}
+
+
+#content p {
+	padding: 4px 0px 4px 0px;
+}
+
+h1,h2,h3,h4,h5 {
+	font-weight: bold;
+}
+
+a {
+color: inherit; 
+font-weight: normal; 
+text-decoration: none;
+}
+
+
+h1 {font-size: 1.2em;padding:20px 0px 20px 0px}
+h2 {font-size: 1.15em;padding-bottom:10px}
+h3 {font-size: 1.15em;padding-bottom:5px;font-style:bold}
+h4 {font-size: 1.03em;padding-bottom:10px}
+h5 {font-size: 1.01em;padding-top:20px;font-style: italic;padding-bottom:10px}
+
+ul {
+	list-style: square;
+	margin: 10px 0px 10px 20px;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+hr {
+	border: none;
+	height: 1px;
+}
+
+bold {
+	font-style: normal;
+	font-weight: normal;
+}
+
+table {
+	margin: 0;
+	padding: 0;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 0.98em;
+	
+}
+
+td {
+	text-align: left;
+	vertical-align: top;
+	padding: 2px;
+	
+}
+
+code {font-family: monospace;font-size: 1em}
+
+#header
+{
+	position: relative;
+	height: 60px;
+	width: 100%;
+	padding-bottom: 20px;
+}
+
+#container
+{
+}
+
+#content
+{
+	float: left;
+	width: 580px;
+}
+
+#footer {
+	padding-top: 20px;
+	width: 100%;
+	height: 50px;
+}
+
+#sidebar
+{
+	//clear: both;
+	float: left;
+	width: 130px;
+	padding-right: 10px;
+}
+
+
+#sidebar ul {
+	margin: -2px 0px 0px 0px;
+	list-style: none;
+}
+
+#sidebar ul li {
+	margin: 3px 0px 3px 0px;
+	color: inherit;
+}
+
+#sidebar ul li a {
+	border: 0;
+	margin: 1px 0px 1px 0px;
+	text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+	font-weight: normal;
+}
+
+#sidebar ul ul {
+	margin-left: 10px;
+	font-size: 95%;
+}
+
+.controls em {
+	white-space: nowrap;
+	font-family: Courier, monospace;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.controls  {
+	margin: 10px 0px 10px 0px;
+}
+
+
+.controls td, th {
+	padding: 5px 10px 5px 10px;
+}
+
+.controls th {
+	//color: #4D5037;
+	text-align: left;
+}
+
+.controls td {
+	vertical-align: top;
+}
+
+.controls .leftColumn {
+	font-style: italic;
+	width: 260px;
+}
+
+.controls .rightColumn {
+	font-style: normal;
+}
+
+
+.navigation em {
+	white-space: nowrap;
+	font-family: Courier, monospace;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.navigation  {
+	margin: 10px 0px 10px 0px;
+}
+
+
+.navigation td, th {
+	padding: 5px 10px 5px 10px;
+}
+
+.navigation th {
+	text-align: left;
+}
+
+.navigation td {
+	vertical-align: top;
+}
+
+.navigation .leftColumn {
+	font-style: italic;
+	width: 160px;
+}
+
+.navigation .rightColumn {
+	font-style: normal;
+}
+
+
+#headerTitle {
+	display: block;
+	overflow: hidden;
+	float: left;
+	margin-top: 20px;
+	font-size: 1.4em;
+	font-weight: bold;
+	width: 550px;
+}
+
+#footerCopyright {
+	font-family: Verdana;
+	float: right;
+	overflow: hidden;
+	font-size: 0.85em;
+	margin: 10px 10px 10px 0px;
+}
+
+.clearFix {
+	float: none;
+	clear: both;
+}
+
+.centerImage {
+	margin-left: -20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+}
+
+.centerImage img {
+	outline: 1px solid #000;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.notes {
+	margin: 0px 10px 0px 10px;
+	padding-bottom: 10px;
+}
+
+.notes sup, .controls sup, .navigation sup {
+	font-style: normal;
+}
+
+.postTable {
+	font-size: 0.99em;
+	margin: 0px 10px 0px 10px;
+}
+
+.dataExample {
+	background-color: black;
+	padding: 0px;
+	font-family: monospace;
+	font-size: 1em;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px 10px 10px 10px;
+}
+
+.dataExample .data em {
+	font-style: normal;
+}
+.dataExample .data {
+	margin: 0px;
+	padding: 0px;
+	width: inherit;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table ul {
+	list-style: square;
+	margin-left: 10px;
+}
+
+table li {
+	margin-bottom: 10px;
+}
+
+/*
+.commandTable {
+	border: 2px;
+}
+*/
+
+.commandTable td, th {
+	padding: 5px 10px 5px 10px;
+}
+
+.commandTable th {
+	white-space: nowrap;
+	text-align: left;
+	border: 0;
+	border-left: 1px;
+}
+
+.commandTable th:first-child {
+	font-size: 110%;
+	font-weight: bold;
+	border-left: 0;
+}
+
+.commandTable ul {
+	margin: 10px 0px 0px 20px;
+}
+
+.plainTable tr td {
+	padding: 1px;
+	margin: 0;
+}

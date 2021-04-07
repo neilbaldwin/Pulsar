@@ -1,0 +1,365 @@
+ca65 V2.13.2 - (C) Copyright 1998-2005 Ullrich von Bassewitz
+Main file   : pulsar_zp.asm
+Current file: pulsar_zp.asm
+
+000000r 1               ;---------------------------------------------------------------
+000000r 1               ; ZP RAM
+000000r 1               ;---------------------------------------------------------------
+000000r 1               		.include "pulsar.h"
+000000r 2               		.include "nes_audio.h"
+000000r 3               ;---------------------------------------------------------------
+000000r 3               ; NES Audio Registers
+000000r 3               ;---------------------------------------------------------------
+000000r 3               
+000000r 3               APU	= $4000
+000000r 3               APU_00	= $4000
+000000r 3               APU_01	= $4001
+000000r 3               APU_02	= $4002
+000000r 3               APU_03	= $4003
+000000r 3               
+000000r 3               APU_04	= $4004
+000000r 3               APU_05	= $4005
+000000r 3               APU_06	= $4006
+000000r 3               APU_07	= $4007
+000000r 3               
+000000r 3               APU_08	= $4008
+000000r 3               APU_09	= $4009
+000000r 3               APU_0A	= $400A
+000000r 3               APU_0B	= $400B
+000000r 3               
+000000r 3               APU_0C	= $400C
+000000r 3               APU_0D	= $400D
+000000r 3               APU_0E	= $400E
+000000r 3               APU_0F	= $400F
+000000r 3               
+000000r 3               APU_10	= $4010
+000000r 3               APU_11	= $4011
+000000r 3               APU_12	= $4012
+000000r 3               APU_13	= $4013
+000000r 3               
+000000r 3               APU_14	= $4014
+000000r 3               APU_15	= $4015
+000000r 3               
+000000r 3               ;Not really APU
+000000r 3               APU_16	= $4016
+000000r 3               APU_17	= $4017
+000000r 3               
+000000r 2               
+000000r 2               .export SCREEN		= $2000
+000000r 2               .export PPU0		= $2000
+000000r 2               .export PPU1		= $2001
+000000r 2               .export PPU_STATUS		= $2002
+000000r 2               
+000000r 2               CHR_RAM_0			= $0000
+000000r 2               CHR_RAM_1			= $1000
+000000r 2               
+000000r 2               
+000000r 2               ENABLE_ECHO = 0
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; ROM LAYOUT
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               BANK_EDITOR0 		= $00
+000000r 2               BANK_EDITOR1		= $01
+000000r 2               BANK_ENGINE		= $05
+000000r 2               BANK_FONT			= $02
+000000r 2               BANK_SCREEN		= $03
+000000r 2               BANK_HINTS		= $04
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SPECIAL CHARS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               CHR_SPACE			= $FF
+000000r 2               CHR_EMPTY			= $25
+000000r 2               CHR_SHARP			= $26
+000000r 2               CHR_Y			= $22
+000000r 2               CHR_N			= $17
+000000r 2               CHR_DUTY_00		= $27
+000000r 2               CHR_DUTY_40		= $29
+000000r 2               CHR_DUTY_80		= $2B
+000000r 2               CHR_DUTY_C0		= $2D
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SPRITE CONSTANTS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               SPR_RIGHT_ARROW		= $06
+000000r 2               SPR_LEFT_ARROW		= $07
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; EDITOR CONSTANTS
+000000r 2               ;---------------------------------------------------------------
+000000r 2               EDIT_MODE_SONG		= 0
+000000r 2               EDIT_MODE_CHAIN		= 1
+000000r 2               EDIT_MODE_PATTERN		= 2
+000000r 2               EDIT_MODE_INSTRUMENT	= 3
+000000r 2               EDIT_MODE_DRUMKIT		= 4
+000000r 2               EDIT_MODE_ENVELOPE_TABLE	= 5
+000000r 2               EDIT_MODE_PITCH_TABLE	= 6
+000000r 2               EDIT_MODE_VIBRATO_TABLE	= 7
+000000r 2               EDIT_MODE_DUTY_TABLE	= 8
+000000r 2               EDIT_MODE_ECHO_TABLE	= 9
+000000r 2               EDIT_MODE_SPEED_TABLE	= 10
+000000r 2               EDIT_MODE_NAV_MENU		= 11
+000000r 2               EDIT_MODE_SETUP		= 12
+000000r 2               
+000000r 2               CHAIN_COLUMN_PATTERN	= 0
+000000r 2               CHAIN_COLUMN_TRANSPOSE	= 1
+000000r 2               
+000000r 2               PATTERN_COLUMN_NOTE		= 0
+000000r 2               PATTERN_COLUMN_INSTRUMENT	= 1
+000000r 2               PATTERN_COLUMN_COMMAND	= 2
+000000r 2               PATTERN_COLUMN_COMMAND_DATA	= 3
+000000r 2               
+000000r 2               INSTRUMENT_ROW_ENVELOPE	= 0
+000000r 2               INSTRUMENT_ROW_LEVEL	= 1
+000000r 2               INSTRUMENT_ROW_GATE		= 2
+000000r 2               INSTRUMENT_ROW_DUTY		= 3
+000000r 2               INSTRUMENT_ROW_TABLE	= 4
+000000r 2               INSTRUMENT_ROW_SWEEP	= 5
+000000r 2               INSTRUMENT_ROW_SWEEPQ	= 6
+000000r 2               INSTRUMENT_ROW_VIBRATO	= 7
+000000r 2               INSTRUMENT_ROW_DETUNE	= 8
+000000r 2               INSTRUMENT_ROW_HARDFREQ	= 9
+000000r 2               INSTRUMENT_ROW_ECHO		= 10
+000000r 2               INSTRUMENT_ROW_AUX		= 11
+000000r 2               
+000000r 2               
+000000r 2               DRUMKIT_COLUMN_SAMPLE	= 0
+000000r 2               DRUMKIT_COLUMN_PITCH	= 1
+000000r 2               DRUMKIT_COLUMN_START_OFFSET	= 2
+000000r 2               DRUMKIT_COLUMN_END_OFFSET	= 3
+000000r 2               DRUMKIT_COLUMN_LOOP		= 4
+000000r 2               DRUMKIT_COLUMN_ROOT		= 5
+000000r 2               
+000000r 2               ENVELOPE_COLUMN_ATTACK	= 0
+000000r 2               ENVELOPE_COLUMN_DECAY	= 1
+000000r 2               ENVELOPE_COLUMN_SUSTAIN	= 2
+000000r 2               ENVELOPE_COLUMN_RELEASE	= 3
+000000r 2               
+000000r 2               TABLE_COLUMN_VOLUME		= 0
+000000r 2               TABLE_COLUMN_PITCH		= 1
+000000r 2               TABLE_COLUMN_FX1		= 2
+000000r 2               TABLE_COLUMN_FX1_DATA	= 3
+000000r 2               TABLE_COLUMN_FX2		= 4
+000000r 2               TABLE_COLUMN_FX2_DATA	= 5
+000000r 2               
+000000r 2               VIBRATO_COLUMN_SPEED	= 0
+000000r 2               VIBRATO_COLUMN_DEPTH	= 1
+000000r 2               VIBRATO_COLUMN_ACCELERATE	= 2
+000000r 2               VIBRATO_COLUMN_DELAY	= 3
+000000r 2               
+000000r 2               DUTY_COLUMN_DUTY		= 0
+000000r 2               DUTY_COLUMN_DELAY		= 1
+000000r 2               DUTY_COLUMN_JUMP		= 2
+000000r 2               
+000000r 2               ECHO_COLUMN_SPEED		= 0
+000000r 2               ECHO_COLUMN_LEVEL		= 1
+000000r 2               ECHO_COLUMN_ATTENUATION	= 2
+000000r 2               
+000000r 2               COMMAND_A		= 0
+000000r 2               COMMAND_B		= 1
+000000r 2               COMMAND_C		= 2
+000000r 2               COMMAND_D		= 3
+000000r 2               COMMAND_E		= 4
+000000r 2               COMMAND_F		= 5
+000000r 2               COMMAND_G		= 6
+000000r 2               COMMAND_H		= 7
+000000r 2               COMMAND_I		= 8
+000000r 2               COMMAND_J		= 9
+000000r 2               COMMAND_K		= 10
+000000r 2               COMMAND_L		= 11
+000000r 2               COMMAND_M		= 12
+000000r 2               COMMAND_N		= 13
+000000r 2               COMMAND_O		= 14
+000000r 2               COMMAND_P		= 15
+000000r 2               COMMAND_Q		= 16
+000000r 2               COMMAND_R		= 17
+000000r 2               COMMAND_S		= 18
+000000r 2               COMMAND_T		= 19
+000000r 2               COMMAND_U		= 20
+000000r 2               COMMAND_V		= 21
+000000r 2               COMMAND_W		= 22
+000000r 2               COMMAND_X		= 23
+000000r 2               COMMAND_Y		= 24
+000000r 2               COMMAND_Z		= 25
+000000r 2               
+000000r 2               
+000000r 2               editorModes		= 12
+000000r 2               
+000000r 2               KEYS_DOUBLE_TAP_SPEED	= $06
+000000r 2               KEYS_REPEAT_DELAY	= $06
+000000r 2               KEYS_REPEAT_SPEED	= $00
+000000r 2               
+000000r 2               songModeColumns	= 5
+000000r 2               chainModeColumns	= 2
+000000r 2               patternModeColumns	= 4
+000000r 2               instrumentModeColumns	= 1
+000000r 2               drumkitModeColumns	= 5
+000000r 2               tableModeColumns	= 6
+000000r 2               envelopeModeColumns	= 4
+000000r 2               vibratoModeColumns	= 4
+000000r 2               dutyModeColumns	= 3
+000000r 2               echoModeColumns	= 3
+000000r 2               speedModeColumns	= 1
+000000r 2               navModeColumns	= 1
+000000r 2               setupModeColumns	= 1
+000000r 2               
+000000r 2               songModeRows	= 16
+000000r 2               chainModeRows	= 16
+000000r 2               patternModeRows	= 16
+000000r 2               instrumentModeRows	= 12
+000000r 2               drumkitModeRows	= 14
+000000r 2               tableModeRows	= 16
+000000r 2               envelopeModeRows	= 16
+000000r 2               vibratoModeRows	= 16
+000000r 2               dutyModeRows	= 16
+000000r 2               echoModeRows	= 16
+000000r 2               speedModeRows	= 16
+000000r 2               navModeRows		= 12
+000000r 2               setupModeRows	= 16
+000000r 2               
+000000r 2               SONG_TRACK_A	= 0
+000000r 2               SONG_TRACK_B	= 1
+000000r 2               SONG_TRACK_C	= 2
+000000r 2               SONG_TRACK_D	= 3
+000000r 2               SONG_TRACK_E	= 4
+000000r 2               
+000000r 2               ;---------------------------------------------------------------
+000000r 2               ; SRAM MAP FOR 8KB
+000000r 2               ;---------------------------------------------------------------
+000000r 2               
+000000r 2               NUMBER_OF_NOTES	= 7*12
+000000r 2               MAX_NUMBER_OF_SAMPLES	= $40
+000000r 2               
+000000r 2               SIZE_OF_HEADER		= $10
+000000r 2               
+000000r 2               TRACKS_PER_SONG		= $05
+000000r 2               STEPS_PER_TRACK		= $40
+000000r 2               
+000000r 2               NUMBER_OF_CHAINS		= $20
+000000r 2               STEPS_PER_CHAIN		= $10
+000000r 2               BYTES_PER_CHAIN_STEP	= $02
+000000r 2               
+000000r 2               NUMBER_OF_PATTERNS		= $20
+000000r 2               STEPS_PER_PATTERN		= $10
+000000r 2               BYTES_PER_PATTERN_STEP	= $04
+000000r 2               
+000000r 2               NUMBER_OF_INSTRUMENTS	= $20
+000000r 2               STEPS_PER_INSTRUMENT	= $0C
+000000r 2               BYTES_PER_INSTRUMENT_STEP	= $01
+000000r 2               
+000000r 2               NUMBER_OF_DRUMKITS		= $02
+000000r 2               STEPS_PER_DRUMKIT		= $0C
+000000r 2               BYTES_PER_DRUMKIT_STEP	= $05
+000000r 2               
+000000r 2               NUMBER_OF_ENVELOPES		= $20
+000000r 2               BYTES_PER_ENVELOPE		= $04
+000000r 2               
+000000r 2               NUMBER_OF_TABLES		= $10
+000000r 2               STEPS_PER_TABLE		= $10
+000000r 2               BYTES_PER_TABLE_STEP	= $06
+000000r 2               
+000000r 2               NUMBER_OF_VIBRATOS		= $10
+000000r 2               BYTES_PER_VIBRATO		= $04
+000000r 2               
+000000r 2               NUMBER_OF_DUTY_TABLES	= $10
+000000r 2               STEPS_PER_DUTY_TABLE	= $10
+000000r 2               BYTES_PER_DUTY_TABLE_STEP	= $03
+000000r 2               
+000000r 2               NUMBER_OF_ECHOES		= $10
+000000r 2               BYTES_PER_ECHO		= $03
+000000r 2               
+000000r 2               NUMBER_OF_SPEED_TABLES	= $10
+000000r 2               STEPS_PER_SPEED_TABLE	= $10
+000000r 2               BYTES_PER_SPEED_TABLE_STEP	= $01
+000000r 2               
+000000r 2               
+000000r 1               .segment		"ZEROPAGE"
+000000r 1               
+000000r 1  xx           currentBank:	.RES 1
+000001r 1  xx           vblankFlag:	.RES 1
+000002r 1  xx           vblankFlagOld:	.RES 1
+000003r 1  xx           vblankOverflow:	.RES 1
+000004r 1  xx           dmaCycleFlag:	.RES 1
+000005r 1               
+000005r 1  xx           tmp0:		.RES 1
+000006r 1  xx           tmp1:		.RES 1
+000007r 1  xx           tmp2:		.RES 1
+000008r 1  xx           tmp3:		.RES 1
+000009r 1               
+000009r 1  xx           engineTmp0:	.RES 1
+00000Ar 1  xx           engineTmp1:	.RES 1
+00000Br 1  xx           engineTmp2:	.RES 1
+00000Cr 1  xx           engineTmp3:	.RES 1
+00000Dr 1               
+00000Dr 1  xx xx        PAD1_jt:		.RES 2
+00000Fr 1               
+00000Fr 1  xx           PAD1_lr:		.RES 1
+000010r 1  xx           PAD1_ud:		.RES 1
+000011r 1  xx           PAD1_str:		.RES 1
+000012r 1  xx           PAD1_sel:		.RES 1
+000013r 1  xx           PAD1_fireb:	.RES 1
+000014r 1  xx           PAD1_firea:	.RES 1
+000015r 1               
+000015r 1  xx xx xx xx  PAD1_oldlr:	.RES 6
+000019r 1  xx xx        
+00001Br 1               
+00001Br 1  xx           PAD1_dlr:		.RES 1
+00001Cr 1  xx           PAD1_dud:		.RES 1
+00001Dr 1  xx           PAD1_dsta:	.RES 1
+00001Er 1  xx           PAD1_dsel:	.RES 1
+00001Fr 1  xx           PAD1_dfireb:	.RES 1
+000020r 1  xx           PAD1_dfirea:	.RES 1
+000021r 1               
+000021r 1               
+000021r 1               
+000021r 1  xx xx        screenVector:	.RES 2
+000023r 1  xx xx        editorVector:	.RES 2
+000025r 1  xx xx        trackVector:	.RES 2
+000027r 1  xx xx        chainVector:	.RES 2
+000029r 1  xx xx        patternVector:	.RES 2
+00002Br 1  xx xx        instrumentVector:	.RES 2
+00002Dr 1  xx xx        drumkitVector:	.RES 2
+00002Fr 1  xx xx        tableVector:	.RES 2
+000031r 1  xx xx        vibratoVector:	.RES 2
+000033r 1  xx xx        dutyVector:		.RES 2
+000035r 1  xx xx        echoVector:		.RES 2
+000037r 1  xx xx        speedVector:	.RES 2
+000039r 1               
+000039r 1  xx xx        plyrEnvelopeVector:	.RES 2
+00003Br 1  xx xx xx xx  plyrChainVector:	.RES 5*2
+00003Fr 1  xx xx xx xx  
+000043r 1  xx xx        
+000045r 1  xx xx xx xx  plyrPatternVector:	.RES 5*2
+000049r 1  xx xx xx xx  
+00004Dr 1  xx xx        
+00004Fr 1  xx xx xx xx  plyrInstrumentVector:	.RES 5*2
+000053r 1  xx xx xx xx  
+000057r 1  xx xx        
+000059r 1  xx xx        plyrDutyVector:	.RES 2
+00005Br 1  xx xx        plyrTableVector:	.RES 2
+00005Dr 1  xx xx        plyrSpeedVector:	.RES 2
+00005Fr 1               
+00005Fr 1  xx xx        copyBufferVector:	.RES 2
+000061r 1               
+000061r 1  xx           lfsr:		.RES 1
+000062r 1               
+000062r 1  xx           old666A:		.RES 1
+000063r 1               
+000063r 1               
+000063r 1               .export currentBank,vblankFlag,vblankFlagOld,vblankOverflow,dmaCycleFlag
+000063r 1               .export tmp0,tmp1,tmp2,tmp3
+000063r 1               .export engineTmp0,engineTmp1,engineTmp2,engineTmp3
+000063r 1               .export PAD1_jt,PAD1_lr,PAD1_ud,PAD1_str,PAD1_sel,PAD1_firea,PAD1_fireb
+000063r 1               .export PAD1_oldlr
+000063r 1               .export PAD1_dlr,PAD1_dud,PAD1_dsta,PAD1_dsel,PAD1_dfirea,PAD1_dfireb
+000063r 1               .export screenVector,editorVector,trackVector,chainVector,patternVector
+000063r 1               .export instrumentVector,drumkitVector,tableVector,vibratoVector
+000063r 1               .export dutyVector,echoVector,speedVector
+000063r 1               .export plyrEnvelopeVector,plyrChainVector,plyrPatternVector,plyrInstrumentVector
+000063r 1               .export plyrDutyVector,plyrTableVector,plyrSpeedVector
+000063r 1               .export copyBufferVector
+000063r 1               .export lfsr
+000063r 1               

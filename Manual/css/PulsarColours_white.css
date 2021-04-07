@@ -1,0 +1,90 @@
+/*-------------------------------------------------------------------*/
+/* Colours */
+/*-------------------------------------------------------------------*/
+
+/* Green & Yellow
+
+/* 4D5037 = mid green
+/* 5D5047 = brighter green
+/* 3D4027 = dark green
+
+/* FFB500 = mid yellow text
+
+/* E9D5A4 = pale yellow text
+/* F9E5B4 = pale yellow text highlighted
+
+/* 897544 = darker yellow for link underline
+
+/*-------------------------------------------------------------------*/
+
+#headerLogo {
+	background: url("../images/logo_red.png") top left no-repeat;
+	background-position: 0px 10px;
+	display: block;
+	overflow: hidden;
+	float: left;
+	height: 40px;
+	width: 140px;
+	padding: 10px 0px 10px 0px;
+}
+
+body {
+	background-color: #FFFFFF;
+}
+
+.commandTable th {
+	border-left: 1px solid #FFFFFF;	
+}
+
+#sidebar ul li:hover {
+	background-color: #CCCCCC;
+}
+
+hr, .controls th, .navigation th, .commandTable th {
+	background-color: #999999;
+}
+
+.controls td, th, .navigation td, th, .dataExample, .commandTable {
+	border: 1px solid #555555;	
+}
+
+body, code, #footerCopyright, .commandTable th {
+	color: #333;	
+}
+
+.dataExample {
+	color: #999999;
+}
+
+.dataExample em
+{
+	color:  #CCCCCC;
+}
+
+a {
+	border-bottom: 1px solid #999999;	
+}
+
+a:hover {
+	border-bottom: 1px solid #333333;
+}
+
+a:hover, #sidebar ul li a:hover, {
+	color: #000000;
+}
+
+a:hover
+{
+	background-color: #CCCCCC;
+}
+
+h1 {
+	color: #000;
+}
+h2, h3, h4,bold,#sidebar,.controls em,.controls th, .controls th a, .navigation em,.navigation th, .notes sup, .controls sup, .navigation sup,.commandTable th:first-child {
+	color: #000000;	
+}
+
+#headerTitle {
+	color: #000000;
+}

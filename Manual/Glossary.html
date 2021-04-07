@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+		<div id="sidebar">
+			<ul>
+				<li><a href="Pulsar.html">Home</a></li>
+				<li><a href="ScreenLayout.html">Screen Layout</a></li>
+				<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+				<li><a href='ControlsOverview.html'>Controls</a></li>
+				<li><a href='CommandOverview.html'>Commands</a></li>
+				<li><a href='ContextNavigation.html'>Navigation</a></li>				
+				<li><a href='Objects.html'>Objects</a></li>
+				<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+			</ul>
+		</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h3>Glossary: Terminology</h3>
+<table>
+	<colgroup width="20%"/>
+	<colgroup />
+	<tr><td><h5>A</h4></td><td></td></tr>
+	<tr><td><bold><em>ADSR</em></bold></td><td>stands for 'Attack Decay Sustain Release' and describes a type of envelope. <a href="Page_Envelope.html">ADSR Envelopes</a> are used in Pulsar to shape the amplitude of Tracks A, B &amp; D</td></tr>
+	<tr><td><bold><em>Arpeggio</em></bold></td><td>(generally) notes of a chord repeated in quick succession, often looped</td></tr>
+	<tr><td><h5>B</h4></td><td></td></tr>
+	<tr><td><bold><em>BPM</em></bold></td><td>stands for 'beats per minute'. Often used in sequencers/recording devices to describe the tempo/speed of a track or song.</td></tr>
+	<tr><td><h5>C</h4></td><td></td></tr>
+	<tr><td><bold><em>Chain</em></bold></td><td>sequence of Pattern numbers</td></tr>
+	<tr><td><h5>D</h4></td><td></td></tr>
+	<tr><td><bold><em>Duty</em></bold></td><td>pulse width setting for Track A &amp; B</td></tr>
+	<tr><td><h5>F</h4></td><td></td></tr>
+	<tr><td><bold><em>Frame</em></bold></td><td>Steps are divided into ticks, the number of ticks depending on Song Speed, Table Speed etc. Sometimes known as a 'tick'</td></tr>
+	<tr><td><h5>M</h4></td><td></td></tr>
+	<tr><td><bold><em>MultiFX</em></bold></td><td>a multi-voice Table</td></tr>
+	<tr><td><h5>P</h4></td><td></td></tr>
+	<tr><td><bold><em>Pattern</em></bold></td><td>sequence of notes and commands</td></tr>
+	<tr><td><h5>S</h4></td><td></td></tr>
+	<tr><td><bold><em>Step</em></bold></td><td>one row of a Song, Chain, Pattern, Table etc.</td></tr>
+	<tr><td><h5>T</h4></td><td></td></tr>
+	<tr><td><bold><em>Table</em></bold></td><td>sequence of pitch, volume and Commands</td></tr>
+	<tr><td><bold><em>Tick</em></bold></td><td>Steps are divided into ticks, the number of ticks depending on Song Speed, Table Speed etc. Sometimes known as a 'frame' which refers to the refresh speed of the audio engine happening once per video refresh (60hz for NTSC, 50hz for PAL)</td></tr>
+	<tr><td><h5>V</h4></td><td></td></tr>
+	<tr><td><bold><em>VU Meter</em></bold></td><td>stands for Volume Unit meter. Often seen on mixing desks to show you the real-time level of each channel</td></tr>
+	<tr><td><h5>U</h4></td><td></td></tr>
+	<tr><td><bold><em>UI</em></bold></td><td>stands for User Interface. Often used as GUI which means 'graphical user interface' but as Pulsar's interface doesn't really contain any graphics, I describe it as just 'UI'</td></tr>
+</table>
+<br /><hr /><br />
+<h3 id="hexadecimal">Glossary: Hexadecimal and Binary Numbers</h3>
+<p>Hexadecimal is a base-16 number system (decimal is base-10) so each single digit goes from 0 to 15. Digits 10 to 15 are represented by the letters A to F.</p>
+<h5>Binary</h5>
+<p>Binary is a base-2 number system where each digit can either be <code>0</code> or <code>1</code>. From right-to-left the digits represent 2 to the power of 0 to 7, that is 2, 4, 8, 16, 32, 64 and 128.</p>
+<br />
+<table class="controls" style="width:50%; margin-left:auto; margin-right:auto">
+	<thead>
+		<th>Decimal</th><th>Hexadecimal</th><th>Binary</th>
+	</thead>
+	<tr><td>0</td><td>00</td><td>00000000</td></tr>
+	<tr><td>1</td><td>01</td><td>00000001</td></tr>
+	<tr><td>2</td><td>02</td><td>00000010</td></tr>
+	<tr><td>3</td><td>03</td><td>00000011</td></tr>
+	<tr><td>4</td><td>04</td><td>00000100</td></tr>
+	<tr><td>5</td><td>05</td><td>00000101</td></tr>
+	<tr><td>6</td><td>06</td><td>00000110</td></tr>
+	<tr><td>7</td><td>07</td><td>00000111</td></tr>
+	<tr><td>8</td><td>08</td><td>00001000</td></tr>
+	<tr><td>9</td><td>09</td><td>00001001</td></tr>
+	<tr><td>10</td><td>0A</td><td>00001010</td></tr>
+	<tr><td>11</td><td>0B</td><td>00001011</td></tr>
+	<tr><td>12</td><td>0C</td><td>00001100</td></tr>
+	<tr><td>13</td><td>0D</td><td>00001101</td></tr>
+	<tr><td>14</td><td>0E</td><td>00001110</td></tr>
+	<tr><td>15</td><td>0F</td><td>00001111</td></tr>
+	<tr><td>16</td><td>10</td><td>00010000</td></tr>
+	<tr><td>17</td><td>11</td><td>00010001</td></tr>
+	<tr><td>18</td><td>12</td><td>00010010</td></tr>
+	<tr><td>19</td><td>13</td><td>00010011</td></tr>
+</table>
+
+<p> ...and so on until:</p>
+
+<table class="controls" style="width:50%; margin-left:auto; margin-right:auto">
+	<thead>
+		<th>Decimal</th><th>Hexadecimal</th><th>Binary</th>
+	</thead>
+	<tr><td>253</td><td>FD</td><td>11111101</td></tr>
+	<tr><td>254</td><td>FE</td><td>11111110</td></tr>
+	<tr><td>255</td><td>FF</td><td>11111111</td></tr>
+</table>
+
+<p>As you can see, the highest <em>unsigned</em> number in 8-bits is 255 (or FF or 11111111).</p>
+
+<p>The most common way to represent <em>signed</em> numbers is using "Two's Complement".</p>
+
+<br />
+<h3 id="2scomplement">Glossary: Two's Complement (8-bit signed numbers)</h3>
+<p><em>Two's Complement</em> is used to represent signed 8-bit numbers. The explanation of how this is achieved is not for this manual but here's a handy guide to get you started.</p>
+<table class="controls" style="width:50%; margin-left:auto; margin-right:auto">
+	<thead><th>Decimal</th><th>Two's Complement (Hex)</th></thead>
+	<tr><td>0 to 127</td><td>00 to 7F</td></tr>
+	<tr><td>-1 to -128</td><td>FF to 80</td></tr>
+</table>
+
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

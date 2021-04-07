@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Overview of Pattern &amp; Table Commands</h2>
+		<p>This page is intended as an overview of the Commands available to use in Patterns and Tables. Many of these will be familiar to LSDJ users as generally, where appropriate, I've tried to match the command letter to the same/similar function that appears in LSDJ. However, there are some that I've left out (where not 
+		appropriate) and others that I've added.</p>
+		<br/>
+		<h4>Commands For Tracks A to D</h4>
+		<table class="plainTable">
+			<colgroup width="8%"/>
+			<colgroup />
+			<tr>
+				<td><code><bold><a href="CommandsA-E.html#command_a">Axx</a></bold></code></td>
+				<td>run Table <code>xx</code></td>
+			</tr>
+			<tr><td><code><bold><a href="CommandsA-E.html#command_b">Bxx</a></bold></code></td><td>select Vibrato program <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsA-E.html#command_c">Cxy</a></bold></code></td><td>play arpeggio chord, <code>x</code> = 1st note, <code>y</code> = 2nd note</td></tr>
+			<tr><td><code><bold><a href="CommandsA-E.html#command_d">Dxx</a></bold></code></td><td>delay note by <code>xx</code> ticks</td></tr>
+			<tr><td><code><bold><a href="CommandsA-E.html#command_e">Exx</a></bold></code></td><td>select ADSR Envelope <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsF-J.html#command_f">Fxy</a></bold></code></td><td>play MultiFX, <code>x</code> = speed, <code>y</code> = MultiFX number</td></tr>
+			<tr><td><code><bold><a href="CommandsF-J.html#command_g">Gxx</a></bold></code></td><td>select Speed Table <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsF-J.html#command_h">Hxy</a></bold></code></td><td>random (pre) jump in Table/Pattern or terminate Pattern</td></tr>
+			<tr><td><code><bold><a href="CommandsF-J.html#command_i">Ixx</a></bold></code></td><td>set audio engine interval (number of times per frame that audio is refreshed)</td></tr>
+			<tr><td><code><bold><a href="CommandsF-J.html#command_j">Jxy</a></bold></code></td><td>random (post) jump in Table/Pattern or terminate Pattern</td></tr>
+			<tr><td><code><bold><a href="CommandsK-O.html#command_k">Kxx</a></bold></code></td><td>kill note after <code>xx</code> ticks</td></tr>
+			<tr><td><code><bold><a href="CommandsK-O.html#command_l">Lxx</a></bold></code></td><td>slide to note, speed <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsK-O.html#command_m">Mxx</a></bold></code></td><td>set Gate Time <code>xx</code> for note</td></tr>
+			<tr><td><code><bold><a href="CommandsK-O.html#command_n">Nxx</a></bold></code></td><td>set Hard Freq amount <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsK-O.html#command_o">Oxx</a></bold></code></td><td>scale output level of note</td></tr>
+			<tr><td><code><bold><a href="CommandsP-T.html#command_p">Pxx</a></bold></code></td><td>linear Pitch Sweep, <code>xx</code> = speed, <code>01</code> to <code>7F</code> for up, <code>80</code> to <code>FF</code> for down</td></tr>
+			<tr><td><code><bold><a href="CommandsP-T.html#command_q">Qxx</a></bold></code></td><td>set step resolution/speed for Pitch Sweep. Chord and Vibrato</td></tr>
+			<tr><td><code><bold><a href="CommandsP-T.html#command_r">Rxx</a></bold></code></td><td>retrigger note at speed <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsP-T.html#command_s">Sxx</a></bold></code></td><td>non-linear Pitch Sweep, <code>xx</code> = speed, <code>01</code> to <code>7F</code> for up, <code>80</code> to <code>FF</code> for down</td></tr>
+			<tr><td><code><bold><a href="CommandsP-T.html#command_t">Txx</a></bold></code></td><td>set fine tune (detune) of <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_u">Uxx</a></bold></code></td><td>set probability of note playing</td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_v">Vxx</a></bold></code></td><td></td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_w">Wxx</a></bold></code></td><td>set Duty or select Duty Table <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_x">Xxx</a></bold></td></code><td></td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_y">Yxx</a></bold></code></td><td>select Echo program <code>xx</code></td></tr>
+			<tr><td><code><bold><a href="CommandsU-Z.html#command_z">Zxx</a></bold></code></td><td>set Table speed, <code>xx</code></td></tr>
+		</table>
+		<br />
+		
+		<h4 id="tracke_commands">Commands For Tracks E (DCM)</h4>
+		<p>Some of the Commands are reused to provide unique functions for Track E only.</p>
+<table class="plainTable">
+	<colgroup width="8%"/>
+	<colgroup />
+	<tr><td><code><bold><a href="CommandsA-E.html#command_e">Exx</a></bold></code></td><td>set sample End Offset</td></tr>
+	<tr><td><code><bold><a href="CommandsK-O.html#command_l">Lxx</a></bold></code></td><td>set sample looping on/off, <code>00</code> = off</td></tr>
+	<tr><td><code><bold><a href="CommandsP-T.html#command_p">Pxx</a></bold></code></td><td>set playback speed of sample</td></tr>
+	<tr><td><code><bold><a href="CommandsP-T.html#command_s">Sxx</a></bold></code></td><td>set sample Start Offset</td></tr>
+</table>
+	
+
+		<br/>
+		<h5>Some Notes About Commands</h5>
+		<p>Something to bear in mind is that there is no range checking on the parameter 
+		value for any of the Commands. Please refer to the section 
+		"Command Details" for details on limits for each command.</p>
+		
+		<p>Having said that, it's not likely that you could cause anything to go (too) 
+		drastically wrong as although the editor will allow you to pretty much enter 
+		any value, there are some internal checks in place to  sensibly limit the 
+		parameters. This will manifest itself generally as values "wrapping around"
+		e.g if a parameter's range is 00 to 1F and you enter 2F, the value that gets 
+		sent to Pulsar's engine will likely be 0F. If you understand about binary 
+		operations on numbers this will make sense. If not, don't worry about it.</p>
+		
+		<p>Also, it might be apparent that some of the Commands don't apply to certain 
+		voices. For example, there is no Pitch Bend for Track D (noise). Pulsar 
+		ignores Commands where they are not appropriate.</p>
+		
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

@@ -1,0 +1,2190 @@
+Modules list:
+-------------
+pulsar_ram.o:
+    ZEROPAGE          Offs=000000  Size=0000B3  Align=00001  Fill=0000
+    RAM               Offs=000000  Size=00051B  Align=00001  Fill=0000
+    SRAM0             Offs=000000  Size=001720  Align=00010  Fill=0000
+    SRAM1             Offs=000000  Size=001CC0  Align=00001  Fill=0000
+    SRAM2             Offs=000000  Size=001FE8  Align=00001  Fill=0000
+    SRAM3             Offs=000000  Size=001FC0  Align=00001  Fill=0000
+ROM_00.o:
+    HEADER            Offs=000000  Size=000010  Align=00001  Fill=0000
+    CODE_00           Offs=000000  Size=003D3C  Align=00001  Fill=0000
+    RESET_00          Offs=000000  Size=00000E  Align=00001  Fill=0000
+ROM_01.o:
+    CODE_01           Offs=000000  Size=002D94  Align=00001  Fill=0000
+ROM_02.o:
+    CODE_02           Offs=000000  Size=002400  Align=00001  Fill=0000
+ROM_03.o:
+    CODE_03           Offs=000000  Size=000D5F  Align=00001  Fill=0000
+ROM_04.o:
+    CODE_04           Offs=000000  Size=000BA4  Align=00001  Fill=0000
+ROM_05.o:
+    CODE_05           Offs=000000  Size=003700  Align=00100  Fill=0000
+ROM_06.o:
+ROM_07.o:
+    CODE_FIXED        Offs=000000  Size=000A5D  Align=00001  Fill=0000
+    DPCM              Offs=000000  Size=0028CA  Align=00040  Fill=0000
+    RESET_FIXED       Offs=000000  Size=00000E  Align=00001  Fill=0000
+
+
+Segment list:
+-------------
+Name                   Start     End    Size  Align
+----------------------------------------------------
+HEADER                000000  00000F  000010  00001
+ZEROPAGE              000010  0000C2  0000B3  00001
+RAM                   000200  00071A  00051B  00001
+SRAM0                 006000  00771F  001720  00010
+SRAM1                 006000  007CBF  001CC0  00001
+SRAM2                 006000  007FE7  001FE8  00001
+SRAM3                 006000  007FBF  001FC0  00001
+CODE_00               008000  00BD3B  003D3C  00001
+CODE_01               008000  00AD93  002D94  00001
+CODE_02               008000  00A3FF  002400  00001
+CODE_03               008000  008D5E  000D5F  00001
+CODE_04               008000  008BA3  000BA4  00001
+CODE_05               008000  00B6FF  003700  00100
+CODE_FIXED            00C000  00CA5C  000A5D  00001
+DPCM                  00CC00  00F4C9  0028CA  00040
+RESET_00              00FFF2  00FFFF  00000E  00001
+RESET_FIXED           00FFF2  00FFFF  00000E  00001
+
+
+Exports list by name:
+---------------------
+ClrBits                   00C587 RLA    DO_NOT_INTERRUPT          000010 RLZ    
+IRQ                       00C266 RLA    NMI                       00C1F9 RLA    
+PAD1_dlr                  00002F RLZ    PAD1_dsta                 000031 RLZ    
+PAD1_dud                  000030 RLZ    PAD1_firea                000028 RLZ    
+PAD1_firea_old            000376 RLA    PAD1_fireb                000027 RLZ    
+PAD1_fireb_old            000377 RLA    PAD1_jt                   000021 RLZ    
+PAD1_lr                   000023 RLZ    PAD1_oldlr                000029 RLZ    
+PAD1_sel                  000026 RLZ    PAD1_sel_old              000378 RLA    
+PAD1_ud                   000024 RLZ    RESET                     00C000 RLA    
+SPR00_ATTR                000202 RLA    SPR00_CHAR                000201 RLA    
+SPR00_X                   000203 RLA    SPR00_Y                   000200 RLA    
+SPR01_ATTR                000206 RLA    SPR01_CHAR                000205 RLA    
+SPR01_X                   000207 RLA    SPR01_Y                   000204 RLA    
+SPR03_ATTR                00020E RLA    SPR03_CHAR                00020D RLA    
+SPR03_X                   00020F RLA    SPR03_Y                   00020C RLA    
+SPR04_ATTR                000212 RLA    SPR04_CHAR                000211 RLA    
+SPR04_X                   000213 RLA    SPR04_Y                   000210 RLA    
+SPR05_ATTR                000216 RLA    SPR05_CHAR                000215 RLA    
+SPR05_X                   000217 RLA    SPR05_Y                   000214 RLA    
+SPR06_ATTR                00021A RLA    SPR06_CHAR                000219 RLA    
+SPR06_X                   00021B RLA    SPR06_Y                   000218 RLA    
+SPR07_ATTR                00021E RLA    SPR07_CHAR                00021D RLA    
+SPR08_ATTR                000222 RLA    SPR08_CHAR                000221 RLA    
+SPR09_ATTR                000226 RLA    SPR09_CHAR                000225 RLA    
+SPR0A_ATTR                00022A RLA    SPR0A_CHAR                000229 RLA    
+SPR0A_X                   00022B RLA    SPR0A_Y                   000228 RLA    
+SPR0B_ATTR                00022E RLA    SPR0B_CHAR                00022D RLA    
+SPR0B_X                   00022F RLA    SPR0B_Y                   00022C RLA    
+SPR0C_ATTR                000232 RLA    SPR0C_X                   000233 RLA    
+SPR0C_Y                   000230 RLA    SPR0D_ATTR                000236 RLA    
+SPR0D_X                   000237 RLA    SPR0D_Y                   000234 RLA    
+SPR0E_ATTR                00023A RLA    SPR0E_X                   00023B RLA    
+SPR0E_Y                   000238 RLA    SPR0F_ATTR                00023E RLA    
+SPR0F_X                   00023F RLA    SPR0F_Y                   00023C RLA    
+SPR10_ATTR                000242 RLA    SPR10_X                   000243 RLA    
+SPR10_Y                   000240 RLA    SPR11_ATTR                000246 RLA    
+SPR11_X                   000247 RLA    SPR11_Y                   000244 RLA    
+SPR12_ATTR                00024A RLA    SPR12_X                   00024B RLA    
+SPR12_Y                   000248 RLA    SPR13_ATTR                00024E RLA    
+SPR13_X                   00024F RLA    SPR13_Y                   00024C RLA    
+SPR14_ATTR                000252 RLA    SPR14_CHAR                000251 RLA    
+SPR14_X                   000253 RLA    SPR14_Y                   000250 RLA    
+SPR15_ATTR                000256 RLA    SPR15_CHAR                000255 RLA    
+SPR15_X                   000257 RLA    SPR15_Y                   000254 RLA    
+SPR16_ATTR                00025A RLA    SPR16_CHAR                000259 RLA    
+SPR16_X                   00025B RLA    SPR16_Y                   000258 RLA    
+SPR17_ATTR                00025E RLA    SPR17_CHAR                00025D RLA    
+SPR17_X                   00025F RLA    SPR17_Y                   00025C RLA    
+SPR18_ATTR                000262 RLA    SPR18_CHAR                000261 RLA    
+SPR18_X                   000263 RLA    SPR18_Y                   000260 RLA    
+SPR19_ATTR                000266 RLA    SPR19_CHAR                000265 RLA    
+SPR19_X                   000267 RLA    SPR19_Y                   000264 RLA    
+SPR20_ATTR                000282 RLA    SPR20_CHAR                000281 RLA    
+SPR20_X                   000283 RLA    SPR20_Y                   000280 RLA    
+SPR21_ATTR                000286 RLA    SPR21_CHAR                000285 RLA    
+SPR21_X                   000287 RLA    SPR21_Y                   000284 RLA    
+SPR22_ATTR                00028A RLA    SPR22_CHAR                000289 RLA    
+SPR22_X                   00028B RLA    SPR22_Y                   000288 RLA    
+SPR23_ATTR                00028E RLA    SPR23_CHAR                00028D RLA    
+SPR23_X                   00028F RLA    SPR23_Y                   00028C RLA    
+SPR24_ATTR                000292 RLA    SPR24_CHAR                000291 RLA    
+SPR24_X                   000293 RLA    SPR24_Y                   000290 RLA    
+SPR25_ATTR                000296 RLA    SPR25_CHAR                000295 RLA    
+SPR25_X                   000297 RLA    SPR25_Y                   000294 RLA    
+SPR26_ATTR                00029A RLA    SPR26_CHAR                000299 RLA    
+SPR26_X                   00029B RLA    SPR26_Y                   000298 RLA    
+SPR27_ATTR                00029E RLA    SPR27_CHAR                00029D RLA    
+SPR27_X                   00029F RLA    SPR27_Y                   00029C RLA    
+SPR28_ATTR                0002A2 RLA    SPR28_CHAR                0002A1 RLA    
+SPR28_X                   0002A3 RLA    SPR28_Y                   0002A0 RLA    
+SRAM                      006000 REA    SRAM_CHAINS               006000 RLA    
+SRAM_CHAIN_FLAGS          006030 RLA    SRAM_DRUMKITS             007E00 RLA    
+SRAM_DRUMKIT_ROOTS        007FE0 RLA    SRAM_DUTY_TABLES          007260 RLA    
+SRAM_ECHOES               007860 RLA    SRAM_ENVELOPES            007160 RLA    
+SRAM_FX_TABLES            007500 RLA    SRAM_HEADER               006000 RLA    
+SRAM_INSTRUMENTS          006FE0 RLA    SRAM_PALETTE              006010 RLA    
+SRAM_PATTERNS             006000 RLA    SRAM_PATTERN_FLAGS        0060AF RLA    
+SRAM_SONG_MUTE            007710 RLA    SRAM_SONG_SOLO            007718 RLA    
+SRAM_SONG_SPEEDS          007708 RLA    SRAM_SPEED_TABLES         007508 RLA    
+SRAM_TABLES               006000 RLA    SRAM_TRACK_A0             006130 RLA    
+SRAM_TRACK_A1             0063AB RLA    SRAM_TRACK_A2             006626 RLA    
+SRAM_TRACK_A3             0068A1 RLA    SRAM_TRACK_A4             006B1C RLA    
+SRAM_TRACK_A5             006D97 RLA    SRAM_TRACK_A6             007012 RLA    
+SRAM_TRACK_A7             00728D RLA    SRAM_TRACK_B0             0061AF RLA    
+SRAM_TRACK_B1             00642A RLA    SRAM_TRACK_B2             0066A5 RLA    
+SRAM_TRACK_B3             006920 RLA    SRAM_TRACK_B4             006B9B RLA    
+SRAM_TRACK_B5             006E16 RLA    SRAM_TRACK_B6             007091 RLA    
+SRAM_TRACK_B7             00730C RLA    SRAM_TRACK_C0             00622E RLA    
+SRAM_TRACK_C1             0064A9 RLA    SRAM_TRACK_C2             006724 RLA    
+SRAM_TRACK_C3             00699F RLA    SRAM_TRACK_C4             006C1A RLA    
+SRAM_TRACK_C5             006E95 RLA    SRAM_TRACK_C6             007110 RLA    
+SRAM_TRACK_C7             00738B RLA    SRAM_TRACK_D0             0062AD RLA    
+SRAM_TRACK_D1             006528 RLA    SRAM_TRACK_D2             0067A3 RLA    
+SRAM_TRACK_D3             006A1E RLA    SRAM_TRACK_D4             006C99 RLA    
+SRAM_TRACK_D5             006F14 RLA    SRAM_TRACK_D6             00718F RLA    
+SRAM_TRACK_D7             00740A RLA    SRAM_TRACK_E0             00632C RLA    
+SRAM_TRACK_E1             0065A7 RLA    SRAM_TRACK_E2             006822 RLA    
+SRAM_TRACK_E3             006A9D RLA    SRAM_TRACK_E4             006D18 RLA    
+SRAM_TRACK_E5             006F93 RLA    SRAM_TRACK_E6             00720E RLA    
+SRAM_TRACK_E7             007489 RLA    SRAM_VIBRATOS             0071E0 RLA    
+SetBits                   00C582 RLA    V_APU                     00062C RLA    
+blockEnd                  000512 RLA    blockMode                 00050F RLA    
+blockOrigin               000510 RLA    blockStart                000511 RLA    
+bpmBeatCounter            000702 RLA    bpmCurrent                000704 RLA    
+bpmFrameCounter           000703 RLA    chainCursorX              0004E5 RLA    
+chainCursorY              0004F3 RLA    chainFirstRow             000501 RLA    
+chainRowsIndex            00C940 RLA    chainVector               000045 RLZ    
+checkErrorMessages        0081FF RLA    clearMarkers              008271 RLA    
+copyBuffer                000665 RLA    copyBufferLength          000664 RLA    
+copyBufferObject          000662 RLA    copyBufferObjectType      000661 RLA    
+copyBufferStartIndex      000663 RLA    copyInfoBuffer            0004C5 RLA    
+copyInfoFlag              0004DF RLA    currentPrgBank            000011 RLZ    
+currentSramBank           000012 RLZ    cursorFlashColour         000318 RLA    
+cursorFlashIndex          000317 RLA    dmaCycleFlag              000016 RLZ    
+dmaSecondary              00801E RLA    dmaUpdateHeader           0004E2 RLA    
+dmaUpdateTitle            0004E3 RLA    dmaUpdateWindow           0004E1 RLA    
+dmcAddressTable           00CC00 RLA    dpcmDC                    00063F RLA    
+dpcmLength                00063D RLA    dpcmPitch                 00063E RLA    
+dpcmStart                 00063C RLA    drumkitCursorX            0004E8 RLA    
+drumkitCursorX_old        00050E RLA    drumkitCursorY            0004F6 RLA    
+drumkitFirstRow           000504 RLA    drumkitRowsIndex          00C9B0 RLA    
+drumkitVector             00004B RLZ    dutyCursorX               0004EC RLA    
+dutyCursorY               0004FA RLA    dutyFirstRow              000508 RLA    
+dutyRowsIndex             00C960 RLA    dutyVector                000051 RLZ    
+echoCursorX               0004ED RLA    echoCursorY               0004FB RLA    
+echoFirstRow              000509 RLA    echoIndex                 00032B RLA    
+echoRowsIndex             00C9BC RLA    editBuffer                00035C RLA    
+editBufferFlag            00035D RLA    editChain                 009E26 RLA    
+editChainAddressHi        00C65B RLA    editChainAddressLo        00C5DC RLA    
+editChainIndex            000328 RLA    editChainLastValue        000331 RLA    
+editDrumkit               00AEE4 RLA    editDrumkitAddressHi      00C820 RLA    
+editDrumkitAddressLo      00C818 RLA    editDrumkitLastValue      000337 RLA    
+editDutyAddressHi         00C8B8 RLA    editDutyAddressLo         00C898 RLA    
+editDutyLastValue         00034B RLA    editDutyTable             00996E RLA    
+editEchoLastValue         00034F RLA    editEchoTable             009D85 RLA    
+editEnvelopeLastValue     00033D RLA    editEnvelopeTable         00B354 RLA    
+editFx                    00A289 RLA    editFxAddressHi           00C928 RLA    
+editFxAddressLo           00C918 RLA    editFxLastValue           000353 RLA    
+editInstrument            00ABC1 RLA    editInstrumentAddressHi   00C7F8 RLA    
+editInstrumentAddressLo   00C7D8 RLA    editNavFlag               00035E RLA    
+editNavMenu               00A7D7 RLA    editPattern               00A370 RLA    
+editPatternAddressHi      00C759 RLA    editPatternAddressLo      00C6DA RLA    
+editPatternLastValue      000333 RLA    editSetup                 00A8D1 RLA    
+editSong                  00996E RLA    editSongLastValue         00032C RLA    
+editSpeed                 009F66 RLA    editSpeedAddressHi        00C8F8 RLA    
+editSpeedAddressLo        00C8D8 RLA    editSpeedLastValue        000352 RLA    
+editTable                 00B56A RLA    editTableAddressHi        00C860 RLA    
+editTableAddressLo        00C828 RLA    editTableLastValue        000341 RLA    
+editTrackAddressHi        00C5B4 RLA    editTrackAddressLo        00C58C RLA    
+editVibratoLastValue      000347 RLA    editVibratoTable          00BB3E RLA    
+editorCurrentChain        00031B RLA    editorCurrentDrumkit      00031E RLA    
+editorCurrentDuty         000322 RLA    editorCurrentEcho         000323 RLA    
+editorCurrentEnvelope     00031F RLA    editorCurrentFx           000325 RLA    
+editorCurrentInstrument   00031D RLA    editorCurrentPattern      00031C RLA    
+editorCurrentSong         000319 RLA    editorCurrentSpeed        000324 RLA    
+editorCurrentTable        000320 RLA    editorCurrentTrack        00031A RLA    
+editorCurrentVibrato      000321 RLA    editorDisplayBPM          008EEA RLA    
+editorFlashCursor         008849 RLA    editorInstrumentAddressHi 00C1DE RLA    
+editorInstrumentAddressLo 00C1D9 RLA    editorKeys                00035F RLA    
+editorKeysEnd             000379 RLA    editorLastValues          00032C RLA    
+editorLastValuesEnd       00035C RLA    editorLoop                00C135 RLA    
+editorMode                000304 RLA    editorModeIndex           000305 RLA    
+editorPlayingNote         0006FB RLA    editorPreviousModes       000306 RLA    
+editorShowHint            00C4E2 RLA    editorUpdateScrollArrows  008283 RLA    
+editorUpdateTrackInfo     008110 RLA    editorVector              000041 RLZ    
+engineTmp0                00001D RLZ    engineTmp1                00001E RLZ    
+engineTmp2                00001F RLZ    envelopeAmp               00059A RLA    
+envelopeCounter           000592 RLA    envelopeCursorX           0004E9 RLA    
+envelopeCursorY           0004F7 RLA    envelopeFirstRow          000505 RLA    
+envelopeIndex             000329 RLA    envelopePhase             000596 RLA    
+errorCounter              0006F9 RLA    errorMessageBuffer        0004CE RLA    
+errorMessageFlag          0004DE RLA    errorMessageNumber        0006F8 RLA    
+errorScreen               008924 RLA    font                      008000 RLA    
+fxCursorX                 0004EF RLA    fxCursorY                 0004FD RLA    
+fxFirstRow                00050B RLA    fxRowsIndex               00C9DC RLA    
+fxVector                  000057 RLZ    getNoteTemp0              0005FA RLA    
+getNoteTemp1              0005FB RLA    headerBuffer              00048A RLA    
+hintAddressHi             008B7A RLA    hintAddressLo             008B60 RLA    
+hintFourteens             008B94 RLA    hintMode                  000316 RLA    
+infoBuffer1               0004BB RLA    infoBuffer2               0004C0 RLA    
+initEditor                008000 RLA    initEditorData            0095C8 RLA    
+initPalette               00C2ED RLA    initPulsar                0091B4 RLA    
+instrumentCursorX         0004E7 RLA    instrumentCursorY         0004F5 RLA    
+instrumentFirstRow        000503 RLA    instrumentVector          000049 RLZ    
+keysDoubleTapA            000367 RLA    keysDoubleTapB            000362 RLA    
+keysDoubleTapSel          00036C RLA    keysHoldA                 000368 RLA    
+keysHoldB                 000363 RLA    keysHoldCounterA          000364 RLA    
+keysHoldCounterB          00035F RLA    keysHoldCounterSel        000369 RLA    
+keysHoldSel               00036D RLA    keysRepeatCounterLR       000375 RLA    
+keysRepeatCounterUD       000371 RLA    keysRepeatLR              000372 RLA    
+keysRepeatOldLR           000373 RLA    keysRepeatOldUD           00036F RLA    
+keysRepeatRateLR          000374 RLA    keysRepeatRateUD          000370 RLA    
+keysRepeatUD              00036E RLA    keysTapA                  000366 RLA    
+keysTapB                  000361 RLA    keysTapCounterA           000365 RLA    
+keysTapCounterB           000360 RLA    keysTapCounterSel         00036A RLA    
+keysTapSel                00036B RLA    layout                    00A000 RLA    
+lfsr                      00008D RLZ    navMenuCursorX            0004F1 RLA    
+navMenuCursorY            0004FF RLA    noteAddFrac               0005A3 RLA    
+noteAddNote               0005A6 RLA    noteNumber                00059E RLA    
+old_V_APUB                00071A RLA    palette                   00C333 RLA    
+patternCursorX            0004E6 RLA    patternCursorY            0004F4 RLA    
+patternFirstRow           000502 RLA    patternLastNote           0005E7 RLA    
+patternRowsIndex          00C950 RLA    patternVector             000047 RLZ    
+phexRow                   00C4C1 RLA    phexTitle                 00C4D2 RLA    
+phexWindow                00C47B RLA    phexWindow2               00C48C RLA    
+phexWindow3               00C4A1 RLA    pitchHi                   0005AF RLA    
+pitchHiOld                0005B4 RLA    pitchLo                   0005AA RLA    
+pitchLoOld                0005B6 RLA    plyrChainIndex            000529 RLA    
+plyrChainVector           000063 RLZ    plyrChordNotes            0005EA RLA    
+plyrCurrentChain          00052E RLA    plyrCurrentChainTranspose 000533 RLA    
+plyrCurrentDuty           0005BE RLA    plyrCurrentInstrument     000538 RLA    
+plyrCurrentNote           00053D RLA    plyrCurrentPattern        000547 RLA    
+plyrCurrentPatternFX      00054C RLA    plyrCurrentPatternFXData  000551 RLA    
+plyrCurrentSpeedTable     0005E8 RLA    plyrDelayNote             000606 RLA    
+plyrDelayNoteCounter      000601 RLA    plyrDetuneHi              000629 RLA    
+plyrDpcmMuted             000641 RLA    plyrDpcmOn                000640 RLA    
+plyrDutyIndex             0005C0 RLA    plyrDutyTableDelay        0005C2 RLA    
+plyrDutyVector            000083 RLZ    plyrEchoAttn              000711 RLA    
+plyrEchoBuffer00_A        0079C0 RLA    plyrEchoBuffer00_B        007B40 RLA    
+plyrEchoBuffer00_D        007C40 RLA    plyrEchoBuffer02_A        007940 RLA    
+plyrEchoBuffer02_B        007AC0 RLA    plyrEchoBuffer02_D        007BC0 RLA    
+plyrEchoBuffer03_A        0078C0 RLA    plyrEchoBuffer03_B        007A40 RLA    
+plyrEchoCounter           000715 RLA    plyrEchoIndex             000705 RLA    
+plyrEchoInitAttn          00070D RLA    plyrEchoSpeed             000709 RLA    
+plyrEnvelopeVector        000081 RLZ    plyrFxDataTemp1           000090 RLZ    
+plyrFxDataTemp2           000091 RLZ    plyrFxTable               0006FD RLA    
+plyrFxTableCounter        0006FE RLA    plyrFxTableIndex          0006FF RLA    
+plyrFxTableSpeed          000700 RLA    plyrFxTableVoice          000701 RLA    
+plyrFxTemp1               00008E RLZ    plyrFxTemp2               00008F RLZ    
+plyrFxType                0005E6 RLA    plyrFxVector              000089 RLZ    
+plyrInitSong              008000 RLA    plyrInstrumentCopy        000093 RLZ    
+plyrInstrumentCopyA       000093 RLZ    plyrInstrumentCopyB       00009F RLZ    
+plyrInstrumentCopyC       0000AB RLZ    plyrInstrumentCopyD       0000B7 RLZ    
+plyrInstrumentCopyE       000556 RLA    plyrInstrumentVector      000077 RLZ    
+plyrKeyOn                 000642 RLA    plyrKillCounter           0005FC RLA    
+plyrNoteCounter           000542 RLA    plyrPatternChordCounter   0005F2 RLA    
+plyrPatternChordIndex     0005EE RLA    plyrPatternChordNote      0005F6 RLA    
+plyrPatternIndex          00051A RLA    plyrPatternJump           000524 RLA    
+plyrPatternStepCounter    00051F RLA    plyrPatternVector         00006D RLZ    
+plyrPitchSweepDelta       0005B8 RLA    plyrPitchSweepLo          0005BB RLA    
+plyrPlayMode              0006F7 RLA    plyrPlaying               000513 RLA    
+plyrPreviousNote          000626 RLA    plyrRefresh               008037 RLA    
+plyrRetriggerCounter      000656 RLA    plyrRetriggerSpeed        000651 RLA    
+plyrSlideDestination      000623 RLA    plyrSlideSpeed            000620 RLA    
+plyrSongStartIndex        000514 RLA    plyrSpeedTableIndex       0005E9 RLA    
+plyrSpeedVector           000087 RLZ    plyrTableCounter          0005D6 RLA    
+plyrTableDoStep           0005E0 RLA    plyrTableIndex            0005CC RLA    
+plyrTableJump             0005DB RLA    plyrTablePitch            0005C8 RLA    
+plyrTableSpeed            0005D1 RLA    plyrTableTrackE           0005E5 RLA    
+plyrTableVector           000085 RLZ    plyrTableVolume           0005C4 RLA    
+plyrTrackIndex            000515 RLA    plyrVibDelta              000611 RLA    
+plyrVibDepthMod           00061A RLA    plyrVibDepthModCounter    00061D RLA    
+plyrVibLastDelta          000614 RLA    plyrVibPos                00060B RLA    
+plyrVibSpeedCounter       00060E RLA    pulsarIntensity           00065C RLA    
+pulsarPassCounter         00065B RLA    pulsarRefresh             0091B8 RLA    
+rowBuffer                 00049B RLA    setMMC1r1                 00CA33 RLA    
+setupCursorX              0004F0 RLA    setupCursorY              0004FE RLA    
+soloLightChar             0006F6 RLA    soloLightCounter          0006F5 RLA    
+songCursorX               0004E4 RLA    songCursorY               0004F2 RLA    
+songFirstRow              000500 RLA    songTrackIndex            000327 RLA    
+songVectors               000035 RLZ    speedCursorX              0004EE RLA    
+speedCursorY              0004FC RLA    speedFirstRow             00050A RLA    
+speedVector               000055 RLZ    spr                       009000 RLA    
+sprBuf                    000200 RLA    tableCursorX              0004EA RLA    
+tableCursorY              0004F8 RLA    tableFirstRow             000506 RLA    
+tableRowsIndex            00C970 RLA    tableRowsIndex2           00C980 RLA    
+tableVector               00004D RLZ    titleBuffer               000479 RLA    
+tmp0                      000017 RLZ    tmp1                      000018 RLZ    
+tmp2                      000019 RLZ    tmp3                      00001A RLZ    
+tmp4                      00001B RLZ    trackVector               000043 RLZ    
+updateVuMeters            008DD0 RLA    vblankFlag                000013 RLZ    
+vblankFlagOld             000014 RLZ    vblankOverflow            000015 RLZ    
+vibratoCursorX            0004EB RLA    vibratoCursorY            0004F9 RLA    
+vibratoFirstRow           000507 RLA    vibratoIndex              00032A RLA    
+vibratoRowsIndex          00C990 RLA    vuCounter                 00064C RLA    
+vuIndex                   000647 RLA    waitForTapA               0006FA RLA    
+windowBuffer              000379 RLA    writePaletteFlag          0006FC RLA    
+writeScreen               0004E0 RLA    yesNoSwitch               00C1E3 RLA    
+
+
+
+Exports list by value:
+----------------------
+DO_NOT_INTERRUPT          000010 RLZ    currentPrgBank            000011 RLZ    
+currentSramBank           000012 RLZ    vblankFlag                000013 RLZ    
+vblankFlagOld             000014 RLZ    vblankOverflow            000015 RLZ    
+dmaCycleFlag              000016 RLZ    tmp0                      000017 RLZ    
+tmp1                      000018 RLZ    tmp2                      000019 RLZ    
+tmp3                      00001A RLZ    tmp4                      00001B RLZ    
+engineTmp0                00001D RLZ    engineTmp1                00001E RLZ    
+engineTmp2                00001F RLZ    PAD1_jt                   000021 RLZ    
+PAD1_lr                   000023 RLZ    PAD1_ud                   000024 RLZ    
+PAD1_sel                  000026 RLZ    PAD1_fireb                000027 RLZ    
+PAD1_firea                000028 RLZ    PAD1_oldlr                000029 RLZ    
+PAD1_dlr                  00002F RLZ    PAD1_dud                  000030 RLZ    
+PAD1_dsta                 000031 RLZ    songVectors               000035 RLZ    
+editorVector              000041 RLZ    trackVector               000043 RLZ    
+chainVector               000045 RLZ    patternVector             000047 RLZ    
+instrumentVector          000049 RLZ    drumkitVector             00004B RLZ    
+tableVector               00004D RLZ    dutyVector                000051 RLZ    
+speedVector               000055 RLZ    fxVector                  000057 RLZ    
+plyrChainVector           000063 RLZ    plyrPatternVector         00006D RLZ    
+plyrInstrumentVector      000077 RLZ    plyrEnvelopeVector        000081 RLZ    
+plyrDutyVector            000083 RLZ    plyrTableVector           000085 RLZ    
+plyrSpeedVector           000087 RLZ    plyrFxVector              000089 RLZ    
+lfsr                      00008D RLZ    plyrFxTemp1               00008E RLZ    
+plyrFxTemp2               00008F RLZ    plyrFxDataTemp1           000090 RLZ    
+plyrFxDataTemp2           000091 RLZ    plyrInstrumentCopy        000093 RLZ    
+plyrInstrumentCopyA       000093 RLZ    plyrInstrumentCopyB       00009F RLZ    
+plyrInstrumentCopyC       0000AB RLZ    plyrInstrumentCopyD       0000B7 RLZ    
+sprBuf                    000200 RLA    SPR00_Y                   000200 RLA    
+SPR00_CHAR                000201 RLA    SPR00_ATTR                000202 RLA    
+SPR00_X                   000203 RLA    SPR01_Y                   000204 RLA    
+SPR01_CHAR                000205 RLA    SPR01_ATTR                000206 RLA    
+SPR01_X                   000207 RLA    SPR03_Y                   00020C RLA    
+SPR03_CHAR                00020D RLA    SPR03_ATTR                00020E RLA    
+SPR03_X                   00020F RLA    SPR04_Y                   000210 RLA    
+SPR04_CHAR                000211 RLA    SPR04_ATTR                000212 RLA    
+SPR04_X                   000213 RLA    SPR05_Y                   000214 RLA    
+SPR05_CHAR                000215 RLA    SPR05_ATTR                000216 RLA    
+SPR05_X                   000217 RLA    SPR06_Y                   000218 RLA    
+SPR06_CHAR                000219 RLA    SPR06_ATTR                00021A RLA    
+SPR06_X                   00021B RLA    SPR07_CHAR                00021D RLA    
+SPR07_ATTR                00021E RLA    SPR08_CHAR                000221 RLA    
+SPR08_ATTR                000222 RLA    SPR09_CHAR                000225 RLA    
+SPR09_ATTR                000226 RLA    SPR0A_Y                   000228 RLA    
+SPR0A_CHAR                000229 RLA    SPR0A_ATTR                00022A RLA    
+SPR0A_X                   00022B RLA    SPR0B_Y                   00022C RLA    
+SPR0B_CHAR                00022D RLA    SPR0B_ATTR                00022E RLA    
+SPR0B_X                   00022F RLA    SPR0C_Y                   000230 RLA    
+SPR0C_ATTR                000232 RLA    SPR0C_X                   000233 RLA    
+SPR0D_Y                   000234 RLA    SPR0D_ATTR                000236 RLA    
+SPR0D_X                   000237 RLA    SPR0E_Y                   000238 RLA    
+SPR0E_ATTR                00023A RLA    SPR0E_X                   00023B RLA    
+SPR0F_Y                   00023C RLA    SPR0F_ATTR                00023E RLA    
+SPR0F_X                   00023F RLA    SPR10_Y                   000240 RLA    
+SPR10_ATTR                000242 RLA    SPR10_X                   000243 RLA    
+SPR11_Y                   000244 RLA    SPR11_ATTR                000246 RLA    
+SPR11_X                   000247 RLA    SPR12_Y                   000248 RLA    
+SPR12_ATTR                00024A RLA    SPR12_X                   00024B RLA    
+SPR13_Y                   00024C RLA    SPR13_ATTR                00024E RLA    
+SPR13_X                   00024F RLA    SPR14_Y                   000250 RLA    
+SPR14_CHAR                000251 RLA    SPR14_ATTR                000252 RLA    
+SPR14_X                   000253 RLA    SPR15_Y                   000254 RLA    
+SPR15_CHAR                000255 RLA    SPR15_ATTR                000256 RLA    
+SPR15_X                   000257 RLA    SPR16_Y                   000258 RLA    
+SPR16_CHAR                000259 RLA    SPR16_ATTR                00025A RLA    
+SPR16_X                   00025B RLA    SPR17_Y                   00025C RLA    
+SPR17_CHAR                00025D RLA    SPR17_ATTR                00025E RLA    
+SPR17_X                   00025F RLA    SPR18_Y                   000260 RLA    
+SPR18_CHAR                000261 RLA    SPR18_ATTR                000262 RLA    
+SPR18_X                   000263 RLA    SPR19_Y                   000264 RLA    
+SPR19_CHAR                000265 RLA    SPR19_ATTR                000266 RLA    
+SPR19_X                   000267 RLA    SPR20_Y                   000280 RLA    
+SPR20_CHAR                000281 RLA    SPR20_ATTR                000282 RLA    
+SPR20_X                   000283 RLA    SPR21_Y                   000284 RLA    
+SPR21_CHAR                000285 RLA    SPR21_ATTR                000286 RLA    
+SPR21_X                   000287 RLA    SPR22_Y                   000288 RLA    
+SPR22_CHAR                000289 RLA    SPR22_ATTR                00028A RLA    
+SPR22_X                   00028B RLA    SPR23_Y                   00028C RLA    
+SPR23_CHAR                00028D RLA    SPR23_ATTR                00028E RLA    
+SPR23_X                   00028F RLA    SPR24_Y                   000290 RLA    
+SPR24_CHAR                000291 RLA    SPR24_ATTR                000292 RLA    
+SPR24_X                   000293 RLA    SPR25_Y                   000294 RLA    
+SPR25_CHAR                000295 RLA    SPR25_ATTR                000296 RLA    
+SPR25_X                   000297 RLA    SPR26_Y                   000298 RLA    
+SPR26_CHAR                000299 RLA    SPR26_ATTR                00029A RLA    
+SPR26_X                   00029B RLA    SPR27_Y                   00029C RLA    
+SPR27_CHAR                00029D RLA    SPR27_ATTR                00029E RLA    
+SPR27_X                   00029F RLA    SPR28_Y                   0002A0 RLA    
+SPR28_CHAR                0002A1 RLA    SPR28_ATTR                0002A2 RLA    
+SPR28_X                   0002A3 RLA    editorMode                000304 RLA    
+editorModeIndex           000305 RLA    editorPreviousModes       000306 RLA    
+hintMode                  000316 RLA    cursorFlashIndex          000317 RLA    
+cursorFlashColour         000318 RLA    editorCurrentSong         000319 RLA    
+editorCurrentTrack        00031A RLA    editorCurrentChain        00031B RLA    
+editorCurrentPattern      00031C RLA    editorCurrentInstrument   00031D RLA    
+editorCurrentDrumkit      00031E RLA    editorCurrentEnvelope     00031F RLA    
+editorCurrentTable        000320 RLA    editorCurrentVibrato      000321 RLA    
+editorCurrentDuty         000322 RLA    editorCurrentEcho         000323 RLA    
+editorCurrentSpeed        000324 RLA    editorCurrentFx           000325 RLA    
+songTrackIndex            000327 RLA    editChainIndex            000328 RLA    
+envelopeIndex             000329 RLA    vibratoIndex              00032A RLA    
+echoIndex                 00032B RLA    editorLastValues          00032C RLA    
+editSongLastValue         00032C RLA    editChainLastValue        000331 RLA    
+editPatternLastValue      000333 RLA    editDrumkitLastValue      000337 RLA    
+editEnvelopeLastValue     00033D RLA    editTableLastValue        000341 RLA    
+editVibratoLastValue      000347 RLA    editDutyLastValue         00034B RLA    
+editEchoLastValue         00034F RLA    editSpeedLastValue        000352 RLA    
+editFxLastValue           000353 RLA    editBuffer                00035C RLA    
+editorLastValuesEnd       00035C RLA    editBufferFlag            00035D RLA    
+editNavFlag               00035E RLA    keysHoldCounterB          00035F RLA    
+editorKeys                00035F RLA    keysTapCounterB           000360 RLA    
+keysTapB                  000361 RLA    keysDoubleTapB            000362 RLA    
+keysHoldB                 000363 RLA    keysHoldCounterA          000364 RLA    
+keysTapCounterA           000365 RLA    keysTapA                  000366 RLA    
+keysDoubleTapA            000367 RLA    keysHoldA                 000368 RLA    
+keysHoldCounterSel        000369 RLA    keysTapCounterSel         00036A RLA    
+keysTapSel                00036B RLA    keysDoubleTapSel          00036C RLA    
+keysHoldSel               00036D RLA    keysRepeatUD              00036E RLA    
+keysRepeatOldUD           00036F RLA    keysRepeatRateUD          000370 RLA    
+keysRepeatCounterUD       000371 RLA    keysRepeatLR              000372 RLA    
+keysRepeatOldLR           000373 RLA    keysRepeatRateLR          000374 RLA    
+keysRepeatCounterLR       000375 RLA    PAD1_firea_old            000376 RLA    
+PAD1_fireb_old            000377 RLA    PAD1_sel_old              000378 RLA    
+editorKeysEnd             000379 RLA    windowBuffer              000379 RLA    
+titleBuffer               000479 RLA    headerBuffer              00048A RLA    
+rowBuffer                 00049B RLA    infoBuffer1               0004BB RLA    
+infoBuffer2               0004C0 RLA    copyInfoBuffer            0004C5 RLA    
+errorMessageBuffer        0004CE RLA    errorMessageFlag          0004DE RLA    
+copyInfoFlag              0004DF RLA    writeScreen               0004E0 RLA    
+dmaUpdateWindow           0004E1 RLA    dmaUpdateHeader           0004E2 RLA    
+dmaUpdateTitle            0004E3 RLA    songCursorX               0004E4 RLA    
+chainCursorX              0004E5 RLA    patternCursorX            0004E6 RLA    
+instrumentCursorX         0004E7 RLA    drumkitCursorX            0004E8 RLA    
+envelopeCursorX           0004E9 RLA    tableCursorX              0004EA RLA    
+vibratoCursorX            0004EB RLA    dutyCursorX               0004EC RLA    
+echoCursorX               0004ED RLA    speedCursorX              0004EE RLA    
+fxCursorX                 0004EF RLA    setupCursorX              0004F0 RLA    
+navMenuCursorX            0004F1 RLA    songCursorY               0004F2 RLA    
+chainCursorY              0004F3 RLA    patternCursorY            0004F4 RLA    
+instrumentCursorY         0004F5 RLA    drumkitCursorY            0004F6 RLA    
+envelopeCursorY           0004F7 RLA    tableCursorY              0004F8 RLA    
+vibratoCursorY            0004F9 RLA    dutyCursorY               0004FA RLA    
+echoCursorY               0004FB RLA    speedCursorY              0004FC RLA    
+fxCursorY                 0004FD RLA    setupCursorY              0004FE RLA    
+navMenuCursorY            0004FF RLA    songFirstRow              000500 RLA    
+chainFirstRow             000501 RLA    patternFirstRow           000502 RLA    
+instrumentFirstRow        000503 RLA    drumkitFirstRow           000504 RLA    
+envelopeFirstRow          000505 RLA    tableFirstRow             000506 RLA    
+vibratoFirstRow           000507 RLA    dutyFirstRow              000508 RLA    
+echoFirstRow              000509 RLA    speedFirstRow             00050A RLA    
+fxFirstRow                00050B RLA    drumkitCursorX_old        00050E RLA    
+blockMode                 00050F RLA    blockOrigin               000510 RLA    
+blockStart                000511 RLA    blockEnd                  000512 RLA    
+plyrPlaying               000513 RLA    plyrSongStartIndex        000514 RLA    
+plyrTrackIndex            000515 RLA    plyrPatternIndex          00051A RLA    
+plyrPatternStepCounter    00051F RLA    plyrPatternJump           000524 RLA    
+plyrChainIndex            000529 RLA    plyrCurrentChain          00052E RLA    
+plyrCurrentChainTranspose 000533 RLA    plyrCurrentInstrument     000538 RLA    
+plyrCurrentNote           00053D RLA    plyrNoteCounter           000542 RLA    
+plyrCurrentPattern        000547 RLA    plyrCurrentPatternFX      00054C RLA    
+plyrCurrentPatternFXData  000551 RLA    plyrInstrumentCopyE       000556 RLA    
+envelopeCounter           000592 RLA    envelopePhase             000596 RLA    
+envelopeAmp               00059A RLA    noteNumber                00059E RLA    
+noteAddFrac               0005A3 RLA    noteAddNote               0005A6 RLA    
+pitchLo                   0005AA RLA    pitchHi                   0005AF RLA    
+pitchHiOld                0005B4 RLA    pitchLoOld                0005B6 RLA    
+plyrPitchSweepDelta       0005B8 RLA    plyrPitchSweepLo          0005BB RLA    
+plyrCurrentDuty           0005BE RLA    plyrDutyIndex             0005C0 RLA    
+plyrDutyTableDelay        0005C2 RLA    plyrTableVolume           0005C4 RLA    
+plyrTablePitch            0005C8 RLA    plyrTableIndex            0005CC RLA    
+plyrTableSpeed            0005D1 RLA    plyrTableCounter          0005D6 RLA    
+plyrTableJump             0005DB RLA    plyrTableDoStep           0005E0 RLA    
+plyrTableTrackE           0005E5 RLA    plyrFxType                0005E6 RLA    
+patternLastNote           0005E7 RLA    plyrCurrentSpeedTable     0005E8 RLA    
+plyrSpeedTableIndex       0005E9 RLA    plyrChordNotes            0005EA RLA    
+plyrPatternChordIndex     0005EE RLA    plyrPatternChordCounter   0005F2 RLA    
+plyrPatternChordNote      0005F6 RLA    getNoteTemp0              0005FA RLA    
+getNoteTemp1              0005FB RLA    plyrKillCounter           0005FC RLA    
+plyrDelayNoteCounter      000601 RLA    plyrDelayNote             000606 RLA    
+plyrVibPos                00060B RLA    plyrVibSpeedCounter       00060E RLA    
+plyrVibDelta              000611 RLA    plyrVibLastDelta          000614 RLA    
+plyrVibDepthMod           00061A RLA    plyrVibDepthModCounter    00061D RLA    
+plyrSlideSpeed            000620 RLA    plyrSlideDestination      000623 RLA    
+plyrPreviousNote          000626 RLA    plyrDetuneHi              000629 RLA    
+V_APU                     00062C RLA    dpcmStart                 00063C RLA    
+dpcmLength                00063D RLA    dpcmPitch                 00063E RLA    
+dpcmDC                    00063F RLA    plyrDpcmOn                000640 RLA    
+plyrDpcmMuted             000641 RLA    plyrKeyOn                 000642 RLA    
+vuIndex                   000647 RLA    vuCounter                 00064C RLA    
+plyrRetriggerSpeed        000651 RLA    plyrRetriggerCounter      000656 RLA    
+pulsarPassCounter         00065B RLA    pulsarIntensity           00065C RLA    
+copyBufferObjectType      000661 RLA    copyBufferObject          000662 RLA    
+copyBufferStartIndex      000663 RLA    copyBufferLength          000664 RLA    
+copyBuffer                000665 RLA    soloLightCounter          0006F5 RLA    
+soloLightChar             0006F6 RLA    plyrPlayMode              0006F7 RLA    
+errorMessageNumber        0006F8 RLA    errorCounter              0006F9 RLA    
+waitForTapA               0006FA RLA    editorPlayingNote         0006FB RLA    
+writePaletteFlag          0006FC RLA    plyrFxTable               0006FD RLA    
+plyrFxTableCounter        0006FE RLA    plyrFxTableIndex          0006FF RLA    
+plyrFxTableSpeed          000700 RLA    plyrFxTableVoice          000701 RLA    
+bpmBeatCounter            000702 RLA    bpmFrameCounter           000703 RLA    
+bpmCurrent                000704 RLA    plyrEchoIndex             000705 RLA    
+plyrEchoSpeed             000709 RLA    plyrEchoInitAttn          00070D RLA    
+plyrEchoAttn              000711 RLA    plyrEchoCounter           000715 RLA    
+old_V_APUB                00071A RLA    SRAM                      006000 REA    
+SRAM_PATTERNS             006000 RLA    SRAM_TABLES               006000 RLA    
+SRAM_HEADER               006000 RLA    SRAM_CHAINS               006000 RLA    
+SRAM_PALETTE              006010 RLA    SRAM_CHAIN_FLAGS          006030 RLA    
+SRAM_PATTERN_FLAGS        0060AF RLA    SRAM_TRACK_A0             006130 RLA    
+SRAM_TRACK_B0             0061AF RLA    SRAM_TRACK_C0             00622E RLA    
+SRAM_TRACK_D0             0062AD RLA    SRAM_TRACK_E0             00632C RLA    
+SRAM_TRACK_A1             0063AB RLA    SRAM_TRACK_B1             00642A RLA    
+SRAM_TRACK_C1             0064A9 RLA    SRAM_TRACK_D1             006528 RLA    
+SRAM_TRACK_E1             0065A7 RLA    SRAM_TRACK_A2             006626 RLA    
+SRAM_TRACK_B2             0066A5 RLA    SRAM_TRACK_C2             006724 RLA    
+SRAM_TRACK_D2             0067A3 RLA    SRAM_TRACK_E2             006822 RLA    
+SRAM_TRACK_A3             0068A1 RLA    SRAM_TRACK_B3             006920 RLA    
+SRAM_TRACK_C3             00699F RLA    SRAM_TRACK_D3             006A1E RLA    
+SRAM_TRACK_E3             006A9D RLA    SRAM_TRACK_A4             006B1C RLA    
+SRAM_TRACK_B4             006B9B RLA    SRAM_TRACK_C4             006C1A RLA    
+SRAM_TRACK_D4             006C99 RLA    SRAM_TRACK_E4             006D18 RLA    
+SRAM_TRACK_A5             006D97 RLA    SRAM_TRACK_B5             006E16 RLA    
+SRAM_TRACK_C5             006E95 RLA    SRAM_TRACK_D5             006F14 RLA    
+SRAM_TRACK_E5             006F93 RLA    SRAM_INSTRUMENTS          006FE0 RLA    
+SRAM_TRACK_A6             007012 RLA    SRAM_TRACK_B6             007091 RLA    
+SRAM_TRACK_C6             007110 RLA    SRAM_ENVELOPES            007160 RLA    
+SRAM_TRACK_D6             00718F RLA    SRAM_VIBRATOS             0071E0 RLA    
+SRAM_TRACK_E6             00720E RLA    SRAM_DUTY_TABLES          007260 RLA    
+SRAM_TRACK_A7             00728D RLA    SRAM_TRACK_B7             00730C RLA    
+SRAM_TRACK_C7             00738B RLA    SRAM_TRACK_D7             00740A RLA    
+SRAM_TRACK_E7             007489 RLA    SRAM_FX_TABLES            007500 RLA    
+SRAM_SPEED_TABLES         007508 RLA    SRAM_SONG_SPEEDS          007708 RLA    
+SRAM_SONG_MUTE            007710 RLA    SRAM_SONG_SOLO            007718 RLA    
+SRAM_ECHOES               007860 RLA    plyrEchoBuffer03_A        0078C0 RLA    
+plyrEchoBuffer02_A        007940 RLA    plyrEchoBuffer00_A        0079C0 RLA    
+plyrEchoBuffer03_B        007A40 RLA    plyrEchoBuffer02_B        007AC0 RLA    
+plyrEchoBuffer00_B        007B40 RLA    plyrEchoBuffer02_D        007BC0 RLA    
+plyrEchoBuffer00_D        007C40 RLA    SRAM_DRUMKITS             007E00 RLA    
+SRAM_DRUMKIT_ROOTS        007FE0 RLA    font                      008000 RLA    
+initEditor                008000 RLA    plyrInitSong              008000 RLA    
+dmaSecondary              00801E RLA    plyrRefresh               008037 RLA    
+editorUpdateTrackInfo     008110 RLA    checkErrorMessages        0081FF RLA    
+clearMarkers              008271 RLA    editorUpdateScrollArrows  008283 RLA    
+editorFlashCursor         008849 RLA    errorScreen               008924 RLA    
+hintAddressLo             008B60 RLA    hintAddressHi             008B7A RLA    
+hintFourteens             008B94 RLA    updateVuMeters            008DD0 RLA    
+editorDisplayBPM          008EEA RLA    spr                       009000 RLA    
+initPulsar                0091B4 RLA    pulsarRefresh             0091B8 RLA    
+initEditorData            0095C8 RLA    editDutyTable             00996E RLA    
+editSong                  00996E RLA    editEchoTable             009D85 RLA    
+editChain                 009E26 RLA    editSpeed                 009F66 RLA    
+layout                    00A000 RLA    editFx                    00A289 RLA    
+editPattern               00A370 RLA    editNavMenu               00A7D7 RLA    
+editSetup                 00A8D1 RLA    editInstrument            00ABC1 RLA    
+editDrumkit               00AEE4 RLA    editEnvelopeTable         00B354 RLA    
+editTable                 00B56A RLA    editVibratoTable          00BB3E RLA    
+RESET                     00C000 RLA    editorLoop                00C135 RLA    
+editorInstrumentAddressLo 00C1D9 RLA    editorInstrumentAddressHi 00C1DE RLA    
+yesNoSwitch               00C1E3 RLA    NMI                       00C1F9 RLA    
+IRQ                       00C266 RLA    initPalette               00C2ED RLA    
+palette                   00C333 RLA    phexWindow                00C47B RLA    
+phexWindow2               00C48C RLA    phexWindow3               00C4A1 RLA    
+phexRow                   00C4C1 RLA    phexTitle                 00C4D2 RLA    
+editorShowHint            00C4E2 RLA    SetBits                   00C582 RLA    
+ClrBits                   00C587 RLA    editTrackAddressLo        00C58C RLA    
+editTrackAddressHi        00C5B4 RLA    editChainAddressLo        00C5DC RLA    
+editChainAddressHi        00C65B RLA    editPatternAddressLo      00C6DA RLA    
+editPatternAddressHi      00C759 RLA    editInstrumentAddressLo   00C7D8 RLA    
+editInstrumentAddressHi   00C7F8 RLA    editDrumkitAddressLo      00C818 RLA    
+editDrumkitAddressHi      00C820 RLA    editTableAddressLo        00C828 RLA    
+editTableAddressHi        00C860 RLA    editDutyAddressLo         00C898 RLA    
+editDutyAddressHi         00C8B8 RLA    editSpeedAddressLo        00C8D8 RLA    
+editSpeedAddressHi        00C8F8 RLA    editFxAddressLo           00C918 RLA    
+editFxAddressHi           00C928 RLA    chainRowsIndex            00C940 RLA    
+patternRowsIndex          00C950 RLA    dutyRowsIndex             00C960 RLA    
+tableRowsIndex            00C970 RLA    tableRowsIndex2           00C980 RLA    
+vibratoRowsIndex          00C990 RLA    drumkitRowsIndex          00C9B0 RLA    
+echoRowsIndex             00C9BC RLA    fxRowsIndex               00C9DC RLA    
+setMMC1r1                 00CA33 RLA    dmcAddressTable           00CC00 RLA    
+
+
+
+Imports list:
+-------------
+ClrBits (ROM_07.o):
+    ROM_05.o                  pulsar.h(595)
+    ROM_01.o                  pulsar.h(595)
+    ROM_00.o                  pulsar.h(595)
+DO_NOT_INTERRUPT (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(408)
+    ROM_01.o                  pulsar.h(408)
+    ROM_00.o                  pulsar.h(408)
+IRQ (ROM_07.o):
+    ROM_00.o                  pulsar.h(579)
+NMI (ROM_07.o):
+    ROM_00.o                  pulsar.h(579)
+PAD1_dlr (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(427)
+    ROM_01.o                  pulsar.h(427)
+    ROM_00.o                  pulsar.h(427)
+PAD1_dsta (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(429)
+    ROM_00.o                  pulsar.h(429)
+PAD1_dud (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(428)
+    ROM_00.o                  pulsar.h(428)
+PAD1_firea (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(424)
+    ROM_01.o                  pulsar.h(424)
+    ROM_00.o                  pulsar.h(424)
+PAD1_firea_old (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(516)
+    ROM_00.o                  pulsar.h(516)
+PAD1_fireb (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(425)
+    ROM_00.o                  pulsar.h(425)
+PAD1_fireb_old (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(516)
+    ROM_00.o                  pulsar.h(516)
+PAD1_jt (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(419)
+PAD1_lr (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(420)
+    ROM_01.o                  pulsar.h(420)
+    ROM_00.o                  pulsar.h(420)
+PAD1_oldlr (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(426)
+PAD1_sel (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(423)
+    ROM_01.o                  pulsar.h(423)
+    ROM_00.o                  pulsar.h(423)
+PAD1_sel_old (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(516)
+    ROM_00.o                  pulsar.h(516)
+PAD1_ud (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(421)
+    ROM_01.o                  pulsar.h(421)
+    ROM_00.o                  pulsar.h(421)
+RESET (ROM_07.o):
+    ROM_00.o                  pulsar.h(579)
+SPR00_ATTR (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(643)
+    ROM_01.o                  pulsar.h(643)
+    ROM_00.o                  pulsar.h(643)
+SPR00_CHAR (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(643)
+    ROM_01.o                  pulsar.h(643)
+    ROM_00.o                  pulsar.h(643)
+SPR00_X (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(643)
+    ROM_01.o                  pulsar.h(643)
+    ROM_00.o                  pulsar.h(643)
+SPR00_Y (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(643)
+    ROM_01.o                  pulsar.h(643)
+    ROM_00.o                  pulsar.h(643)
+SPR01_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(644)
+    ROM_00.o                  pulsar.h(644)
+SPR01_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(644)
+    ROM_00.o                  pulsar.h(644)
+SPR01_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(644)
+    ROM_00.o                  pulsar.h(644)
+SPR01_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(644)
+    ROM_00.o                  pulsar.h(644)
+SPR03_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(646)
+    ROM_00.o                  pulsar.h(646)
+SPR03_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(646)
+    ROM_00.o                  pulsar.h(646)
+SPR03_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(646)
+    ROM_00.o                  pulsar.h(646)
+SPR03_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(646)
+    ROM_00.o                  pulsar.h(646)
+SPR04_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(647)
+    ROM_00.o                  pulsar.h(647)
+SPR04_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(647)
+    ROM_00.o                  pulsar.h(647)
+SPR04_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(647)
+    ROM_00.o                  pulsar.h(647)
+SPR04_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(647)
+    ROM_00.o                  pulsar.h(647)
+SPR05_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(648)
+    ROM_00.o                  pulsar.h(648)
+SPR05_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(648)
+    ROM_00.o                  pulsar.h(648)
+SPR05_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(648)
+    ROM_00.o                  pulsar.h(648)
+SPR05_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(648)
+    ROM_00.o                  pulsar.h(648)
+SPR06_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(649)
+    ROM_00.o                  pulsar.h(649)
+SPR06_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(649)
+    ROM_00.o                  pulsar.h(649)
+SPR06_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(649)
+    ROM_00.o                  pulsar.h(649)
+SPR06_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(649)
+    ROM_00.o                  pulsar.h(649)
+SPR07_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(650)
+    ROM_00.o                  pulsar.h(650)
+SPR07_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(650)
+    ROM_00.o                  pulsar.h(650)
+SPR08_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(651)
+    ROM_00.o                  pulsar.h(651)
+SPR08_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(651)
+    ROM_00.o                  pulsar.h(651)
+SPR09_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(652)
+    ROM_00.o                  pulsar.h(652)
+SPR09_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(652)
+    ROM_00.o                  pulsar.h(652)
+SPR0A_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(653)
+    ROM_00.o                  pulsar.h(653)
+SPR0A_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(653)
+    ROM_00.o                  pulsar.h(653)
+SPR0A_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(653)
+    ROM_00.o                  pulsar.h(653)
+SPR0A_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(653)
+    ROM_00.o                  pulsar.h(653)
+SPR0B_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(654)
+    ROM_00.o                  pulsar.h(654)
+SPR0B_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(654)
+    ROM_00.o                  pulsar.h(654)
+SPR0B_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(654)
+    ROM_00.o                  pulsar.h(654)
+SPR0B_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(654)
+    ROM_00.o                  pulsar.h(654)
+SPR0C_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(655)
+    ROM_00.o                  pulsar.h(655)
+SPR0C_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(655)
+    ROM_00.o                  pulsar.h(655)
+SPR0C_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(655)
+    ROM_00.o                  pulsar.h(655)
+SPR0D_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(656)
+    ROM_00.o                  pulsar.h(656)
+SPR0D_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(656)
+    ROM_00.o                  pulsar.h(656)
+SPR0D_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(656)
+    ROM_00.o                  pulsar.h(656)
+SPR0E_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(657)
+    ROM_00.o                  pulsar.h(657)
+SPR0E_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(657)
+    ROM_00.o                  pulsar.h(657)
+SPR0E_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(657)
+    ROM_00.o                  pulsar.h(657)
+SPR0F_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(658)
+    ROM_00.o                  pulsar.h(658)
+SPR0F_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(658)
+    ROM_00.o                  pulsar.h(658)
+SPR0F_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(658)
+    ROM_00.o                  pulsar.h(658)
+SPR10_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(659)
+    ROM_00.o                  pulsar.h(659)
+SPR10_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(659)
+    ROM_00.o                  pulsar.h(659)
+SPR10_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(659)
+    ROM_00.o                  pulsar.h(659)
+SPR11_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(660)
+    ROM_00.o                  pulsar.h(660)
+SPR11_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(660)
+    ROM_00.o                  pulsar.h(660)
+SPR11_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(660)
+    ROM_00.o                  pulsar.h(660)
+SPR12_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(661)
+    ROM_00.o                  pulsar.h(661)
+SPR12_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(661)
+    ROM_00.o                  pulsar.h(661)
+SPR12_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(661)
+    ROM_00.o                  pulsar.h(661)
+SPR13_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(662)
+    ROM_00.o                  pulsar.h(662)
+SPR13_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(662)
+    ROM_00.o                  pulsar.h(662)
+SPR13_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(662)
+    ROM_00.o                  pulsar.h(662)
+SPR14_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(663)
+    ROM_00.o                  pulsar.h(663)
+SPR14_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(663)
+    ROM_00.o                  pulsar.h(663)
+SPR14_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(663)
+    ROM_00.o                  pulsar.h(663)
+SPR14_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(663)
+    ROM_00.o                  pulsar.h(663)
+SPR15_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(664)
+    ROM_00.o                  pulsar.h(664)
+SPR15_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(664)
+    ROM_00.o                  pulsar.h(664)
+SPR15_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(664)
+    ROM_00.o                  pulsar.h(664)
+SPR15_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(664)
+    ROM_00.o                  pulsar.h(664)
+SPR16_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(665)
+    ROM_00.o                  pulsar.h(665)
+SPR16_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(665)
+    ROM_00.o                  pulsar.h(665)
+SPR16_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(665)
+    ROM_00.o                  pulsar.h(665)
+SPR16_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(665)
+    ROM_00.o                  pulsar.h(665)
+SPR17_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(666)
+    ROM_00.o                  pulsar.h(666)
+SPR17_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(666)
+    ROM_00.o                  pulsar.h(666)
+SPR17_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(666)
+    ROM_00.o                  pulsar.h(666)
+SPR17_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(666)
+    ROM_00.o                  pulsar.h(666)
+SPR18_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(667)
+    ROM_00.o                  pulsar.h(667)
+SPR18_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(667)
+    ROM_00.o                  pulsar.h(667)
+SPR18_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(667)
+    ROM_00.o                  pulsar.h(667)
+SPR18_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(667)
+    ROM_00.o                  pulsar.h(667)
+SPR19_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(668)
+    ROM_00.o                  pulsar.h(668)
+SPR19_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(668)
+    ROM_00.o                  pulsar.h(668)
+SPR19_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(668)
+    ROM_00.o                  pulsar.h(668)
+SPR19_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(668)
+    ROM_00.o                  pulsar.h(668)
+SPR20_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(675)
+    ROM_00.o                  pulsar.h(675)
+SPR20_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(675)
+    ROM_00.o                  pulsar.h(675)
+SPR20_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(675)
+    ROM_00.o                  pulsar.h(675)
+SPR20_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(675)
+    ROM_00.o                  pulsar.h(675)
+SPR21_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(676)
+    ROM_00.o                  pulsar.h(676)
+SPR21_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(676)
+    ROM_00.o                  pulsar.h(676)
+SPR21_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(676)
+    ROM_00.o                  pulsar.h(676)
+SPR21_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(676)
+    ROM_00.o                  pulsar.h(676)
+SPR22_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(677)
+    ROM_00.o                  pulsar.h(677)
+SPR22_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(677)
+    ROM_00.o                  pulsar.h(677)
+SPR22_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(677)
+    ROM_00.o                  pulsar.h(677)
+SPR22_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(677)
+    ROM_00.o                  pulsar.h(677)
+SPR23_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(678)
+    ROM_00.o                  pulsar.h(678)
+SPR23_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(678)
+    ROM_00.o                  pulsar.h(678)
+SPR23_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(678)
+    ROM_00.o                  pulsar.h(678)
+SPR23_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(678)
+    ROM_00.o                  pulsar.h(678)
+SPR24_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(679)
+    ROM_00.o                  pulsar.h(679)
+SPR24_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(679)
+    ROM_00.o                  pulsar.h(679)
+SPR24_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(679)
+    ROM_00.o                  pulsar.h(679)
+SPR24_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(679)
+    ROM_00.o                  pulsar.h(679)
+SPR25_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(680)
+    ROM_00.o                  pulsar.h(680)
+SPR25_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(680)
+    ROM_00.o                  pulsar.h(680)
+SPR25_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(680)
+    ROM_00.o                  pulsar.h(680)
+SPR25_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(680)
+    ROM_00.o                  pulsar.h(680)
+SPR26_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(681)
+    ROM_00.o                  pulsar.h(681)
+SPR26_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(681)
+    ROM_00.o                  pulsar.h(681)
+SPR26_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(681)
+    ROM_00.o                  pulsar.h(681)
+SPR26_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(681)
+    ROM_00.o                  pulsar.h(681)
+SPR27_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(682)
+    ROM_00.o                  pulsar.h(682)
+SPR27_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(682)
+    ROM_00.o                  pulsar.h(682)
+SPR27_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(682)
+    ROM_00.o                  pulsar.h(682)
+SPR27_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(682)
+    ROM_00.o                  pulsar.h(682)
+SPR28_ATTR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(683)
+    ROM_00.o                  pulsar.h(683)
+SPR28_CHAR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(683)
+    ROM_00.o                  pulsar.h(683)
+SPR28_X (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(683)
+    ROM_00.o                  pulsar.h(683)
+SPR28_Y (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(683)
+    ROM_00.o                  pulsar.h(683)
+SRAM (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(463)
+SRAM_CHAINS (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(477)
+SRAM_CHAIN_FLAGS (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(477)
+    ROM_00.o                  pulsar.h(477)
+SRAM_DRUMKITS (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(479)
+SRAM_DRUMKIT_ROOTS (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(479)
+    ROM_01.o                  pulsar.h(479)
+    ROM_00.o                  pulsar.h(479)
+SRAM_DUTY_TABLES (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(480)
+SRAM_ECHOES (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(480)
+    ROM_01.o                  pulsar.h(480)
+    ROM_00.o                  pulsar.h(480)
+SRAM_ENVELOPES (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(480)
+    ROM_01.o                  pulsar.h(480)
+    ROM_00.o                  pulsar.h(480)
+SRAM_FX_TABLES (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(483)
+SRAM_HEADER (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(464)
+    ROM_05.o                  pulsar.h(464)
+    ROM_04.o                  pulsar.h(464)
+    ROM_03.o                  pulsar.h(464)
+    ROM_02.o                  pulsar.h(464)
+    ROM_01.o                  pulsar.h(464)
+    ROM_00.o                  pulsar.h(464)
+SRAM_INSTRUMENTS (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(479)
+SRAM_PALETTE (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(465)
+    ROM_05.o                  pulsar.h(465)
+    ROM_04.o                  pulsar.h(465)
+    ROM_03.o                  pulsar.h(465)
+    ROM_02.o                  pulsar.h(465)
+    ROM_01.o                  pulsar.h(465)
+    ROM_00.o                  pulsar.h(465)
+SRAM_PATTERNS (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(478)
+SRAM_PATTERN_FLAGS (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(478)
+    ROM_00.o                  pulsar.h(478)
+SRAM_SONG_MUTE (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(481)
+    ROM_01.o                  pulsar.h(481)
+    ROM_00.o                  pulsar.h(481)
+SRAM_SONG_SOLO (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(481)
+    ROM_01.o                  pulsar.h(481)
+    ROM_00.o                  pulsar.h(481)
+SRAM_SONG_SPEEDS (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(481)
+    ROM_00.o                  pulsar.h(481)
+SRAM_SPEED_TABLES (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(480)
+SRAM_TABLES (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(480)
+SRAM_TRACK_A0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(466)
+SRAM_TRACK_A1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(468)
+SRAM_TRACK_A2 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(469)
+SRAM_TRACK_A3 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(470)
+SRAM_TRACK_A4 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(471)
+SRAM_TRACK_A5 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(472)
+SRAM_TRACK_A6 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(473)
+SRAM_TRACK_A7 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(474)
+SRAM_TRACK_B0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(466)
+SRAM_TRACK_B1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(468)
+SRAM_TRACK_B2 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(469)
+SRAM_TRACK_B3 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(470)
+SRAM_TRACK_B4 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(471)
+SRAM_TRACK_B5 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(472)
+SRAM_TRACK_B6 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(473)
+SRAM_TRACK_B7 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(474)
+SRAM_TRACK_C0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(466)
+SRAM_TRACK_C1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(468)
+SRAM_TRACK_C2 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(469)
+SRAM_TRACK_C3 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(470)
+SRAM_TRACK_C4 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(471)
+SRAM_TRACK_C5 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(472)
+SRAM_TRACK_C6 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(473)
+SRAM_TRACK_C7 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(474)
+SRAM_TRACK_D0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(466)
+SRAM_TRACK_D1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(468)
+SRAM_TRACK_D2 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(469)
+SRAM_TRACK_D3 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(470)
+SRAM_TRACK_D4 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(471)
+SRAM_TRACK_D5 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(472)
+SRAM_TRACK_D6 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(473)
+SRAM_TRACK_D7 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(474)
+SRAM_TRACK_E0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(466)
+SRAM_TRACK_E1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(468)
+SRAM_TRACK_E2 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(469)
+SRAM_TRACK_E3 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(470)
+SRAM_TRACK_E4 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(471)
+SRAM_TRACK_E5 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(472)
+SRAM_TRACK_E6 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(473)
+SRAM_TRACK_E7 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(474)
+SRAM_VIBRATOS (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(480)
+    ROM_01.o                  pulsar.h(480)
+    ROM_00.o                  pulsar.h(480)
+SetBits (ROM_07.o):
+    ROM_05.o                  pulsar.h(595)
+    ROM_01.o                  pulsar.h(595)
+    ROM_00.o                  pulsar.h(595)
+V_APU (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(555)
+    ROM_01.o                  pulsar.h(555)
+    ROM_00.o                  pulsar.h(555)
+blockEnd (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(529)
+    ROM_00.o                  pulsar.h(529)
+blockMode (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(529)
+    ROM_00.o                  pulsar.h(529)
+blockOrigin (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(529)
+    ROM_00.o                  pulsar.h(529)
+blockStart (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(529)
+    ROM_00.o                  pulsar.h(529)
+bpmBeatCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(568)
+bpmCurrent (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(568)
+    ROM_01.o                  pulsar.h(568)
+    ROM_00.o                  pulsar.h(568)
+bpmFrameCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(568)
+chainCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(519)
+    ROM_00.o                  pulsar.h(519)
+chainCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(522)
+    ROM_00.o                  pulsar.h(522)
+chainFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(525)
+    ROM_00.o                  pulsar.h(525)
+chainRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(590)
+    ROM_00.o                  pulsar.h(590)
+chainVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(436)
+    ROM_00.o                  pulsar.h(436)
+checkErrorMessages (ROM_00.o):
+    ROM_07.o                  common.h(6)
+clearMarkers (ROM_00.o):
+    ROM_07.o                  common.h(4)
+copyBuffer (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(482)
+    ROM_00.o                  pulsar.h(482)
+copyBufferLength (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(482)
+    ROM_00.o                  pulsar.h(482)
+copyBufferObject (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(561)
+    ROM_00.o                  pulsar.h(561)
+copyBufferObjectType (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(561)
+    ROM_00.o                  pulsar.h(561)
+copyBufferStartIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(482)
+    ROM_00.o                  pulsar.h(482)
+copyInfoBuffer (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(494)
+    ROM_01.o                  pulsar.h(494)
+    ROM_00.o                  pulsar.h(494)
+copyInfoFlag (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(494)
+    ROM_01.o                  pulsar.h(494)
+    ROM_00.o                  pulsar.h(494)
+currentPrgBank (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(409)
+currentSramBank (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(409)
+cursorFlashColour (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(498)
+    ROM_01.o                  pulsar.h(498)
+    ROM_00.o                  pulsar.h(498)
+cursorFlashIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(498)
+    ROM_00.o                  pulsar.h(498)
+dmaCycleFlag (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(413)
+    ROM_01.o                  pulsar.h(413)
+    ROM_00.o                  pulsar.h(413)
+dmaSecondary (ROM_03.o):
+    ROM_07.o                  pulsar.h(603)
+dmaUpdateHeader (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(518)
+    ROM_01.o                  pulsar.h(518)
+    ROM_00.o                  pulsar.h(518)
+dmaUpdateTitle (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(518)
+    ROM_01.o                  pulsar.h(518)
+    ROM_00.o                  pulsar.h(518)
+dmaUpdateWindow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(518)
+    ROM_00.o                  pulsar.h(518)
+dmcAddressTable (ROM_07.o):
+    ROM_05.o                  pulsar.h(596)
+dpcmDC (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+dpcmLength (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+dpcmPitch (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+dpcmStart (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+drumkitCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(519)
+    ROM_00.o                  pulsar.h(519)
+drumkitCursorX_old (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(528)
+    ROM_00.o                  pulsar.h(528)
+drumkitCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(522)
+    ROM_00.o                  pulsar.h(522)
+drumkitFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(525)
+    ROM_00.o                  pulsar.h(525)
+drumkitRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(591)
+    ROM_00.o                  pulsar.h(591)
+drumkitVector (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(439)
+dutyCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(520)
+    ROM_00.o                  pulsar.h(520)
+dutyCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(523)
+    ROM_00.o                  pulsar.h(523)
+dutyFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(526)
+    ROM_00.o                  pulsar.h(526)
+dutyRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(590)
+    ROM_01.o                  pulsar.h(590)
+dutyVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(442)
+echoCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(520)
+    ROM_00.o                  pulsar.h(520)
+echoCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(523)
+    ROM_00.o                  pulsar.h(523)
+echoFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(526)
+    ROM_00.o                  pulsar.h(526)
+echoIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(504)
+echoRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(567)
+    ROM_01.o                  pulsar.h(567)
+editBuffer (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(509)
+    ROM_00.o                  pulsar.h(509)
+editBufferFlag (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(509)
+    ROM_00.o                  pulsar.h(509)
+editChain (ROM_00.o):
+    ROM_07.o                  pulsar.h(609)
+editChainAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(582)
+    ROM_01.o                  pulsar.h(582)
+    ROM_00.o                  pulsar.h(582)
+editChainAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(582)
+    ROM_01.o                  pulsar.h(582)
+    ROM_00.o                  pulsar.h(582)
+editChainIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(504)
+    ROM_01.o                  pulsar.h(504)
+    ROM_00.o                  pulsar.h(504)
+editChainLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(506)
+editDrumkit (ROM_00.o):
+    ROM_07.o                  pulsar.h(612)
+editDrumkitAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(585)
+    ROM_01.o                  pulsar.h(585)
+    ROM_00.o                  pulsar.h(585)
+editDrumkitAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(585)
+    ROM_01.o                  pulsar.h(585)
+    ROM_00.o                  pulsar.h(585)
+editDrumkitLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(506)
+editDutyAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(587)
+    ROM_01.o                  pulsar.h(587)
+    ROM_00.o                  pulsar.h(587)
+editDutyAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(587)
+    ROM_01.o                  pulsar.h(587)
+    ROM_00.o                  pulsar.h(587)
+editDutyLastValue (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(507)
+editDutyTable (ROM_01.o):
+    ROM_07.o                  pulsar.h(616)
+editEchoLastValue (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(508)
+editEchoTable (ROM_01.o):
+    ROM_07.o                  pulsar.h(617)
+editEnvelopeLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(507)
+editEnvelopeTable (ROM_00.o):
+    ROM_07.o                  pulsar.h(613)
+editFx (ROM_01.o):
+    ROM_07.o                  pulsar.h(619)
+editFxAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(589)
+    ROM_01.o                  pulsar.h(589)
+    ROM_00.o                  pulsar.h(589)
+editFxAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(589)
+    ROM_01.o                  pulsar.h(589)
+    ROM_00.o                  pulsar.h(589)
+editFxLastValue (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(565)
+editInstrument (ROM_00.o):
+    ROM_07.o                  pulsar.h(611)
+editInstrumentAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(584)
+    ROM_01.o                  pulsar.h(584)
+    ROM_00.o                  pulsar.h(584)
+editInstrumentAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(584)
+    ROM_01.o                  pulsar.h(584)
+    ROM_00.o                  pulsar.h(584)
+editNavFlag (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(509)
+    ROM_00.o                  pulsar.h(509)
+editNavMenu (ROM_01.o):
+    ROM_07.o                  pulsar.h(620)
+editPattern (ROM_00.o):
+    ROM_07.o                  pulsar.h(610)
+editPatternAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(583)
+    ROM_01.o                  pulsar.h(583)
+    ROM_00.o                  pulsar.h(583)
+editPatternAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(583)
+    ROM_01.o                  pulsar.h(583)
+    ROM_00.o                  pulsar.h(583)
+editPatternLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(506)
+editSetup (ROM_01.o):
+    ROM_07.o                  pulsar.h(621)
+editSong (ROM_00.o):
+    ROM_07.o                  pulsar.h(608)
+editSongLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(506)
+editSpeed (ROM_01.o):
+    ROM_07.o                  pulsar.h(618)
+editSpeedAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(581)
+    ROM_01.o                  pulsar.h(581)
+    ROM_00.o                  pulsar.h(581)
+editSpeedAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(581)
+    ROM_01.o                  pulsar.h(581)
+    ROM_00.o                  pulsar.h(581)
+editSpeedLastValue (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(508)
+editTable (ROM_00.o):
+    ROM_07.o                  pulsar.h(614)
+editTableAddressHi (ROM_07.o):
+    ROM_05.o                  pulsar.h(586)
+    ROM_01.o                  pulsar.h(586)
+    ROM_00.o                  pulsar.h(586)
+editTableAddressLo (ROM_07.o):
+    ROM_05.o                  pulsar.h(586)
+    ROM_01.o                  pulsar.h(586)
+    ROM_00.o                  pulsar.h(586)
+editTableLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(507)
+editTrackAddressHi (ROM_07.o):
+    ROM_01.o                  pulsar.h(580)
+    ROM_00.o                  pulsar.h(580)
+editTrackAddressLo (ROM_07.o):
+    ROM_01.o                  pulsar.h(580)
+    ROM_00.o                  pulsar.h(580)
+editVibratoLastValue (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(507)
+editVibratoTable (ROM_00.o):
+    ROM_07.o                  pulsar.h(615)
+editorCurrentChain (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(499)
+    ROM_01.o                  pulsar.h(499)
+    ROM_00.o                  pulsar.h(499)
+editorCurrentDrumkit (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(500)
+    ROM_00.o                  pulsar.h(500)
+editorCurrentDuty (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(501)
+    ROM_00.o                  pulsar.h(501)
+editorCurrentEcho (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(501)
+    ROM_00.o                  pulsar.h(501)
+editorCurrentEnvelope (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(500)
+    ROM_00.o                  pulsar.h(500)
+editorCurrentFx (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(565)
+    ROM_00.o                  pulsar.h(565)
+editorCurrentInstrument (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(499)
+    ROM_00.o                  pulsar.h(499)
+editorCurrentPattern (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(499)
+    ROM_00.o                  pulsar.h(499)
+editorCurrentSong (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(502)
+    ROM_05.o                  pulsar.h(502)
+    ROM_01.o                  pulsar.h(502)
+    ROM_00.o                  pulsar.h(502)
+editorCurrentSpeed (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(501)
+    ROM_00.o                  pulsar.h(501)
+editorCurrentTable (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(500)
+    ROM_00.o                  pulsar.h(500)
+editorCurrentTrack (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(499)
+    ROM_01.o                  pulsar.h(499)
+    ROM_00.o                  pulsar.h(499)
+editorCurrentVibrato (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(500)
+    ROM_00.o                  pulsar.h(500)
+editorDisplayBPM (ROM_00.o):
+    ROM_07.o                  common.h(5)
+editorFlashCursor (ROM_00.o):
+    ROM_07.o                  common.h(4)
+editorInstrumentAddressHi (ROM_07.o):
+    ROM_00.o                  pulsar.h(622)
+editorInstrumentAddressLo (ROM_07.o):
+    ROM_00.o                  pulsar.h(622)
+editorKeys (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(510)
+    ROM_00.o                  pulsar.h(510)
+editorKeysEnd (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(510)
+    ROM_00.o                  pulsar.h(510)
+editorLastValues (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(505)
+    ROM_00.o                  pulsar.h(505)
+editorLastValuesEnd (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(505)
+    ROM_00.o                  pulsar.h(505)
+editorLoop (ROM_07.o):
+    ROM_01.o                  pulsar.h(623)
+    ROM_00.o                  pulsar.h(623)
+editorMode (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(497)
+    ROM_01.o                  pulsar.h(497)
+    ROM_00.o                  pulsar.h(497)
+editorModeIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(497)
+    ROM_00.o                  pulsar.h(497)
+editorPlayingNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(605)
+    ROM_01.o                  pulsar.h(605)
+    ROM_00.o                  pulsar.h(605)
+editorPreviousModes (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(497)
+    ROM_00.o                  pulsar.h(497)
+editorShowHint (ROM_07.o):
+    ROM_00.o                  pulsar.h(594)
+editorUpdateScrollArrows (ROM_00.o):
+    ROM_07.o                  common.h(4)
+editorUpdateTrackInfo (ROM_00.o):
+    ROM_07.o                  common.h(6)
+editorVector (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(434)
+engineTmp0 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(415)
+engineTmp1 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(416)
+engineTmp2 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(417)
+envelopeAmp (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(536)
+envelopeCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(536)
+envelopeCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(520)
+    ROM_00.o                  pulsar.h(520)
+envelopeCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(523)
+    ROM_00.o                  pulsar.h(523)
+envelopeFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(526)
+    ROM_00.o                  pulsar.h(526)
+envelopeIndex (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(504)
+envelopePhase (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(536)
+errorCounter (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(564)
+    ROM_00.o                  pulsar.h(564)
+errorMessageBuffer (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(517)
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+errorMessageFlag (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(564)
+    ROM_01.o                  pulsar.h(564)
+    ROM_00.o                  pulsar.h(564)
+errorMessageNumber (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(564)
+    ROM_00.o                  pulsar.h(564)
+errorScreen (ROM_03.o):
+    ROM_07.o                  pulsar.h(626)
+font (ROM_02.o):
+    ROM_07.o                  pulsar.h(602)
+fxCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(565)
+    ROM_00.o                  pulsar.h(565)
+fxCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(565)
+    ROM_00.o                  pulsar.h(565)
+fxFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(565)
+    ROM_00.o                  pulsar.h(565)
+fxRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(591)
+    ROM_01.o                  pulsar.h(591)
+fxVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(445)
+getNoteTemp0 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(549)
+getNoteTemp1 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(549)
+headerBuffer (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(517)
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+hintAddressHi (ROM_04.o):
+    ROM_07.o                  pulsar.h(635)
+hintAddressLo (ROM_04.o):
+    ROM_07.o                  pulsar.h(635)
+hintFourteens (ROM_04.o):
+    ROM_07.o                  pulsar.h(635)
+hintMode (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(498)
+    ROM_00.o                  pulsar.h(498)
+infoBuffer1 (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(494)
+    ROM_01.o                  pulsar.h(494)
+    ROM_00.o                  pulsar.h(494)
+infoBuffer2 (pulsar_ram.o):
+    ROM_03.o                  pulsar.h(494)
+    ROM_01.o                  pulsar.h(494)
+    ROM_00.o                  pulsar.h(494)
+initEditor (ROM_00.o):
+    ROM_07.o                  common.h(4)
+initEditorData (ROM_00.o):
+    ROM_07.o                  common.h(4)
+initPalette (ROM_07.o):
+    ROM_01.o                  pulsar.h(598)
+    ROM_00.o                  pulsar.h(598)
+initPulsar (ROM_05.o):
+    ROM_07.o                  pulsar.h(632)
+instrumentCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(519)
+    ROM_00.o                  pulsar.h(519)
+instrumentCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(522)
+    ROM_00.o                  pulsar.h(522)
+instrumentFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(525)
+    ROM_00.o                  pulsar.h(525)
+instrumentVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(438)
+    ROM_00.o                  pulsar.h(438)
+keysDoubleTapA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(512)
+    ROM_00.o                  pulsar.h(512)
+keysDoubleTapB (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(511)
+    ROM_00.o                  pulsar.h(511)
+keysDoubleTapSel (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(513)
+    ROM_00.o                  pulsar.h(513)
+keysHoldA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(512)
+    ROM_00.o                  pulsar.h(512)
+keysHoldB (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(511)
+    ROM_00.o                  pulsar.h(511)
+keysHoldCounterA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(512)
+    ROM_00.o                  pulsar.h(512)
+keysHoldCounterB (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(511)
+    ROM_00.o                  pulsar.h(511)
+keysHoldCounterSel (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(513)
+    ROM_00.o                  pulsar.h(513)
+keysHoldSel (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(513)
+    ROM_00.o                  pulsar.h(513)
+keysRepeatCounterLR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(515)
+    ROM_00.o                  pulsar.h(515)
+keysRepeatCounterUD (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(514)
+    ROM_00.o                  pulsar.h(514)
+keysRepeatLR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(515)
+    ROM_00.o                  pulsar.h(515)
+keysRepeatOldLR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(515)
+    ROM_00.o                  pulsar.h(515)
+keysRepeatOldUD (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(514)
+    ROM_00.o                  pulsar.h(514)
+keysRepeatRateLR (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(515)
+    ROM_00.o                  pulsar.h(515)
+keysRepeatRateUD (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(514)
+    ROM_00.o                  pulsar.h(514)
+keysRepeatUD (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(514)
+    ROM_00.o                  pulsar.h(514)
+keysTapA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(512)
+    ROM_00.o                  pulsar.h(512)
+keysTapB (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(511)
+    ROM_00.o                  pulsar.h(511)
+keysTapCounterA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(512)
+    ROM_00.o                  pulsar.h(512)
+keysTapCounterB (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(511)
+    ROM_00.o                  pulsar.h(511)
+keysTapCounterSel (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(513)
+    ROM_00.o                  pulsar.h(513)
+keysTapSel (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(513)
+    ROM_00.o                  pulsar.h(513)
+layout (ROM_02.o):
+    ROM_07.o                  pulsar.h(602)
+lfsr (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(457)
+    ROM_01.o                  pulsar.h(457)
+    ROM_00.o                  pulsar.h(457)
+navMenuCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(521)
+    ROM_00.o                  pulsar.h(521)
+navMenuCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(524)
+    ROM_00.o                  pulsar.h(524)
+noteAddFrac (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(538)
+noteAddNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(538)
+noteNumber (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(537)
+old_V_APUB (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(576)
+palette (ROM_07.o):
+    ROM_03.o                  pulsar.h(626)
+patternCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(519)
+    ROM_00.o                  pulsar.h(519)
+patternCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(522)
+    ROM_00.o                  pulsar.h(522)
+patternFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(525)
+    ROM_00.o                  pulsar.h(525)
+patternLastNote (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(547)
+patternRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(590)
+    ROM_00.o                  pulsar.h(590)
+patternVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(437)
+    ROM_00.o                  pulsar.h(437)
+phexRow (ROM_07.o):
+    ROM_01.o                  pulsar.h(592)
+    ROM_00.o                  pulsar.h(592)
+phexTitle (ROM_07.o):
+    ROM_01.o                  pulsar.h(592)
+    ROM_00.o                  pulsar.h(592)
+phexWindow (ROM_07.o):
+    ROM_01.o                  pulsar.h(592)
+    ROM_00.o                  pulsar.h(592)
+phexWindow2 (ROM_07.o):
+    ROM_01.o                  pulsar.h(592)
+phexWindow3 (ROM_07.o):
+    ROM_01.o                  pulsar.h(592)
+pitchHi (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(539)
+pitchHiOld (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(539)
+pitchLo (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(539)
+pitchLoOld (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(539)
+plyrChainIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(531)
+    ROM_01.o                  pulsar.h(531)
+    ROM_00.o                  pulsar.h(531)
+plyrChainVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(449)
+plyrChordNotes (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(548)
+plyrCurrentChain (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(531)
+    ROM_01.o                  pulsar.h(531)
+    ROM_00.o                  pulsar.h(531)
+plyrCurrentChainTranspose (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(531)
+    ROM_00.o                  pulsar.h(531)
+plyrCurrentDuty (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(541)
+plyrCurrentInstrument (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(532)
+    ROM_01.o                  pulsar.h(532)
+    ROM_00.o                  pulsar.h(532)
+plyrCurrentNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(532)
+    ROM_00.o                  pulsar.h(532)
+plyrCurrentPattern (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(533)
+    ROM_01.o                  pulsar.h(533)
+    ROM_00.o                  pulsar.h(533)
+plyrCurrentPatternFX (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(533)
+plyrCurrentPatternFXData (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(533)
+plyrCurrentSpeedTable (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(547)
+    ROM_01.o                  pulsar.h(547)
+    ROM_00.o                  pulsar.h(547)
+plyrDelayNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(550)
+plyrDelayNoteCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(550)
+    ROM_01.o                  pulsar.h(550)
+    ROM_00.o                  pulsar.h(550)
+plyrDetuneHi (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(554)
+plyrDpcmMuted (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+plyrDpcmOn (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(556)
+plyrDutyIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(541)
+    ROM_01.o                  pulsar.h(541)
+plyrDutyTableDelay (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(541)
+plyrDutyVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(452)
+plyrEchoAttn (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(572)
+plyrEchoBuffer00_A (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(486)
+plyrEchoBuffer00_B (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(487)
+plyrEchoBuffer00_D (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(488)
+plyrEchoBuffer02_A (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(486)
+plyrEchoBuffer02_B (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(487)
+plyrEchoBuffer02_D (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(488)
+plyrEchoBuffer03_A (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(486)
+plyrEchoBuffer03_B (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(487)
+plyrEchoCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(572)
+plyrEchoIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(572)
+plyrEchoInitAttn (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(572)
+plyrEchoSpeed (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(572)
+plyrEnvelopeVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(448)
+plyrFxDataTemp1 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(460)
+plyrFxDataTemp2 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(460)
+plyrFxTable (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(566)
+    ROM_01.o                  pulsar.h(566)
+plyrFxTableCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(566)
+plyrFxTableIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(566)
+    ROM_01.o                  pulsar.h(566)
+plyrFxTableSpeed (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(566)
+plyrFxTableVoice (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(566)
+plyrFxTemp1 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(460)
+plyrFxTemp2 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(460)
+plyrFxType (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(546)
+plyrFxVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(455)
+plyrInitSong (ROM_05.o):
+    ROM_07.o                  pulsar.h(629)
+plyrInstrumentCopy (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(459)
+plyrInstrumentCopyA (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(459)
+    ROM_05.o                  pulsar.h(459)
+    ROM_01.o                  pulsar.h(459)
+    ROM_00.o                  pulsar.h(459)
+plyrInstrumentCopyB (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(459)
+    ROM_05.o                  pulsar.h(459)
+    ROM_01.o                  pulsar.h(459)
+    ROM_00.o                  pulsar.h(459)
+plyrInstrumentCopyC (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(459)
+    ROM_05.o                  pulsar.h(459)
+    ROM_01.o                  pulsar.h(459)
+    ROM_00.o                  pulsar.h(459)
+plyrInstrumentCopyD (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(459)
+    ROM_05.o                  pulsar.h(459)
+    ROM_01.o                  pulsar.h(459)
+    ROM_00.o                  pulsar.h(459)
+plyrInstrumentCopyE (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(535)
+    ROM_05.o                  pulsar.h(535)
+    ROM_01.o                  pulsar.h(535)
+    ROM_00.o                  pulsar.h(535)
+plyrInstrumentVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(451)
+plyrKeyOn (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(557)
+    ROM_00.o                  pulsar.h(557)
+plyrKillCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(550)
+    ROM_00.o                  pulsar.h(550)
+plyrNoteCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(532)
+    ROM_01.o                  pulsar.h(532)
+    ROM_00.o                  pulsar.h(532)
+plyrPatternChordCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(548)
+plyrPatternChordIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(548)
+plyrPatternChordNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(548)
+plyrPatternIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(530)
+    ROM_01.o                  pulsar.h(530)
+    ROM_00.o                  pulsar.h(530)
+plyrPatternJump (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(531)
+plyrPatternStepCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(530)
+    ROM_01.o                  pulsar.h(530)
+    ROM_00.o                  pulsar.h(530)
+plyrPatternVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(450)
+plyrPitchSweepDelta (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(540)
+plyrPitchSweepLo (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(540)
+plyrPlayMode (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(563)
+    ROM_01.o                  pulsar.h(563)
+    ROM_00.o                  pulsar.h(563)
+plyrPlaying (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(530)
+    ROM_01.o                  pulsar.h(530)
+    ROM_00.o                  pulsar.h(530)
+plyrPreviousNote (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(553)
+plyrRefresh (ROM_05.o):
+    ROM_07.o                  pulsar.h(629)
+plyrRetriggerCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(559)
+    ROM_01.o                  pulsar.h(559)
+    ROM_00.o                  pulsar.h(559)
+plyrRetriggerSpeed (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(559)
+    ROM_00.o                  pulsar.h(559)
+plyrSlideDestination (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(553)
+plyrSlideSpeed (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(553)
+plyrSongStartIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(530)
+    ROM_01.o                  pulsar.h(530)
+    ROM_00.o                  pulsar.h(530)
+plyrSpeedTableIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(547)
+    ROM_01.o                  pulsar.h(547)
+    ROM_00.o                  pulsar.h(547)
+plyrSpeedVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(454)
+plyrTableCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(543)
+plyrTableDoStep (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(543)
+plyrTableIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(542)
+    ROM_00.o                  pulsar.h(542)
+plyrTableJump (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(543)
+plyrTablePitch (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(542)
+plyrTableSpeed (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(542)
+plyrTableTrackE (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(544)
+plyrTableVector (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(453)
+plyrTableVolume (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(542)
+plyrTrackIndex (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(530)
+    ROM_01.o                  pulsar.h(530)
+    ROM_00.o                  pulsar.h(530)
+plyrVibDelta (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(551)
+plyrVibDepthMod (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(552)
+plyrVibDepthModCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(552)
+plyrVibLastDelta (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(551)
+plyrVibPos (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(551)
+plyrVibSpeedCounter (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(551)
+pulsarIntensity (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(560)
+pulsarPassCounter (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(560)
+    ROM_05.o                  pulsar.h(560)
+pulsarRefresh (ROM_05.o):
+    ROM_07.o                  pulsar.h(632)
+rowBuffer (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(517)
+    ROM_03.o                  pulsar.h(517)
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+setMMC1r1 (ROM_07.o):
+    ROM_05.o                  pulsar.h(597)
+    ROM_01.o                  pulsar.h(597)
+    ROM_00.o                  pulsar.h(597)
+setupCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(521)
+    ROM_00.o                  pulsar.h(521)
+setupCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(524)
+    ROM_00.o                  pulsar.h(524)
+soloLightChar (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(562)
+    ROM_00.o                  pulsar.h(562)
+soloLightCounter (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(562)
+    ROM_00.o                  pulsar.h(562)
+songCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(519)
+    ROM_00.o                  pulsar.h(519)
+songCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(522)
+    ROM_00.o                  pulsar.h(522)
+songFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(525)
+    ROM_00.o                  pulsar.h(525)
+songTrackIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(504)
+    ROM_00.o                  pulsar.h(504)
+songVectors (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(446)
+    ROM_05.o                  pulsar.h(446)
+    ROM_01.o                  pulsar.h(446)
+    ROM_00.o                  pulsar.h(446)
+speedCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(521)
+    ROM_00.o                  pulsar.h(521)
+speedCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(524)
+    ROM_00.o                  pulsar.h(524)
+speedFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(527)
+    ROM_00.o                  pulsar.h(527)
+speedVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(444)
+spr (ROM_02.o):
+    ROM_07.o                  pulsar.h(602)
+sprBuf (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(495)
+tableCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(520)
+    ROM_00.o                  pulsar.h(520)
+tableCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(523)
+    ROM_00.o                  pulsar.h(523)
+tableFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(526)
+    ROM_00.o                  pulsar.h(526)
+tableRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(591)
+    ROM_00.o                  pulsar.h(591)
+tableRowsIndex2 (ROM_07.o):
+    ROM_05.o                  pulsar.h(591)
+tableVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(440)
+    ROM_00.o                  pulsar.h(440)
+titleBuffer (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(517)
+    ROM_03.o                  pulsar.h(517)
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+tmp0 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(414)
+    ROM_05.o                  pulsar.h(414)
+    ROM_03.o                  pulsar.h(414)
+    ROM_01.o                  pulsar.h(414)
+    ROM_00.o                  pulsar.h(414)
+tmp1 (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(414)
+    ROM_05.o                  pulsar.h(414)
+    ROM_03.o                  pulsar.h(414)
+    ROM_01.o                  pulsar.h(414)
+    ROM_00.o                  pulsar.h(414)
+tmp2 (pulsar_ram.o):
+    ROM_05.o                  pulsar.h(414)
+    ROM_01.o                  pulsar.h(414)
+    ROM_00.o                  pulsar.h(414)
+tmp3 (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(414)
+    ROM_00.o                  pulsar.h(414)
+tmp4 (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(414)
+    ROM_00.o                  pulsar.h(414)
+trackVector (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(435)
+    ROM_00.o                  pulsar.h(435)
+updateVuMeters (ROM_00.o):
+    ROM_07.o                  common.h(5)
+vblankFlag (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(410)
+    ROM_05.o                  pulsar.h(410)
+vblankFlagOld (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(411)
+vblankOverflow (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(412)
+vibratoCursorX (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(520)
+    ROM_00.o                  pulsar.h(520)
+vibratoCursorY (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(523)
+    ROM_00.o                  pulsar.h(523)
+vibratoFirstRow (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(526)
+    ROM_00.o                  pulsar.h(526)
+vibratoIndex (pulsar_ram.o):
+    ROM_00.o                  pulsar.h(504)
+vibratoRowsIndex (ROM_07.o):
+    ROM_05.o                  pulsar.h(591)
+    ROM_00.o                  pulsar.h(591)
+vuCounter (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(558)
+    ROM_00.o                  pulsar.h(558)
+vuIndex (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(558)
+    ROM_00.o                  pulsar.h(558)
+waitForTapA (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(604)
+    ROM_00.o                  pulsar.h(604)
+windowBuffer (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(517)
+    ROM_03.o                  pulsar.h(517)
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+writePaletteFlag (pulsar_ram.o):
+    ROM_07.o                  pulsar.h(593)
+    ROM_01.o                  pulsar.h(593)
+    ROM_00.o                  pulsar.h(593)
+writeScreen (pulsar_ram.o):
+    ROM_01.o                  pulsar.h(517)
+    ROM_00.o                  pulsar.h(517)
+yesNoSwitch (ROM_07.o):
+    ROM_00.o                  common.h(7)
+

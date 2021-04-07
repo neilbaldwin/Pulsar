@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<ul>
+			<li><a href="CommandsA-E.html#command_a"><code>A</code> - table</a></li>
+			<li><a href="CommandsA-E.html#command_b"><code>B</code> - vibrato</a></li>
+			<li><a href="CommandsA-E.html#command_c"><code>C</code> - chord</a></li>
+			<li><a href="CommandsA-E.html#command_d"><code>D</code> - delay note</a></li>
+			<li><a href="CommandsA-E.html#command_e"><code>E</code> - envelope</a></li>
+			<li><a href="CommandsF-J.html#command_f"><code>F</code> - multiFX</a></li>
+			<li><a href="CommandsF-J.html#command_g"><code>G</code> - speed table</a></li>
+			<li><a href="CommandsF-J.html#command_h"><code>H</code> - jump (pre)</a></li>
+			<li><a href="CommandsF-J.html#command_i"><code>I</code> - refresh rate</a></li>
+			<li><a href="CommandsF-J.html#command_j"><code>J</code> - jump (post)</a></li>
+			<li><a href="CommandsK-O.html#command_k"><code>K</code> - kill note</a></li>
+			<li><a href="CommandsK-O.html#command_l"><code>L</code> - slide</a></li>
+			<li><a href="CommandsK-O.html#command_m"><code>M</code> - gate time</a></li>
+			<li><a href="CommandsK-O.html#command_n"><code>N</code> - hard frq</a></li>
+			<li><a href="CommandsK-O.html#command_o"><code>O</code> - output level</a></li>
+			<li><a href="CommandsP-T.html#command_p"><code>P</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_q"><code>Q</code> - pitch q</a></li>
+			<li><a href="CommandsP-T.html#command_r"><code>R</code> - repeat</a></li>
+			<li><a href="CommandsP-T.html#command_s"><code>S</code> - sweep</a></li>
+			<li><a href="CommandsP-T.html#command_t"><code>T</code> - detune</a></li>
+			<li><a href="CommandsU-Z.html#command_u"><code>U</code> - probability</a></li>
+			<li><a href="CommandsU-Z.html#command_v"><code>V</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_w"><code>W</code> - duty</a></li>
+			<li><a href="CommandsU-Z.html#command_x"><code>X</code> - (future use)</a></li>
+			<li><a href="CommandsU-Z.html#command_y"><code>Y</code> - echo</a></li>
+			<li><a href="CommandsU-Z.html#command_z"><code>Z</code> - table speed</a></li>
+		</ul>		
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Commands P - T</h2>
+		
+<table class="commandTable" id="command_p">
+	<thead>
+		<th width="10%"><code>Pxx</code></th>
+		<th>Pitch Sweep (linear)</th>
+		<th width="10%"><code>ABC--</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Sweeps the pitch of the current note, <code>XX</code> controls direction and speed.</p> 
+		 <p><code>01 - 7F</code> sweep up, slowest to fastest</p>
+		 <p><code>FF - 80</code> sweep down, slowest to fastest</p>                           
+		                                                                              
+		<p><bold>Note: </bold>the pitch sweep for <code>Pxx</code> is roughly linear so you should get the same rate of change in all octaves. This is in contrast to the other sweep command, <code>Sxx</code> which is a non-linear sweep.</p>
+		
+		<p><bold>Note: </bold> the Instrument parameter <code>PSWEEP-Q</code> affects this command. The lower the <code>PSWEEP-Q</code> setting, the slower and more 'steppy' the sweep will be.</p>
+	
+			</td>
+	</tr>
+<tr>
+	<td colspan="4">
+		<hr /><br />
+		<p><bold>Track E: </bold>when used on Track E, this command sets the <a href="Page_Drumkit.html#E_PT">Playback Pitch</a> (<code>PT</code>) for the sample.</p>
+	</td>
+</tr>
+</table>
+<br />
+<table class="commandTable" id="command_q">
+	<thead>
+		<th width="10%"><code>Qxx</code></th>
+		<th>Pitch Sweep Quality</th>
+		<th width="10%"><code>ABC--</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Overrides the current Instrument's <code><a href="Page_Instrument.html#PSWEEP_Q">PSWEEP-Q</a></code> setting.</p>
+		 <p>As mentioned several times throughout the manual, <code>'PWEEP Q'</code> influences several synthesis effects:</p>
+		 <ul>
+		 <li>the speed and smoothness of pitch sweeping and slide (<code>Lxx</code>)</li>
+		 <li>the speed of the arpeggio for the Chord command (<code>Cxx</code>)</li>
+		 <li>the speed and smoothness of Vibrato</li>                               
+		 </p> 
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_r">
+	<thead>
+		<th width="10%"><code>Rxx</code></th>
+		<th>Repeat Note</th>
+		<th width="10%"><code>ABCDE</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Causes the current note to be repeated at a rate determined by <code>XX</code>. <code>00</code> is off, <code>FF</code> is fastest. The repeating will continue until a new note, until a Kill command (<code>Kxx</code>) or until another Repeat command!</p>     
+         
+		</td>
+	</tr>
+</table>
+<br />
+<table class="commandTable" id="command_s">
+	<thead>
+		<th width="10%"><code>Sxx</code></th>
+		<th>Pitch Sweep (non-linear)</th>
+		<th width="10%"><code>ABC--</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+<tr>
+	<td colspan="4">
+	 <p>Sweeps the pitch of the current note, <code>XX</code> controls direction and speed.</p> 
+	 <p><code>01 - 7F</code> sweep up, slowest to fastest</p>
+	 <p><code>FF - 80</code> sweep down, slowest to fastest</p>                           
+	                                                                              
+	<p><bold>Note: </bold>the pitch sweep for <code>Sxx</code> is non-linear so higher the octave the faster the perceived pitch change over time. This is in contrast to the other sweep command, <code>Pxx</code> which is a (roughly) linear sweep.</p>
+	
+	<p><bold>Note: </bold> the Instrument parameter <code>PSWEEP-Q</code> affects this command. The lower the <code>PSWEEP-Q</code> setting, the slower and more 'steppy' the sweep will be.</p>
+
+		</td>
+</tr>
+<tr>
+	<td colspan="4">
+		<hr /><br />
+		<p><bold>Track E: </bold>when used on Track E, this sets the <a href="Page_Drumkit.html#E_ST">Start Offset</a> (<code>ST</code>) for the sample.</p>
+	</td>
+</tr>
+
+</table>
+<br />
+<table class="commandTable" id="command_t">
+	<thead>
+		<th width="10%"><code>Txx</code></th>
+		<th>Detune</th>
+		<th width="10%"><code>ABC--</code></th>
+		<th width="20%"><code>Pattern/Table</code></th>
+	</thead>
+	<tr>
+		<td colspan="4">
+		 <p>Overrides the current Instrument's <code><a href="Page_Instrument.html#DETUNE">DETUNE</a></code> setting. This is a constant that is added to the output pitch, positive (<code>01 to 7F</code>) or negative (<code>FF to 80</code>).</p>
+		</td>
+	</tr>
+</table>
+<br />
+
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

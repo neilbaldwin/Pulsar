@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<link rel="stylesheet" href="css/Pulsar.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<hr />
+		<span id="headerLogo"></span>
+		<span id="headerTitle">Pulsar Operation Manual</span>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- header -->
+
+	<div class="clearFix"></div>
+	
+	<div id="container">
+<div id="sidebar">
+	<ul>
+		<li><a href="Pulsar.html">Home</a></li>
+		<li><a href="ScreenLayout.html">Screen Layout</a></li>
+		<li><a href='EditorOverview.html'>Editor Pages</a></li>				
+		<ul>
+			<li><a href="Page_Song.html">Song Editor</a></li>
+			<li><a href="Page_Chain.html">Chain Editor</a></li>
+			<li><a href="Page_Pattern.html">Pattern Editor</a></li>
+			<li><a href="Page_Instrument.html">Instrument Editor</a></li>
+			<li><a href="Page_Drumkit.html">Drumkit Editor</a></li>
+			<li><a href="Page_Envelope.html">Envelope List Editor</a></li>
+			<li><a href="Page_Table.html">Table Editor</a></li>
+			<li><a href="Page_Vibrato.html">Vibrato List Editor</a></li>
+			<li><a href="Page_Duty.html">Duty Table Editor</a></li>
+			<li><a href="Page_Echo.html">Echo List Editor</a></li>
+			<li><a href="Page_Speed.html">Speed Table Editor</a></li>
+			<li><a href="Page_MultiFX.html">MultiFX Editor</a></li>
+			<li><a href="Page_NavMenu.html">Navigation Menu</a></li>
+			<li><a href="Page_Setup.html">Setup/Utility Page</a></li>
+		</ul>		
+		<li><a href='ControlsOverview.html'>Controls</a></li>
+		<li><a href='CommandOverview.html'>Commands</a></li>
+		<li><a href='ContextNavigation.html'>Navigation</a></li>				
+		<li><a href='Objects.html'>Objects</a></li>
+		<li><a href='SystemRequirements.html'>Requirements</a></li>
+				<li><a href='QuirksBugs.html'>Quirks &amp; Bugs</a></li>
+				<li><a href='NES_Audio.html'>NES Audio</a></li>
+				<li><a href='Glossary.html'>Glossary</a></li>
+	</ul>
+</div> <!-- sidebar -->
+
+		<div id="content">
+
+		<h2>Echo List Page</h2>
+		
+		<span class="centerImage">
+			<img src="images/echoScreen.png" />
+			<div class="clearFix"></div>
+		</span>
+
+<p>Tracks A. B &amp; D can make use of the <em>Auto Echo</em> effect. This is the same Auto Echo that I invented and implemented in both NTRQ and Nijuu - it uses an algorithm to produce a single-voice-echo effect without the need for manually inserting echo notes into your Patterns. It's not only good a simulating single-voice-echo but is quite an effective creative tool in it's own right. Also because it requires no additional manual calculation of where to place echo notes, it can also produce echo effects that would be near impossible to do by hand.</p>
+<p>Like Envelope and Vibrato, Echo refers to an <em>Echo Object</em> in Pulsar. The Echo List has numbers down the left-hand side that are the object numbers you would specify in the Instrument <code>ECHO</code> parameter and also in the Echo Command (<code>Yxx</code>). Each row of the Echo List is one Echo Object comprising three parameters.</p>
+<p>From left-to-right those parameters are:</p>
+<br />
+<table>
+	<colgroup width="8%"/>
+	<colgroup />
+	<tr>
+		<td><code><bold>SP</bold></code></td>
+		<td>specifies the Echo feedback speed. The value is the number of ticks/frames between each attenuation of the Echo signal. The lower the number, the shorter the echo delay</td>
+	</tr>
+	<tr>
+		<td><code><bold>LV</bold></code></td>
+		<td>specifies the initial attenuation of the Echo signal when it is fed back into the audio output. It is a scaling value from <code>00 - 0F</code> where <code>00</code> is silent and <code>0F</code> is full volume</td>
+	</tr>
+	<tr>
+		<td><code><bold>AT</bold></code></td>
+		<td>specifies the speed that the Echo signal decays over time. The value is simply subtracted from the current Echo amplitude at a frequency determined by the Echo Speed (<code>SP</code>) until the Echo amplitude is zero. A value of <code>00</code> would mean the Echo would technically be infinite. Maximum value in practicality is <code>0F</code> but much smaller values are more useful</td>
+	</tr>
+</table>
+<br />
+<h5>Auto Echo Information</h5>
+<p><em>Taken from a post on my NTRQ.net blog.</em></p>
+<p>Some people have asked why the sounds... are short and if that's the only way the echo can work? It is true that the effect is quite dependent on the length of time a note is playing for or more specifically, it's the gaps in between the notes that are important - because it's only using a single voice, the echo signal has to have somewhere to go! For example, if you have a totally legato sound with no audible gaps in between the notes, you won't get any echo sound. So to get the best out of the echo (or the most obvious effect out of it) it's best to make sure there's plenty of silence in between notes. Of course, you can also have a fast run of notes with a gap at the end and the echo will reflect what has just been played, just as it does with single notes (depending of course on the Echo Speed of your current Echo patch).</p>
+
+<p>Pulsar's Echo engine has two phases. One when it is <em>'recording'</em> and the other when it is <em>'playing'</em> echo. It constantly monitors the Amplitude Envelope of the voice while 'recording' the voice output and waits for a gap where the Envelope is in the Release phase. At this point it decides that it's time to feed some of the 'recorded' audio back into the signal path, swapping back to 'recording' again when a new note is played. It constantly flips between the two modes depending on what is going on the in Pattern.</p>
+		</div> <!-- content -->
+		
+	<div class="clearFix"></div>
+
+	</div>
+	
+	<div id="footer">
+		<hr />
+		<div id="footerCopyright">(c) Neil Baldwin, 2010</div>
+		<div class="clearFix"></div>
+		<hr />
+	</div> <!-- footer -->
+	
+</body>
+</html>

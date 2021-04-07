@@ -1,0 +1,5 @@
+.segment "CODE_02"
+	.include "pulsar.h"
+font:	.incbin "set.chr"
+spr:	.incbin "spr.chr"
+layout:	.incbin "nametables/pulsar.nam"
